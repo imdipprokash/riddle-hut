@@ -13,32 +13,38 @@ type Props = {
 };
 
 const CustomKeyboard = ({answer, onPress}: Props) => {
+  const [count, setCount] = useState(0);
+
   let KeyboardKeysArray = splitToTwoArrays(answer.split(''));
+  let part1 = KeyboardKeysArray.slice(0, 6); // First 6 elements
+  let part2 = KeyboardKeysArray.slice(6); // Remaining elements
+
   const [firstRowKeys, setFirstRowKeys] = useState(
-    KeyboardKeysArray.splice(0, 6).map((item: any) => ({
+    part1.map((item: any) => ({
       itemName: item,
       isClick: false,
     })),
   );
   const [secondRowKeys, setSecondRowKeys] = useState(
-    KeyboardKeysArray.map((item: any) => ({
+    part2.map((item: any) => ({
       itemName: item,
       isClick: false,
     })),
   );
 
-  const [count, setCount] = useState(0);
-
   useEffect(() => {
-    KeyboardKeysArray = splitToTwoArrays(answer.split(''));
+    let KeyboardKeysArray = splitToTwoArrays(answer.split(''));
+    let part1 = KeyboardKeysArray.slice(0, 6); // First 6 elements
+    let part2 = KeyboardKeysArray.slice(6); // Remaining element
+
     setFirstRowKeys(
-      KeyboardKeysArray.splice(0, 6).map((item: any) => ({
+      part1.map((item: any) => ({
         itemName: item,
         isClick: false,
       })),
     );
     setSecondRowKeys(
-      KeyboardKeysArray.map((item: any) => ({
+      part2.map((item: any) => ({
         itemName: item,
         isClick: false,
       })),
@@ -82,10 +88,8 @@ const CustomKeyboard = ({answer, onPress}: Props) => {
             onPress={() => {
               onPress(item.itemName);
               setCount(prev => prev + 1);
-              setFirstRowKeys((prev: any) => [
-                ...prev,
-                (prev[index].isClick = true),
-              ]);
+
+              firstRowKeys[index].isClick = true;
             }}>
             {!item?.isClick && (
               <Text
@@ -124,10 +128,8 @@ const CustomKeyboard = ({answer, onPress}: Props) => {
             onPress={() => {
               onPress(item.itemName);
               setCount(prev => prev + 1);
-              setSecondRowKeys((prev: any) => [
-                ...prev,
-                (prev[index].isClick = true),
-              ]);
+
+              secondRowKeys[index].isClick = true;
             }}>
             {!item?.isClick && (
               <Text

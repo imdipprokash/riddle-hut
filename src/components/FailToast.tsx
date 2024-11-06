@@ -1,6 +1,7 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {AppColors, ScreenHeight, ScreenWidth} from '../utils/constants';
+import Sound from 'react-native-sound';
 
 type Props = {
   onClose: () => void;

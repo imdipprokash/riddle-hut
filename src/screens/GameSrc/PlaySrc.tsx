@@ -18,7 +18,7 @@ import {useStore} from '../../zustand/store';
 import LottieView from 'lottie-react-native';
 import {showModal} from '../../components/RootModal';
 import WinToast from '../../components/WinToast';
-import {useFocusEffect} from '@react-navigation/native';
+import Sound from 'react-native-sound';
 import FailToast from '../../components/FailToast';
 
 type Props = {};
@@ -30,13 +30,12 @@ const PlaySrc = (props: Props) => {
 
   const riddle = riddles[level];
 
-  let userInput = '';
-
   const [showCelebration, SetShowCelebration] = useState<boolean>(false);
   const [answer, setAnswer] = useState('');
   const [answerCharacterArray, setAnswerCharacterArray] = useState(
     Array(riddle.answer.length).fill(''),
   );
+
   useEffect(() => {
     setAnswerCharacterArray(Array(riddle.answer.length).fill(''));
   }, [riddle]);
@@ -44,7 +43,6 @@ const PlaySrc = (props: Props) => {
   useEffect(() => {
     if (answer.length === riddle.answer.length) {
       if (answer === riddle.answer.toLowerCase()) {
-        // triggerConfetti();
         SetShowCelebration(true);
         increaseLevel();
         showModal((onClose: any) => (
@@ -54,13 +52,11 @@ const PlaySrc = (props: Props) => {
               onClose();
               setAnswer('');
               SetShowCelebration(false);
-              userInput = '';
             }}
             HandlerPressPrevious={function (): void {
               if (level > -1) {
                 decreaseLevel();
                 setAnswer('');
-                userInput = '';
               }
               // setAnswerCharacterArray(Array(riddle.answer.length).fill(''));
               onClose();
@@ -76,7 +72,6 @@ const PlaySrc = (props: Props) => {
               onClose();
               setAnswer('');
               setAnswerCharacterArray(Array(riddle.answer.length).fill(''));
-              userInput = '';
             }}
           />
         ));
