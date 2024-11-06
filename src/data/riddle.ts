@@ -25,11 +25,7 @@ export const riddles = [
     question: 'What gets wetter as it dries?',
     answer: 'towel',
   },
-  {
-    question:
-      'What comes once in a minute, twice in a moment, but never in a thousand years?',
-    answer: 'm',
-  },
+
   {
     question: 'I’m tall when I’m young, and I’m short when I’m old. What am I?',
     answer: 'candle',
@@ -38,11 +34,7 @@ export const riddles = [
     question: 'What has hands but can’t clap?',
     answer: 'clock',
   },
-  {
-    question:
-      'You’ll find me in Mercury, Earth, Mars, and Jupiter, but not in Venus or Neptune. What am I?',
-    answer: 'r',
-  },
+
   {
     question: 'What is full of holes but still holds water?',
     answer: 'sponge',
@@ -50,7 +42,7 @@ export const riddles = [
   {
     question:
       'I’m light as a feather, yet the strongest man can’t hold me for much longer than a minute. What am I?',
-    answer: 'rreath',
+    answer: 'wreath',
   },
 
   {

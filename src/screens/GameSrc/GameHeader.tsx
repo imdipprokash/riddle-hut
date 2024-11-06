@@ -1,13 +1,12 @@
 import {Image, ImageBackground, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {ScreenWidth} from '../../utils/constants';
-import {useCoinStore, useStore} from '../../zustand/store';
+import {useStore} from '../../zustand/store';
 
 type Props = {};
 
 const GameHeader = (props: Props) => {
   const level = useStore((state: any) => state.level);
-  const coin = useCoinStore(state => state.coin);
   return (
     <View
       style={{

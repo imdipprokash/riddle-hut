@@ -43,16 +43,16 @@ interface CoinState {
   decreaseCoin: () => void;
 }
 
-export const useCoinStore = create<CoinState>()(
-  persist(
-    set => ({
-      coin: 0,
-      increaseCoin: () => set(state => ({coin: state.coin + 50})),
-      decreaseCoin: () => set(state => ({coin: state.coin - 50})),
-    }),
-    {
-      name: 'coin-storage', // Unique name for the local storage key
-      storage: asyncStorage,
-    },
-  ),
-);
+// export const useCoinStore = create<CoinState>()(
+//   persist(
+//     set => ({
+//       coin: 0,
+//       increaseCoin: () => set(state => ({coin: state.coin + 50})),
+//       decreaseCoin: () => set(state => ({coin: state.coin - 50})),
+//     }),
+//     {
+//       name: 'coin-storage', // Unique name for the local storage key
+//       storage: asyncStorage,
+//     },
+//   ),
+// );

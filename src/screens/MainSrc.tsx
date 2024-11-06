@@ -10,6 +10,8 @@ import AlertModal from '../components/AlertModal';
 type Props = {};
 
 const MainSrc = (props: Props) => {
+  const setLevelToZero = useStore(state => state.setLevelToZero);
+
   const nav: any = useNavigation();
   const level = useStore(state => state.level);
   return (
@@ -43,6 +45,8 @@ const MainSrc = (props: Props) => {
                     }}
                     yesHandler={() => {
                       onClose();
+                      setLevelToZero();
+
                       nav.navigate('PlaySrc');
                     }}
                   />

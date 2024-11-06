@@ -25,52 +25,53 @@ type Props = {};
 const PlaySrc = (props: Props) => {
   const level = useStore((state: any) => state.level);
   const increaseLevel = useStore(state => state.increaseLevel);
+  const decreaseLevel = useStore(state => state.decreaseLevel);
 
-  const setLevelToZero = useStore(state => state.setLevelToZero);
+  const riddle = riddles[level];
 
-  useFocusEffect(
-    useCallback(() => {
-      console.log('This');
-      setLevelToZero();
-    }, []),
-  );
   let userInput = '';
 
   const [showCelebration, SetShowCelebration] = useState<boolean>(false);
   const [answer, setAnswer] = useState('');
   const [answerCharacterArray, setAnswerCharacterArray] = useState(
-    Array(riddles[level].answer.length).fill(''),
+    Array(riddle.answer.length).fill(''),
   );
+  useEffect(() => {
+    setAnswerCharacterArray(Array(riddle.answer.length).fill(''));
+  }, [riddle]);
 
   useEffect(() => {
-    setAnswerCharacterArray(Array(riddles[level].answer.length).fill(''));
-  }, [level]);
-
-  useEffect(() => {
-    if (answer.length === riddles[level].answer.length) {
-      if (answer === riddles[level].answer.toLowerCase()) {
+    if (answer.length === riddle.answer.length) {
+      if (answer === riddle.answer.toLowerCase()) {
         // triggerConfetti();
         SetShowCelebration(true);
         increaseLevel();
         setTimeout(() => {
           showModal((onClose: any) => (
             <WinToast
-              message={riddles[level].answer}
-              status={'success'}
+              message={riddle.answer}
               onClose={() => {
                 onClose();
                 setAnswer('');
                 SetShowCelebration(false);
-                setAnswerCharacterArray(
-                  Array(riddles[level].answer.length).fill(''),
-                );
+                userInput = '';
+              }}
+              HandlerPressPrevious={function (): void {
+                if (level > -1) {
+                  decreaseLevel();
+                  setAnswer('');
+                  userInput = '';
+                }
+                // setAnswerCharacterArray(Array(riddle.answer.length).fill(''));
+                onClose();
+                SetShowCelebration(false);
               }}
             />
           ));
         }, 1000);
       } else {
         setAnswer('');
-        setAnswerCharacterArray(Array(riddles[level].answer.length).fill(''));
+        setAnswerCharacterArray(Array(riddle.answer.length).fill(''));
 
         userInput = '';
         Alert.alert('Wrong');
@@ -116,7 +117,7 @@ const PlaySrc = (props: Props) => {
               fontSize: 25,
               fontFamily: 'JosefinSans-Regular',
             }}>
-            {riddles[level].question}
+            {riddle.question}
           </Text>
           {/* input */}
           <View
@@ -153,7 +154,7 @@ const PlaySrc = (props: Props) => {
           {/* Keyboard */}
 
           <CustomKeyboard
-            answer={riddles[level].answer}
+            answer={riddle.answer}
             onPress={e => {
               answerCharacterArray[answer.length] = e;
               setAnswer(prev => {
