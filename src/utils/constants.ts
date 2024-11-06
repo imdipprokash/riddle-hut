@@ -17,15 +17,11 @@ export function splitToTwoArrays(arr: any) {
   }
 
   // Add random characters until the array length is 16
-  while (arr.length < 16) {
+  while (arr.length < 12) {
     const randomChar = getRandomChar();
     const randomPosition = Math.floor(Math.random() * (arr.length + 1));
     arr.splice(randomPosition, 0, randomChar); // Insert at random position
   }
 
-  // Split the array into two arrays of 8 characters each
-  const arr1 = arr.slice(0, 8);
-  const arr2 = arr.slice(8, 16);
-
-  return [arr1, arr2];
+  return arr;
 }

@@ -1,5 +1,5 @@
 import {
-  Image,
+  Alert,
   ImageBackground,
   Keyboard,
   StyleSheet,
@@ -7,29 +7,43 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
-import {
-  AppColors,
-  ScreenHeight,
-  ScreenWidth,
-  splitToTwoArrays,
-} from '../../utils/constants';
+import React, {useEffect, useState} from 'react';
+import {AppColors, ScreenHeight, ScreenWidth} from '../../utils/constants';
 import GameHeader from './GameHeader';
 import GameGemHeader from './GameGemHeader';
 import {riddles} from '../../data/riddle';
 import CustomKeyboard from './CustomKeyboard';
+import {useStore} from '../../zustand/store';
 
 type Props = {};
 
 const PlaySrc = (props: Props) => {
-  const [answer, setAnswer] = useState(
-    Array(riddles[0].answer.length).fill(''),
-  );
-  const KeyboardKeysArray = splitToTwoArrays(riddles[0].answer.split(''));
+  const bears = useStore((state: any) => state.bears);
 
-  const handleKeyPress = (e: string) => {
-    console.log(e);
-  };
+  let userInput = '';
+
+  const [showCelebration, SetShowCelebration] = useState<boolean>(false);
+  const [answer, setAnswer] = useState('');
+  const [answerCharacterArray] = useState(
+    Array(riddles[bears].answer.length).fill(''),
+  );
+
+  useEffect(() => {
+    if (answer.length === riddles[bears].answer.length) {
+      if (answer === riddles[bears].answer.toLowerCase()) {
+        SetShowCelebration(true);
+        setAnswer('');
+        Alert.alert('Wow 🥳');
+      } else {
+        SetShowCelebration(false);
+        setAnswer('');
+
+        userInput = '';
+        Alert.alert('Wrong');
+      }
+    }
+  }, [answer]);
+
   return (
     <View style={styles.mainContainer}>
       <ImageBackground
@@ -57,7 +71,7 @@ const PlaySrc = (props: Props) => {
               fontSize: 25,
               fontFamily: 'JosefinSans-Regular',
             }}>
-            {riddles[0].question}
+            {riddles[1].question}
           </Text>
           {/* input */}
           <View
@@ -66,8 +80,9 @@ const PlaySrc = (props: Props) => {
               gap: 10,
               paddingTop: ScreenHeight * 0.05,
             }}>
-            {answer.map((item, index) => (
+            {answerCharacterArray.map((item, index) => (
               <TextInput
+                key={index}
                 editable={false}
                 maxLength={1}
                 value={item}
@@ -78,6 +93,8 @@ const PlaySrc = (props: Props) => {
                   width: 55,
                   fontSize: 30,
                   borderRadius: 16,
+                  backgroundColor:
+                    item === '' ? 'transparent' : AppColors.activeBtnColor,
                   borderColor: AppColors.activeBtnColor,
                   borderWidth: 3,
                   paddingHorizontal: 14,
@@ -91,8 +108,17 @@ const PlaySrc = (props: Props) => {
           {/* Keyboard */}
 
           <CustomKeyboard
-            KeyboardKeysArray={KeyboardKeysArray}
-            onPress={handleKeyPress}
+            answer={riddles[bears].answer}
+            onPress={e => {
+              answerCharacterArray[answer.length] = e;
+              setAnswer(prev => {
+                if (prev) {
+                  return prev + e;
+                } else {
+                  return e;
+                }
+              });
+            }}
           />
         </View>
       </View>

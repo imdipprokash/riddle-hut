@@ -1,10 +1,13 @@
 import {Image, ImageBackground, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {ScreenWidth} from '../../utils/constants';
+import {useStore} from '../../zustand/store';
 
 type Props = {};
 
 const GameHeader = (props: Props) => {
+  const bears = useStore((state: any) => state.bears);
+
   return (
     <View
       style={{
@@ -28,7 +31,7 @@ const GameHeader = (props: Props) => {
             source={require('../../assets/Images/Star.png')}
             style={{width: 20, height: 20, marginRight: 5}}
           />
-          <Text style={styles.textStyle}>1</Text>
+          <Text style={styles.textStyle}>{bears + 1}</Text>
         </ImageBackground>
       </View>
       <View>
