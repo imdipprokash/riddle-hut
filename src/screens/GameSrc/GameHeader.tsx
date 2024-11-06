@@ -1,13 +1,13 @@
 import {Image, ImageBackground, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {ScreenWidth} from '../../utils/constants';
-import {useStore} from '../../zustand/store';
+import {useCoinStore, useStore} from '../../zustand/store';
 
 type Props = {};
 
 const GameHeader = (props: Props) => {
-  const bears = useStore((state: any) => state.bears);
-
+  const level = useStore((state: any) => state.level);
+  const coin = useCoinStore(state => state.coin);
   return (
     <View
       style={{
@@ -31,7 +31,7 @@ const GameHeader = (props: Props) => {
             source={require('../../assets/Images/Star.png')}
             style={{width: 20, height: 20, marginRight: 5}}
           />
-          <Text style={styles.textStyle}>{bears + 1}</Text>
+          <Text style={styles.textStyle}>{level + 1}</Text>
         </ImageBackground>
       </View>
       <View>
@@ -61,7 +61,7 @@ const GameHeader = (props: Props) => {
             paddingHorizontal: 10,
             justifyContent: 'flex-end',
           }}>
-          <Text style={styles.textStyle}>500</Text>
+          <Text style={styles.textStyle}>{50 * level}</Text>
 
           <Image
             source={require('../../assets/Images/gem.png')}

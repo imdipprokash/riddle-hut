@@ -13,10 +13,7 @@ type Props = {
 };
 
 const CustomKeyboard = ({answer, onPress}: Props) => {
-  const KeyboardKeysArray = splitToTwoArrays(answer.split(''));
-
-  const [count, setCount] = useState(0);
-
+  let KeyboardKeysArray = splitToTwoArrays(answer.split(''));
   const [firstRowKeys, setFirstRowKeys] = useState(
     KeyboardKeysArray.splice(0, 6).map((item: any) => ({
       itemName: item,
@@ -29,16 +26,34 @@ const CustomKeyboard = ({answer, onPress}: Props) => {
       isClick: false,
     })),
   );
+
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    KeyboardKeysArray = splitToTwoArrays(answer.split(''));
+    setFirstRowKeys(
+      KeyboardKeysArray.splice(0, 6).map((item: any) => ({
+        itemName: item,
+        isClick: false,
+      })),
+    );
+    setSecondRowKeys(
+      KeyboardKeysArray.map((item: any) => ({
+        itemName: item,
+        isClick: false,
+      })),
+    );
+  }, [answer]);
   // setCount(prev => prev + 1);
   useEffect(() => {
     if (count === answer.length) {
       setCount(0);
-      // setFirstRowKeys((prev: any) => {
-      //   return prev.map((item: any) => ({...item, isClick: false}));
-      // });
-      // setSecondRowKeys((prev: any) => {
-      //   return prev.map((item: any) => ({...item, isClick: false}));
-      // });
+      setFirstRowKeys((prev: any) => {
+        return prev.map((item: any) => ({...item, isClick: false}));
+      });
+      setSecondRowKeys((prev: any) => {
+        return prev.map((item: any) => ({...item, isClick: false}));
+      });
     }
   }, [count]);
 

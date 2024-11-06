@@ -6,6 +6,8 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {AppColors} from './src/utils/constants';
 import MainSrc from './src/screens/MainSrc';
 import PlaySrc from './src/screens/GameSrc/PlaySrc';
+import {RootSiblingParent} from 'react-native-root-siblings';
+import ResumeSrc from './src/screens/GameSrc/ResumeSrc';
 
 type Props = {};
 
@@ -21,29 +23,31 @@ const App = (props: Props) => {
     );
   }
   return (
-    <NavigationContainer>
-      <StatusBar
-        translucent
-        backgroundColor={'transparent'}
-        barStyle={'dark-content'}
-      />
-      <Stack.Navigator
-        initialRouteName="Home"
-        screenOptions={{
-          headerShown: false,
-          contentStyle: {backgroundColor: AppColors.bgColor},
-        }}>
-        <Stack.Screen name="MainSrc" component={MainSrc} />
-        <Stack.Screen name="PlaySrc" component={PlaySrc} />
+    <RootSiblingParent>
+      <NavigationContainer>
+        <StatusBar
+          translucent
+          backgroundColor={'transparent'}
+          barStyle={'dark-content'}
+        />
+        <Stack.Navigator
+          initialRouteName="Home"
+          screenOptions={{
+            headerShown: false,
+            contentStyle: {backgroundColor: AppColors.bgColor},
+          }}>
+          <Stack.Screen name="MainSrc" component={MainSrc} />
+          <Stack.Screen name="PlaySrc" component={PlaySrc} />
 
-        {/* <Stack.Screen name="SignUpSrc" component={SignUpSrc} /> */}
+          <Stack.Screen name="ResumeSrc" component={ResumeSrc} />
 
-        {/*  */}
-        <Stack.Screen name="MyTabs">
-          {props => <MyTabs {...props} extraData={{}} />}
-        </Stack.Screen>
-      </Stack.Navigator>
-    </NavigationContainer>
+          {/*  */}
+          <Stack.Screen name="MyTabs">
+            {props => <MyTabs {...props} extraData={{}} />}
+          </Stack.Screen>
+        </Stack.Navigator>
+      </NavigationContainer>
+    </RootSiblingParent>
   );
 };
 

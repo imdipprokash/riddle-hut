@@ -1,13 +1,17 @@
 import {ImageBackground, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {ScreenHeight, ScreenWidth} from '../utils/constants';
+import {AppColors, ScreenHeight, ScreenWidth} from '../utils/constants';
 import GameBtn from '../components/GameBtn';
 import {useNavigation} from '@react-navigation/native';
+import {useStore} from '../zustand/store';
+import {showModal} from '../components/RootModal';
+import AlertModal from '../components/AlertModal';
 
 type Props = {};
 
 const MainSrc = (props: Props) => {
   const nav: any = useNavigation();
+  const level = useStore(state => state.level);
   return (
     <View style={styles.mainContainer}>
       <ImageBackground
@@ -15,14 +19,45 @@ const MainSrc = (props: Props) => {
         source={require('../assets/BgImage.png')}
       />
       <View style={styles.mainViewStyle}>
+        <Text
+          style={{
+            fontSize: 70,
+            fontFamily: 'JosefinSans-Bold',
+            paddingBottom: 5,
+            textAlign: 'center',
+            marginTop: 10,
+
+            color: AppColors.activeBtnColor,
+          }}>
+          RiddleHut
+        </Text>
         <View style={{gap: 20}}>
           <GameBtn
             title={'Play'}
             onPress={() => {
-              nav.navigate('PlaySrc');
+              if (level !== 0) {
+                showModal((onClose: any) => (
+                  <AlertModal
+                    noHandler={() => {
+                      onClose();
+                    }}
+                    yesHandler={() => {
+                      onClose();
+                      nav.navigate('PlaySrc');
+                    }}
+                  />
+                ));
+              } else {
+                nav.navigate('PlaySrc');
+              }
             }}
           />
-          <GameBtn title={'Resume'} />
+          <GameBtn
+            title={'Resume'}
+            onPress={() => {
+              nav.navigate('ResumeSrc');
+            }}
+          />
           <GameBtn title={'Setting'} />
         </View>
       </View>

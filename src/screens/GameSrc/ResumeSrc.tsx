@@ -7,7 +7,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {AppColors, ScreenHeight, ScreenWidth} from '../../utils/constants';
 import GameHeader from './GameHeader';
 import GameGemHeader from './GameGemHeader';
@@ -18,22 +18,14 @@ import {useStore} from '../../zustand/store';
 import LottieView from 'lottie-react-native';
 import {showModal} from '../../components/RootModal';
 import WinToast from '../../components/WinToast';
-import {useFocusEffect} from '@react-navigation/native';
 
 type Props = {};
 
-const PlaySrc = (props: Props) => {
+const ResumeSrc = (props: Props) => {
   const level = useStore((state: any) => state.level);
   const increaseLevel = useStore(state => state.increaseLevel);
+  const decreaseLevel = useStore(state => state.decreaseLevel);
 
-  const setLevelToZero = useStore(state => state.setLevelToZero);
-
-  useFocusEffect(
-    useCallback(() => {
-      console.log('This');
-      setLevelToZero();
-    }, []),
-  );
   let userInput = '';
 
   const [showCelebration, SetShowCelebration] = useState<boolean>(false);
@@ -43,6 +35,7 @@ const PlaySrc = (props: Props) => {
   );
 
   useEffect(() => {
+    console.log(level);
     setAnswerCharacterArray(Array(riddles[level].answer.length).fill(''));
   }, [level]);
 
@@ -55,19 +48,20 @@ const PlaySrc = (props: Props) => {
         setTimeout(() => {
           showModal((onClose: any) => (
             <WinToast
+              HandlerPressPrevious={() => {
+                onClose();
+                decreaseLevel();
+                SetShowCelebration(false);
+              }}
               message={riddles[level].answer}
-              status={'success'}
               onClose={() => {
                 onClose();
                 setAnswer('');
                 SetShowCelebration(false);
-                setAnswerCharacterArray(
-                  Array(riddles[level].answer.length).fill(''),
-                );
               }}
             />
           ));
-        }, 1000);
+        }, 1500);
       } else {
         setAnswer('');
         setAnswerCharacterArray(Array(riddles[level].answer.length).fill(''));
@@ -171,7 +165,7 @@ const PlaySrc = (props: Props) => {
   );
 };
 
-export default PlaySrc;
+export default ResumeSrc;
 
 const styles = StyleSheet.create({
   mainContainer: {
