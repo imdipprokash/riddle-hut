@@ -9,7 +9,7 @@ import AlertModal from '../components/AlertModal';
 
 type Props = {};
 
-const MainSrc = (props: Props) => {
+const AboutSrc = (props: Props) => {
   const setLevelToZero = useStore(state => state.setLevelToZero);
 
   const nav: any = useNavigation();
@@ -21,60 +21,33 @@ const MainSrc = (props: Props) => {
         source={require('../assets/BgImage.png')}
       />
       <View style={styles.mainViewStyle}>
+        <GameBtn
+          title={'About'}
+          onPress={() => {
+            nav.navigate('AboutSrc');
+          }}
+        />
         <Text
           style={{
-            fontSize: 70,
+            fontSize: 30,
             fontFamily: 'JosefinSans-Bold',
             paddingBottom: 5,
+            color: '#333',
             textAlign: 'center',
-            marginTop: 10,
-
-            color: AppColors.activeBtnColor,
           }}>
-          RiddleHut
+          I am Dipprokash Sardar, a skilled React Native developer with
+          extensive experience building robust mobile and web applications. I
+          specialize in React Native for mobile development and React.js for web
+          applications, with additional expertise in RESTful API integration,
+          Redux Toolkit, and Bluetooth communication for IoT-based mobile
+          applications.
         </Text>
-        <View style={{gap: 20}}>
-          <GameBtn
-            title={'Play'}
-            onPress={() => {
-              if (level !== 0) {
-                showModal((onClose: any) => (
-                  <AlertModal
-                    noHandler={() => {
-                      onClose();
-                    }}
-                    yesHandler={() => {
-                      onClose();
-                      setLevelToZero();
-
-                      nav.navigate('PlaySrc');
-                    }}
-                  />
-                ));
-              } else {
-                nav.navigate('PlaySrc');
-              }
-            }}
-          />
-          <GameBtn
-            title={'Resume'}
-            onPress={() => {
-              nav.navigate('ResumeSrc');
-            }}
-          />
-          <GameBtn
-            title={'About'}
-            onPress={() => {
-              nav.navigate('AboutSrc');
-            }}
-          />
-        </View>
       </View>
     </View>
   );
 };
 
-export default MainSrc;
+export default AboutSrc;
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -85,8 +58,9 @@ const styles = StyleSheet.create({
   mainViewStyle: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'space-evenly',
+    // justifyContent: 'space-evenly',
     alignItems: 'center',
-    gap: 10,
+    gap: 20,
+    marginTop: 30,
   },
 });

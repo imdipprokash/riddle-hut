@@ -7,6 +7,7 @@ import {AppColors} from './src/utils/constants';
 import MainSrc from './src/screens/MainSrc';
 import PlaySrc from './src/screens/GameSrc/PlaySrc';
 import {RootSiblingParent} from 'react-native-root-siblings';
+import AboutSrc from './src/screens/AboutSrc';
 
 type Props = {};
 
@@ -37,8 +38,8 @@ const App = (props: Props) => {
           }}>
           <Stack.Screen name="MainSrc" component={MainSrc} />
           <Stack.Screen name="PlaySrc" component={PlaySrc} />
-
           <Stack.Screen name="ResumeSrc" component={PlaySrc} />
+          <Stack.Screen name="AboutSrc" component={AboutSrc} />
 
           {/*  */}
           <Stack.Screen name="MyTabs">
