@@ -7,7 +7,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {AppColors, ScreenHeight, ScreenWidth} from '../../utils/constants';
 import GameHeader from './GameHeader';
 import GameGemHeader from './GameGemHeader';
@@ -19,6 +19,7 @@ import LottieView from 'lottie-react-native';
 import {showModal} from '../../components/RootModal';
 import WinToast from '../../components/WinToast';
 import {useFocusEffect} from '@react-navigation/native';
+import FailToast from '../../components/FailToast';
 
 type Props = {};
 
@@ -46,35 +47,39 @@ const PlaySrc = (props: Props) => {
         // triggerConfetti();
         SetShowCelebration(true);
         increaseLevel();
-        setTimeout(() => {
-          showModal((onClose: any) => (
-            <WinToast
-              message={riddle.answer}
-              onClose={() => {
-                onClose();
+        showModal((onClose: any) => (
+          <WinToast
+            message={riddle.answer}
+            onClose={() => {
+              onClose();
+              setAnswer('');
+              SetShowCelebration(false);
+              userInput = '';
+            }}
+            HandlerPressPrevious={function (): void {
+              if (level > -1) {
+                decreaseLevel();
                 setAnswer('');
-                SetShowCelebration(false);
                 userInput = '';
-              }}
-              HandlerPressPrevious={function (): void {
-                if (level > -1) {
-                  decreaseLevel();
-                  setAnswer('');
-                  userInput = '';
-                }
-                // setAnswerCharacterArray(Array(riddle.answer.length).fill(''));
-                onClose();
-                SetShowCelebration(false);
-              }}
-            />
-          ));
-        }, 1000);
+              }
+              // setAnswerCharacterArray(Array(riddle.answer.length).fill(''));
+              onClose();
+              SetShowCelebration(false);
+            }}
+          />
+        ));
       } else {
-        setAnswer('');
-        setAnswerCharacterArray(Array(riddle.answer.length).fill(''));
-
-        userInput = '';
-        Alert.alert('Wrong');
+        showModal((onClose: any) => (
+          <FailToast
+            message={''}
+            onClose={() => {
+              onClose();
+              setAnswer('');
+              setAnswerCharacterArray(Array(riddle.answer.length).fill(''));
+              userInput = '';
+            }}
+          />
+        ));
       }
     }
   }, [answer]);

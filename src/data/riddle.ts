@@ -4,17 +4,21 @@ export const riddles = [
     answer: 'egg',
   },
   {
-    question: 'What has a head, a tail, is brown, and has no legs?',
-    answer: 'penny',
-  },
-
-  {
-    question: 'What can travel around the world while staying in a corner?',
-    answer: 'stamp',
+    question: 'What has hands but can’t clap?',
+    answer: 'clock',
   },
   {
     question: 'What has many teeth but can’t bite?',
     answer: 'comb',
+  },
+  {
+    question: 'What can travel around the world while staying in a corner?',
+    answer: 'stamp',
+  },
+
+  {
+    question: 'What has a head, a tail, is brown, and has no legs?',
+    answer: 'penny',
   },
 
   {
@@ -29,10 +33,6 @@ export const riddles = [
   {
     question: 'I’m tall when I’m young, and I’m short when I’m old. What am I?',
     answer: 'candle',
-  },
-  {
-    question: 'What has hands but can’t clap?',
-    answer: 'clock',
   },
 
   {
