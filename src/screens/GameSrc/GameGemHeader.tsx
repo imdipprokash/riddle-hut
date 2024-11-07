@@ -14,7 +14,7 @@ import GetGemToast from '../../components/GetGemToast';
 
 const adsId = __DEV__
   ? TestIds.REWARDED
-  : 'ca-app-pub-3346761957556908/6676712344';
+  : 'ca-app-pub-3346761957556908/3830921102';
 
 type Props = {
   bulbHandler: () => void;
