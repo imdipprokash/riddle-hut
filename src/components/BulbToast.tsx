@@ -7,16 +7,13 @@ import {showModal} from './RootModal';
 import AnswerModal from './AnswerModal';
 
 type Props = {
-  onClose: () => void;
   status?: 'error' | 'success';
   message?: string;
   coinDeductHandler: () => void;
   showAdsHandler: () => void;
 };
 
-const BulbToast = ({onClose, coinDeductHandler, showAdsHandler}: Props) => {
-  const Coin = useCoinStore(state => state.coin);
-
+const BulbToast = ({coinDeductHandler, showAdsHandler}: Props) => {
   return (
     <TouchableOpacity
       activeOpacity={1}

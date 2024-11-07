@@ -4,27 +4,45 @@ import {AppColors, ScreenWidth} from '../../utils/constants';
 import {useCoinStore, useStore} from '../../zustand/store';
 import {showModal} from '../../components/RootModal';
 import BulbToast from '../../components/BulbToast';
+import ToastMsg from '../../components/ToastMsg';
 
-type Props = {};
+type Props = {
+  bulbHandler: () => void;
+};
 
-const GameGemHeader = (props: Props) => {
-  const level = useStore((state: any) => state.level);
-  const Coin = useCoinStore(state => state.coin);
+const GameGemHeader = ({bulbHandler}: Props) => {
+  const {decreaseCoin, coin} = useCoinStore(state => state);
+
+  const ShowAdsHandler = () => {
+    showModal((onClose: any) => (
+      <ToastMsg
+        onClose={() => {
+          bulbHandler();
+          onClose();
+        }}
+      />
+    ));
+  };
+
+  const GetGemHandler = () => {};
 
   const bulbIconHandler = () => {
-    // if coin is more then 100 then show the answer else ask to watch a video to get coin
-
-    if (Coin > 90) {
-      showModal((onClose: any) => (
-        <BulbToast
-          onClose={() => {
+    showModal((onClose: any) => (
+      <BulbToast
+        coinDeductHandler={() => {
+          if (coin > 90) {
             onClose();
-          }}
-          coinDeductHandler={() => {}}
-          showAdsHandler={() => {}}
-        />
-      ));
-    }
+            decreaseCoin();
+            bulbHandler();
+          }
+        }}
+        showAdsHandler={() => {
+          onClose();
+          console.log('Show ads');
+          ShowAdsHandler();
+        }}
+      />
+    ));
   };
 
   return (

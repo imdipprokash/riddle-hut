@@ -51,6 +51,7 @@ const PlaySrc = (props: Props) => {
   useEffect(() => {
     setAnswerCharacterArray(Array(riddle.answer.length).fill(''));
   }, [riddle]);
+
   console.log(currentCompleteLevel, level, coin);
 
   useEffect(() => {
@@ -120,7 +121,12 @@ const PlaySrc = (props: Props) => {
         {/* Header */}
         <GameHeader />
         {/* Game Gem Header */}
-        <GameGemHeader />
+        <GameGemHeader
+          bulbHandler={() => {
+            setAnswer(riddle.answer);
+            setAnswerCharacterArray(riddle.answer.split(''));
+          }}
+        />
         {/* Main Game content */}
         <View
           style={{
