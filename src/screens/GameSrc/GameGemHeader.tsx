@@ -10,7 +10,6 @@ import {
   RewardedAdEventType,
   TestIds,
 } from 'react-native-google-mobile-ads';
-import GetGemToast from '../../components/GetGemToast';
 
 const adsId = __DEV__
   ? TestIds.REWARDED
@@ -35,7 +34,7 @@ const rewarded = RewardedAd.createForAdRequest(adsId, {
 const GameGemHeader = ({bulbHandler}: Props) => {
   const {decreaseCoin, coin, increaseCoin} = useCoinStore(state => state);
   const [loaded, setLoaded] = useState(false);
-  const [isGetGem, setGetGem] = useState(true);
+  const [isGetGem, setGetGem] = useState(false);
 
   useEffect(() => {
     const unsubscribeLoaded = rewarded.addAdEventListener(
@@ -48,14 +47,10 @@ const GameGemHeader = ({bulbHandler}: Props) => {
       RewardedAdEventType.EARNED_REWARD,
       reward => {
         console.log(reward);
+
+        setLoaded(false);
+        bulbHandler();
         rewarded.load();
-        if (isGetGem) {
-          setGetGem(false);
-          increaseCoin();
-          showModal((onClose: () => void) => <GetGemToast onClose={onClose} />);
-        } else {
-          bulbHandler();
-        }
       },
     );
 
@@ -69,12 +64,17 @@ const GameGemHeader = ({bulbHandler}: Props) => {
     };
   }, []);
 
-  const ShowAdsHandler = async (onClose: () => void) => {
+  // if (isGetGem) {
+  //   increaseCoin();
+  //   showModal((onClose: () => void) => <GetGemToast onClose={onClose} />);
+  // } else {
+
+  // }
+
+  const SkipByShowAds = async (onClose: () => void) => {
     if (loaded) {
       onClose();
-      setLoaded(false);
       rewarded.show();
-      bulbHandler();
     } else {
       onClose();
       rewarded.load();
@@ -90,10 +90,9 @@ const GameGemHeader = ({bulbHandler}: Props) => {
   };
 
   const GetGemHandler = () => {
+    setGetGem(true);
     if (loaded) {
-      setGetGem(true);
       setLoaded(false);
-      rewarded.show();
     } else {
       rewarded.load();
       showModal((onClose: any) => (
@@ -108,18 +107,28 @@ const GameGemHeader = ({bulbHandler}: Props) => {
   };
 
   const bulbIconHandler = () => {
-    setGetGem(false);
+    rewarded.load();
     showModal((onClose: any) => (
       <BulbToast
+        onClose={onClose}
         coinDeductHandler={() => {
           if (coin > 90) {
             onClose();
             decreaseCoin();
             bulbHandler();
+          } else {
+            // onClose();
+
+            showModal((onClose: any) => (
+              <ToastMsg
+                message="Not enough gem available !!"
+                onClose={onClose}
+              />
+            ));
           }
         }}
         showAdsHandler={() => {
-          ShowAdsHandler(onClose);
+          SkipByShowAds(onClose);
         }}
       />
     ));
@@ -130,7 +139,8 @@ const GameGemHeader = ({bulbHandler}: Props) => {
       style={{
         flexDirection: 'row',
         width: ScreenWidth,
-        justifyContent: 'space-between',
+        // justifyContent: 'space-between',
+        justifyContent: 'flex-end',
         paddingHorizontal: 20,
         marginTop: -10,
       }}>
@@ -155,9 +165,9 @@ const GameGemHeader = ({bulbHandler}: Props) => {
           style={{width: 30, height: 30}}
         />
       </TouchableOpacity>
-      <TouchableOpacity
+      {/* <TouchableOpacity
         activeOpacity={0.7}
-        onPress={GetGemHandler}
+        onPress={bulbHandler}
         style={{
           width: 50,
           height: 50,
@@ -174,7 +184,7 @@ const GameGemHeader = ({bulbHandler}: Props) => {
           source={require('../../assets/Images/gem.png')}
           style={{width: 30, height: 30}}
         />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 };

@@ -52,12 +52,6 @@ const PlaySrc = (props: Props) => {
   );
 
   useEffect(() => {
-    setAnswerCharacterArray(Array(riddle.answer.length).fill(''));
-  }, [riddle]);
-
-  console.log('====>', answer, riddle.question, answerCharacterArray);
-
-  useEffect(() => {
     if (answer.length === riddle.answer.length) {
       if (answer === riddle.answer.toLowerCase()) {
         SetShowCelebration(true);
@@ -66,16 +60,18 @@ const PlaySrc = (props: Props) => {
           increaseCoin();
           increaseCurrentCompleteLevel();
         }
-
+        setAnswer('');
         showModal((onClose: any) => (
           <WinToast
             message={riddle.answer}
             onClose={() => {
               onClose();
-              setAnswer('');
               SetShowCelebration(false);
               if (level + 1 !== riddles.length) {
                 increaseLevel();
+                setAnswerCharacterArray(
+                  Array(riddles[level + 1].answer.length).fill(''),
+                );
               } else {
                 showModal((onClose: () => void) => (
                   <GameComplete
@@ -111,7 +107,42 @@ const PlaySrc = (props: Props) => {
         ));
       }
     }
-  }, [answer.length > 0]);
+  }, [answer]);
+
+  const completeByAds = () => {
+    showModal((onClose: any) => (
+      <WinToast
+        message={riddle.answer}
+        onClose={() => {
+          onClose();
+          setAnswer('');
+          setAnswerCharacterArray(Array(riddle.answer.length).fill(''));
+          SetShowCelebration(false);
+          if (level + 1 !== riddles.length) {
+            increaseLevel();
+          } else {
+            showModal((onClose: () => void) => (
+              <GameComplete
+                onClose={() => {
+                  onClose();
+                  setLevelToZero();
+                }}
+              />
+            ));
+          }
+        }}
+        HandlerPressPrevious={function (): void {
+          if (level > 0) {
+            decreaseLevel();
+          }
+          setAnswer('');
+          setAnswerCharacterArray(Array(riddle.answer.length).fill(''));
+          onClose();
+          SetShowCelebration(false);
+        }}
+      />
+    ));
+  };
 
   return (
     <View style={styles.mainContainer}>
@@ -136,8 +167,10 @@ const PlaySrc = (props: Props) => {
         {/* Game Gem Header */}
         <GameGemHeader
           bulbHandler={() => {
-            setAnswer(riddle.answer);
-            setAnswerCharacterArray(riddle.answer.split(''));
+            SetShowCelebration(true);
+            completeByAds();
+            // setAnswer(riddles[level].answer);
+            // setAnswerCharacterArray(riddles[level].answer.split(''));
           }}
         />
         {/* Main Game content */}
