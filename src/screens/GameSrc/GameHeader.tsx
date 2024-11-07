@@ -8,6 +8,7 @@ type Props = {};
 const GameHeader = (props: Props) => {
   const level = useStore((state: any) => state.level);
   const Coin = useCoinStore(state => state.coin);
+
   return (
     <View
       style={{

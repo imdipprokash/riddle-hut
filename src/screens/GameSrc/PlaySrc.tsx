@@ -23,6 +23,8 @@ import LottieView from 'lottie-react-native';
 import {showModal} from '../../components/RootModal';
 import WinToast from '../../components/WinToast';
 import FailToast from '../../components/FailToast';
+import AdsScreen from '../../components/ads/AdsScreen';
+import GameComplete from '../../components/GameComplete';
 
 type Props = {};
 
@@ -30,6 +32,7 @@ const PlaySrc = (props: Props) => {
   const level = useStore((state: any) => state.level);
   const increaseLevel = useStore(state => state.increaseLevel);
   const decreaseLevel = useStore(state => state.decreaseLevel);
+  const setLevelToZero = useStore(state => state.setLevelToZero);
 
   const currentCompleteLevel = useLevelCompleteState(
     state => state.currentCompleteLevel,
@@ -40,7 +43,7 @@ const PlaySrc = (props: Props) => {
     state => state.increaseCurrentCompleteLevel,
   );
 
-  const riddle = riddles[level];
+  const riddle = riddles[level]; //level
 
   const [showCelebration, SetShowCelebration] = useState<boolean>(false);
   const [answer, setAnswer] = useState('');
@@ -52,7 +55,7 @@ const PlaySrc = (props: Props) => {
     setAnswerCharacterArray(Array(riddle.answer.length).fill(''));
   }, [riddle]);
 
-  console.log(currentCompleteLevel, level, coin);
+  console.log('====>', answer, riddle.question, answerCharacterArray);
 
   useEffect(() => {
     if (answer.length === riddle.answer.length) {
@@ -60,7 +63,6 @@ const PlaySrc = (props: Props) => {
         SetShowCelebration(true);
 
         if (currentCompleteLevel < level + 1) {
-          //  coin increment
           increaseCoin();
           increaseCurrentCompleteLevel();
         }
@@ -72,14 +74,25 @@ const PlaySrc = (props: Props) => {
               onClose();
               setAnswer('');
               SetShowCelebration(false);
-              increaseLevel();
+              if (level + 1 !== riddles.length) {
+                increaseLevel();
+              } else {
+                showModal((onClose: () => void) => (
+                  <GameComplete
+                    onClose={() => {
+                      onClose();
+                      setLevelToZero();
+                    }}
+                  />
+                ));
+              }
             }}
             HandlerPressPrevious={function (): void {
               if (level > 0) {
                 decreaseLevel();
               }
               setAnswer('');
-              // setAnswerCharacterArray(Array(riddle.answer.length).fill(''));
+              setAnswerCharacterArray(Array(riddle.answer.length).fill(''));
               onClose();
               SetShowCelebration(false);
             }}
@@ -98,7 +111,7 @@ const PlaySrc = (props: Props) => {
         ));
       }
     }
-  }, [answer]);
+  }, [answer.length > 0]);
 
   return (
     <View style={styles.mainContainer}>
@@ -132,7 +145,7 @@ const PlaySrc = (props: Props) => {
           style={{
             width: ScreenWidth,
             alignItems: 'center',
-            paddingTop: ScreenHeight * 0.1,
+            paddingTop: ScreenHeight * 0.045,
             gap: 30,
           }}>
           {/* Question */}
@@ -193,6 +206,9 @@ const PlaySrc = (props: Props) => {
             }}
           />
         </View>
+      </View>
+      <View style={{position: 'absolute', bottom: 1}}>
+        <AdsScreen />
       </View>
     </View>
   );

@@ -1,43 +1,114 @@
 import {Image, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {AppColors, ScreenWidth} from '../../utils/constants';
 import {useCoinStore, useStore} from '../../zustand/store';
 import {showModal} from '../../components/RootModal';
 import BulbToast from '../../components/BulbToast';
 import ToastMsg from '../../components/ToastMsg';
+import {
+  RewardedAd,
+  RewardedAdEventType,
+  TestIds,
+} from 'react-native-google-mobile-ads';
+import GetGemToast from '../../components/GetGemToast';
+
+const adsId = __DEV__
+  ? TestIds.REWARDED
+  : 'ca-app-pub-3346761957556908/6676712344';
 
 type Props = {
   bulbHandler: () => void;
 };
+const rewarded = RewardedAd.createForAdRequest(adsId, {
+  keywords: [
+    'insurance',
+    'mortgage',
+    'investment',
+    'credit card',
+    'lawyer',
+    'online degree',
+    'crypto',
+    'enterprise software',
+  ],
+});
 
 const GameGemHeader = ({bulbHandler}: Props) => {
-  const {decreaseCoin, coin} = useCoinStore(state => state);
+  const {decreaseCoin, coin, increaseCoin} = useCoinStore(state => state);
+  const [loaded, setLoaded] = useState(false);
+  const [isGetGem, setGetGem] = useState(true);
 
-  const ShowAdsHandler = () => {
-    showModal((onClose: any) => (
-      <ToastMsg
-        onClose={() => {
+  useEffect(() => {
+    const unsubscribeLoaded = rewarded.addAdEventListener(
+      RewardedAdEventType.LOADED,
+      () => {
+        setLoaded(true);
+      },
+    );
+    const unsubscribeEarned = rewarded.addAdEventListener(
+      RewardedAdEventType.EARNED_REWARD,
+      reward => {
+        console.log(reward);
+        rewarded.load();
+        if (isGetGem) {
+          setGetGem(false);
+          increaseCoin();
+          showModal((onClose: () => void) => <GetGemToast onClose={onClose} />);
+        } else {
           bulbHandler();
-          onClose();
-        }}
-        message="Ads not found!!"
-      />
-    ));
+        }
+      },
+    );
+
+    // Start loading the rewarded ad straight away
+    rewarded.load();
+
+    // Unsubscribe from events on unmount
+    return () => {
+      unsubscribeLoaded();
+      unsubscribeEarned();
+    };
+  }, []);
+
+  const ShowAdsHandler = async (onClose: () => void) => {
+    if (loaded) {
+      onClose();
+      setLoaded(false);
+      rewarded.show();
+      bulbHandler();
+    } else {
+      onClose();
+      rewarded.load();
+      showModal((onClose: any) => (
+        <ToastMsg
+          onClose={() => {
+            onClose();
+          }}
+          message="No ads found !"
+        />
+      ));
+    }
   };
 
   const GetGemHandler = () => {
-    // Show ads and increment coin
-    showModal((onClose: any) => (
-      <ToastMsg
-        onClose={() => {
-          onClose();
-        }}
-        message="Ads not found!!"
-      />
-    ));
+    if (loaded) {
+      setGetGem(true);
+      setLoaded(false);
+      rewarded.show();
+    } else {
+      rewarded.load();
+      showModal((onClose: any) => (
+        <ToastMsg
+          onClose={() => {
+            onClose();
+          }}
+          message="No ads found !"
+        />
+      ));
+    }
   };
 
   const bulbIconHandler = () => {
+    setGetGem(false);
     showModal((onClose: any) => (
       <BulbToast
         coinDeductHandler={() => {
@@ -48,9 +119,7 @@ const GameGemHeader = ({bulbHandler}: Props) => {
           }
         }}
         showAdsHandler={() => {
-          onClose();
-          console.log('Show ads');
-          ShowAdsHandler();
+          ShowAdsHandler(onClose);
         }}
       />
     ));
