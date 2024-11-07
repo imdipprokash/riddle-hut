@@ -72,28 +72,12 @@ const GameGemHeader = ({bulbHandler}: Props) => {
   // }
 
   const SkipByShowAds = async (onClose: () => void) => {
+    rewarded.load();
     if (loaded) {
       onClose();
       rewarded.show();
     } else {
       onClose();
-      rewarded.load();
-      showModal((onClose: any) => (
-        <ToastMsg
-          onClose={() => {
-            onClose();
-          }}
-          message="No ads found !"
-        />
-      ));
-    }
-  };
-
-  const GetGemHandler = () => {
-    setGetGem(true);
-    if (loaded) {
-      setLoaded(false);
-    } else {
       rewarded.load();
       showModal((onClose: any) => (
         <ToastMsg
@@ -118,7 +102,7 @@ const GameGemHeader = ({bulbHandler}: Props) => {
             bulbHandler();
           } else {
             // onClose();
-
+            rewarded.load();
             showModal((onClose: any) => (
               <ToastMsg
                 message="Not enough gem available !!"
