@@ -9,9 +9,9 @@
     [
       "react-native-fbsdk-next",
       {
-        "appID": "1103641798104377",
-        "clientToken": "c3e20eee3f780d68",
-        "displayName": "PLANTGENIUS",
+        "appID": "1068001327948771",
+        "clientToken": "469143343707504",
+        "displayName": "RiddleHut",
         "advertiserIDCollectionEnabled": false,
         "autoLogAppEventsEnabled": false,
         "isAutoInitEnabled": true,

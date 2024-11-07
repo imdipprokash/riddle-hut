@@ -36,6 +36,29 @@ const WinToast = ({onClose, HandlerPressPrevious, message}: Props) => {
           alignItems: 'center',
           gap: 10,
         }}>
+        <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={onClose}
+          style={{
+            position: 'absolute',
+            zIndex: 100,
+            top: -25,
+            right: 0,
+            backgroundColor: AppColors.bgColor,
+            width: 45,
+            borderRadius: 999,
+          }}>
+          <Text
+            style={{
+              fontSize: 35,
+              color: 'black',
+              textAlign: 'center',
+              marginTop: -5,
+            }}>
+            x
+          </Text>
+        </TouchableOpacity>
+
         {/* Header section*/}
         <View style={{position: 'absolute', top: -40, flexDirection: 'row'}}>
           <Image
