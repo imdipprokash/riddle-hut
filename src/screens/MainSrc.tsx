@@ -3,7 +3,7 @@ import React from 'react';
 import {AppColors, ScreenHeight, ScreenWidth} from '../utils/constants';
 import GameBtn from '../components/GameBtn';
 import {useNavigation} from '@react-navigation/native';
-import {useStore} from '../zustand/store';
+import {useLevelCompleteState, useStore} from '../zustand/store';
 import {showModal} from '../components/RootModal';
 import AlertModal from '../components/AlertModal';
 
@@ -17,7 +17,11 @@ const MainSrc = (props: Props) => {
   return (
     <View style={styles.mainContainer}>
       <ImageBackground
-        style={{width: ScreenWidth, height: ScreenHeight, position: 'absolute'}}
+        style={{
+          width: ScreenWidth,
+          height: ScreenHeight,
+          position: 'absolute',
+        }}
         source={require('../assets/BgImage.png')}
       />
       <View style={styles.mainViewStyle}>
@@ -46,7 +50,6 @@ const MainSrc = (props: Props) => {
                     yesHandler={() => {
                       onClose();
                       setLevelToZero();
-
                       nav.navigate('PlaySrc');
                     }}
                   />

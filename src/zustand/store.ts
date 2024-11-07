@@ -31,7 +31,7 @@ export const useStore = create<LevelState>()(
       setLevelToZero: () => set(state => ({level: 0})),
     }),
     {
-      name: 'bear-storage', // Unique name for the local storage key
+      name: 'level-storage', // Unique name for the local storage key
       storage: asyncStorage,
     },
   ),
@@ -43,16 +43,38 @@ interface CoinState {
   decreaseCoin: () => void;
 }
 
-// export const useCoinStore = create<CoinState>()(
-//   persist(
-//     set => ({
-//       coin: 0,
-//       increaseCoin: () => set(state => ({coin: state.coin + 50})),
-//       decreaseCoin: () => set(state => ({coin: state.coin - 50})),
-//     }),
-//     {
-//       name: 'coin-storage', // Unique name for the local storage key
-//       storage: asyncStorage,
-//     },
-//   ),
-// );
+export const useCoinStore = create<CoinState>()(
+  persist(
+    set => ({
+      coin: 0,
+      increaseCoin: () => set(state => ({coin: state.coin + 50})),
+      decreaseCoin: () => set(state => ({coin: state.coin - 100})),
+    }),
+    {
+      name: 'coin-storage', // Unique name for the local storage key
+      storage: asyncStorage,
+    },
+  ),
+);
+
+interface LevelCompleteState {
+  currentCompleteLevel: number;
+  increaseCurrentCompleteLevel: () => void;
+  setCurrentCompleteLevelToZero: () => void;
+}
+
+export const useLevelCompleteState = create<LevelCompleteState>()(
+  persist(
+    set => ({
+      currentCompleteLevel: 0,
+      increaseCurrentCompleteLevel: () =>
+        set(state => ({currentCompleteLevel: state.currentCompleteLevel + 1})),
+      setCurrentCompleteLevelToZero: () =>
+        set(state => ({currentCompleteLevel: 0})),
+    }),
+    {
+      name: 'LevelCompleteState-storage', // Unique name for the local storage key
+      storage: asyncStorage,
+    },
+  ),
+);

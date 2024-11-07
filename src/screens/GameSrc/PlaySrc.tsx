@@ -13,12 +13,15 @@ import GameHeader from './GameHeader';
 import GameGemHeader from './GameGemHeader';
 import {riddles} from '../../data/riddle';
 import CustomKeyboard from './CustomKeyboard';
-import {useStore} from '../../zustand/store';
+import {
+  useLevelCompleteState,
+  useStore,
+  useCoinStore,
+} from '../../zustand/store';
 
 import LottieView from 'lottie-react-native';
 import {showModal} from '../../components/RootModal';
 import WinToast from '../../components/WinToast';
-import Sound from 'react-native-sound';
 import FailToast from '../../components/FailToast';
 
 type Props = {};
@@ -27,6 +30,15 @@ const PlaySrc = (props: Props) => {
   const level = useStore((state: any) => state.level);
   const increaseLevel = useStore(state => state.increaseLevel);
   const decreaseLevel = useStore(state => state.decreaseLevel);
+
+  const currentCompleteLevel = useLevelCompleteState(
+    state => state.currentCompleteLevel,
+  );
+
+  const {increaseCoin, coin} = useCoinStore(state => state);
+  const increaseCurrentCompleteLevel = useLevelCompleteState(
+    state => state.increaseCurrentCompleteLevel,
+  );
 
   const riddle = riddles[level];
 
@@ -39,12 +51,19 @@ const PlaySrc = (props: Props) => {
   useEffect(() => {
     setAnswerCharacterArray(Array(riddle.answer.length).fill(''));
   }, [riddle]);
+  console.log(currentCompleteLevel, level, coin);
 
   useEffect(() => {
     if (answer.length === riddle.answer.length) {
       if (answer === riddle.answer.toLowerCase()) {
         SetShowCelebration(true);
-        increaseLevel();
+
+        if (currentCompleteLevel < level + 1) {
+          //  coin increment
+          increaseCoin();
+          increaseCurrentCompleteLevel();
+        }
+
         showModal((onClose: any) => (
           <WinToast
             message={riddle.answer}
@@ -52,12 +71,13 @@ const PlaySrc = (props: Props) => {
               onClose();
               setAnswer('');
               SetShowCelebration(false);
+              increaseLevel();
             }}
             HandlerPressPrevious={function (): void {
-              if (level > -1) {
+              if (level > 0) {
                 decreaseLevel();
-                setAnswer('');
               }
+              setAnswer('');
               // setAnswerCharacterArray(Array(riddle.answer.length).fill(''));
               onClose();
               SetShowCelebration(false);

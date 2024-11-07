@@ -28,7 +28,7 @@ const App = (props: Props) => {
         <StatusBar
           translucent
           backgroundColor={'transparent'}
-          barStyle={'dark-content'}
+          barStyle={'light-content'}
         />
         <Stack.Navigator
           initialRouteName="Home"
