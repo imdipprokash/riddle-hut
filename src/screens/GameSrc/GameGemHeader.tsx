@@ -20,11 +20,22 @@ const GameGemHeader = ({bulbHandler}: Props) => {
           bulbHandler();
           onClose();
         }}
+        message="Ads not found!!"
       />
     ));
   };
 
-  const GetGemHandler = () => {};
+  const GetGemHandler = () => {
+    // Show ads and increment coin
+    showModal((onClose: any) => (
+      <ToastMsg
+        onClose={() => {
+          onClose();
+        }}
+        message="Ads not found!!"
+      />
+    ));
+  };
 
   const bulbIconHandler = () => {
     showModal((onClose: any) => (
@@ -77,7 +88,7 @@ const GameGemHeader = ({bulbHandler}: Props) => {
       </TouchableOpacity>
       <TouchableOpacity
         activeOpacity={0.7}
-        onPress={bulbIconHandler}
+        onPress={GetGemHandler}
         style={{
           width: 50,
           height: 50,
