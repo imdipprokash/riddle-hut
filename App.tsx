@@ -8,6 +8,9 @@ import MainSrc from './src/screens/MainSrc';
 import PlaySrc from './src/screens/GameSrc/PlaySrc';
 import {RootSiblingParent} from 'react-native-root-siblings';
 import AboutSrc from './src/screens/AboutSrc';
+import {Provider} from 'react-redux';
+import {persistor, store} from './src/redux/store';
+import {PersistGate} from 'redux-persist/integration/react';
 
 type Props = {};
 
@@ -23,31 +26,35 @@ const App = (props: Props) => {
     );
   }
   return (
-    <RootSiblingParent>
-      <NavigationContainer>
-        <StatusBar
-          translucent
-          backgroundColor={'transparent'}
-          barStyle={'light-content'}
-        />
-        <Stack.Navigator
-          initialRouteName="Home"
-          screenOptions={{
-            headerShown: false,
-            contentStyle: {backgroundColor: AppColors.bgColor},
-          }}>
-          <Stack.Screen name="MainSrc" component={MainSrc} />
-          <Stack.Screen name="PlaySrc" component={PlaySrc} />
-          <Stack.Screen name="ResumeSrc" component={PlaySrc} />
-          <Stack.Screen name="AboutSrc" component={AboutSrc} />
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <RootSiblingParent>
+          <NavigationContainer>
+            <StatusBar
+              translucent
+              backgroundColor={'transparent'}
+              barStyle={'light-content'}
+            />
+            <Stack.Navigator
+              initialRouteName="Home"
+              screenOptions={{
+                headerShown: false,
+                contentStyle: {backgroundColor: AppColors.bgColor},
+              }}>
+              <Stack.Screen name="MainSrc" component={MainSrc} />
+              <Stack.Screen name="PlaySrc" component={PlaySrc} />
+              <Stack.Screen name="ResumeSrc" component={PlaySrc} />
+              <Stack.Screen name="AboutSrc" component={AboutSrc} />
 
-          {/*  */}
-          <Stack.Screen name="MyTabs">
-            {props => <MyTabs {...props} extraData={{}} />}
-          </Stack.Screen>
-        </Stack.Navigator>
-      </NavigationContainer>
-    </RootSiblingParent>
+              {/*  */}
+              <Stack.Screen name="MyTabs">
+                {props => <MyTabs {...props} extraData={{}} />}
+              </Stack.Screen>
+            </Stack.Navigator>
+          </NavigationContainer>
+        </RootSiblingParent>
+      </PersistGate>
+    </Provider>
   );
 };
 

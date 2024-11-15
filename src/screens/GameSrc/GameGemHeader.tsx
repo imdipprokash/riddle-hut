@@ -1,7 +1,6 @@
 import {Image, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {AppColors, ScreenWidth} from '../../utils/constants';
-import {useCoinStore, useStore} from '../../zustand/store';
 import {showModal} from '../../components/RootModal';
 import BulbToast from '../../components/BulbToast';
 import ToastMsg from '../../components/ToastMsg';
@@ -10,6 +9,8 @@ import {
   RewardedAdEventType,
   TestIds,
 } from 'react-native-google-mobile-ads';
+import {useAppDispatch, useAppSelector} from '../../redux/hook';
+import {DecreaseCoin} from '../../redux/slices/coinSlice';
 
 const adsId = __DEV__
   ? TestIds.REWARDED
@@ -32,7 +33,10 @@ const rewarded = RewardedAd.createForAdRequest(adsId, {
 });
 
 const GameGemHeader = ({bulbHandler}: Props) => {
-  const {decreaseCoin, coin, increaseCoin} = useCoinStore(state => state);
+  // const {decreaseCoin, coin, increaseCoin} = useCoinStore(state => state);
+
+  const dispatch = useAppDispatch();
+  const coin = useAppSelector(state => state.coin.currentCoin);
   const [loaded, setLoaded] = useState(false);
   const [isGetGem, setGetGem] = useState(false);
 
@@ -98,7 +102,8 @@ const GameGemHeader = ({bulbHandler}: Props) => {
         coinDeductHandler={() => {
           if (coin > 90) {
             onClose();
-            decreaseCoin();
+            // decreaseCoin();
+            dispatch(DecreaseCoin());
             bulbHandler();
           } else {
             // onClose();
@@ -130,7 +135,8 @@ const GameGemHeader = ({bulbHandler}: Props) => {
       }}>
       <TouchableOpacity
         activeOpacity={0.7}
-        onPress={bulbIconHandler}
+        // onPress={bulbIconHandler}
+        onPress={bulbHandler}
         style={{
           width: 50,
           height: 50,

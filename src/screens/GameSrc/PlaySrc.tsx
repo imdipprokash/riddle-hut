@@ -13,11 +13,6 @@ import GameHeader from './GameHeader';
 import GameGemHeader from './GameGemHeader';
 import {riddles} from '../../data/riddle';
 import CustomKeyboard from './CustomKeyboard';
-import {
-  useLevelCompleteState,
-  useStore,
-  useCoinStore,
-} from '../../zustand/store';
 
 import LottieView from 'lottie-react-native';
 import {showModal} from '../../components/RootModal';
@@ -25,23 +20,21 @@ import WinToast from '../../components/WinToast';
 import FailToast from '../../components/FailToast';
 import AdsScreen from '../../components/ads/AdsScreen';
 import GameComplete from '../../components/GameComplete';
+import {useAppDispatch, useAppSelector} from '../../redux/hook';
+import {
+  DecreaseLevel,
+  IncreaseLevel,
+  ResetLevel,
+} from '../../redux/slices/levelSlice';
+import {IncreaseCoin} from '../../redux/slices/coinSlice';
 
 type Props = {};
 
 const PlaySrc = (props: Props) => {
-  const level = useStore((state: any) => state.level);
-  const increaseLevel = useStore(state => state.increaseLevel);
-  const decreaseLevel = useStore(state => state.decreaseLevel);
-  const setLevelToZero = useStore(state => state.setLevelToZero);
+  const level = useAppSelector(state => state.level.currentLevel);
+  const dispatch = useAppDispatch();
 
-  const currentCompleteLevel = useLevelCompleteState(
-    state => state.currentCompleteLevel,
-  );
-
-  const {increaseCoin, coin} = useCoinStore(state => state);
-  const increaseCurrentCompleteLevel = useLevelCompleteState(
-    state => state.increaseCurrentCompleteLevel,
-  );
+  console.log('This is the level ', level);
 
   const riddle = riddles[level]; //level
 
@@ -54,13 +47,7 @@ const PlaySrc = (props: Props) => {
   useEffect(() => {
     if (answer.length === riddle.answer.length) {
       if (answer === riddle.answer.toLowerCase()) {
-        SetShowCelebration(true);
-
-        if (currentCompleteLevel < level + 1) {
-          increaseCoin();
-          increaseCurrentCompleteLevel();
-        }
-        setAnswer('');
+        onSuccessHandler();
         showModal((onClose: any) => (
           <WinToast
             message={riddle.answer}
@@ -68,16 +55,14 @@ const PlaySrc = (props: Props) => {
               onClose();
               SetShowCelebration(false);
               if (level + 1 !== riddles.length) {
-                increaseLevel();
-                setAnswerCharacterArray(
-                  Array(riddles[level + 1].answer.length).fill(''),
-                );
+                dispatch(IncreaseLevel());
               } else {
                 showModal((onClose: () => void) => (
                   <GameComplete
                     onClose={() => {
                       onClose();
-                      setLevelToZero();
+                      // setLevelToZero();
+                      dispatch(ResetLevel());
                     }}
                   />
                 ));
@@ -85,7 +70,7 @@ const PlaySrc = (props: Props) => {
             }}
             HandlerPressPrevious={function (): void {
               if (level > 0) {
-                decreaseLevel();
+                dispatch(DecreaseLevel());
               }
               setAnswer('');
               setAnswerCharacterArray(Array(riddle.answer.length).fill(''));
@@ -109,6 +94,24 @@ const PlaySrc = (props: Props) => {
     }
   }, [answer]);
 
+  const onSuccessHandler = () => {
+    if (level < riddles.length) {
+      dispatch(IncreaseLevel());
+    }
+
+    // Coin increase
+    dispatch(IncreaseCoin());
+
+    // clear answerArray
+    setAnswerCharacterArray(Array(riddles[level + 1].answer.length).fill(''));
+
+    // clear user input
+    setAnswer('');
+
+    // Show celebration
+    SetShowCelebration(true);
+  };
+
   const completeByAds = () => {
     showModal((onClose: any) => (
       <WinToast
@@ -119,13 +122,13 @@ const PlaySrc = (props: Props) => {
           setAnswerCharacterArray(Array(riddle.answer.length).fill(''));
           SetShowCelebration(false);
           if (level + 1 !== riddles.length) {
-            increaseLevel();
+            dispatch(IncreaseLevel());
           } else {
             showModal((onClose: () => void) => (
               <GameComplete
                 onClose={() => {
                   onClose();
-                  setLevelToZero();
+                  dispatch(ResetLevel());
                 }}
               />
             ));
@@ -133,7 +136,7 @@ const PlaySrc = (props: Props) => {
         }}
         HandlerPressPrevious={function (): void {
           if (level > 0) {
-            decreaseLevel();
+            dispatch(DecreaseLevel());
           }
           setAnswer('');
           setAnswerCharacterArray(Array(riddle.answer.length).fill(''));
@@ -169,8 +172,6 @@ const PlaySrc = (props: Props) => {
           bulbHandler={() => {
             SetShowCelebration(true);
             completeByAds();
-            // setAnswer(riddles[level].answer);
-            // setAnswerCharacterArray(riddles[level].answer.split(''));
           }}
         />
         {/* Main Game content */}
@@ -207,8 +208,8 @@ const PlaySrc = (props: Props) => {
                 onFocus={() => Keyboard.dismiss()}
                 onKeyPress={() => Keyboard.dismiss()}
                 style={{
-                  height: 60,
-                  width: 55,
+                  width: ScreenWidth * 0.131,
+                  height: ScreenHeight * 0.065,
                   fontSize: 30,
                   borderRadius: 16,
                   backgroundColor:

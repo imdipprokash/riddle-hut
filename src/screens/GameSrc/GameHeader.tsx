@@ -1,13 +1,15 @@
 import {Image, ImageBackground, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {ScreenWidth} from '../../utils/constants';
-import {useCoinStore, useStore} from '../../zustand/store';
+import {useAppSelector} from '../../redux/hook';
 
 type Props = {};
 
 const GameHeader = (props: Props) => {
-  const level = useStore((state: any) => state.level);
-  const Coin = useCoinStore(state => state.coin);
+  const level = useAppSelector(state => state.level.currentLevel);
+  const Coin = useAppSelector(state => state.coin.currentCoin);
+
+  console.log('This is the level game header ', level);
 
   return (
     <View
@@ -32,7 +34,7 @@ const GameHeader = (props: Props) => {
             source={require('../../assets/Images/Star.png')}
             style={{width: 20, height: 20, marginRight: 5}}
           />
-          <Text style={styles.textStyle}>{level + 1}</Text>
+          <Text style={styles.textStyle}>{level}</Text>
         </ImageBackground>
       </View>
       <View>

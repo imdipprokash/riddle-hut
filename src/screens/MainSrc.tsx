@@ -3,17 +3,20 @@ import React from 'react';
 import {AppColors, ScreenHeight, ScreenWidth} from '../utils/constants';
 import GameBtn from '../components/GameBtn';
 import {useNavigation} from '@react-navigation/native';
-import {useLevelCompleteState, useStore} from '../zustand/store';
 import {showModal} from '../components/RootModal';
 import AlertModal from '../components/AlertModal';
+import {useAppDispatch, useAppSelector} from '../redux/hook';
+import {ResetLevel} from '../redux/slices/levelSlice';
 
 type Props = {};
 
 const MainSrc = (props: Props) => {
-  const setLevelToZero = useStore(state => state.setLevelToZero);
+  const dispatch = useAppDispatch();
 
   const nav: any = useNavigation();
-  const level = useStore(state => state.level);
+  const level = useAppSelector(state => state.level.currentLevel);
+
+  console.log(level);
   return (
     <View style={styles.mainContainer}>
       <ImageBackground
@@ -49,7 +52,7 @@ const MainSrc = (props: Props) => {
                     }}
                     yesHandler={() => {
                       onClose();
-                      setLevelToZero();
+                      dispatch(ResetLevel());
                       nav.navigate('PlaySrc');
                     }}
                   />

@@ -64,20 +64,27 @@ const CustomKeyboard = ({answer, onPress}: Props) => {
   }, [count]);
 
   return (
-    <View>
+    <View
+      style={{
+        width: ScreenWidth,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
       <View
         style={{
           flexDirection: 'row',
           gap: 10,
           paddingTop: ScreenHeight * 0.05,
           width: ScreenWidth * 0.96,
+          alignItems: 'center',
+          justifyContent: 'center',
         }}>
         {firstRowKeys.map((item: any, index: number) => (
           <TouchableOpacity
             activeOpacity={0.7}
             style={{
-              width: 55,
-              height: 60,
+              width: ScreenWidth * 0.131,
+              height: ScreenHeight * 0.065,
               backgroundColor: item?.isClick
                 ? 'transparent'
                 : AppColors.activeBtnColor,
@@ -111,14 +118,16 @@ const CustomKeyboard = ({answer, onPress}: Props) => {
           gap: 10,
           paddingTop: ScreenHeight * 0.05,
           width: ScreenWidth * 0.96,
+          alignItems: 'center',
+          justifyContent: 'center',
         }}>
         {secondRowKeys.map((item: any, index: number) => (
           <TouchableOpacity
             disabled={item.isClick}
             key={index}
             style={{
-              width: 55,
-              height: 60,
+              width: ScreenWidth * 0.131,
+              height: ScreenHeight * 0.065,
               backgroundColor: item?.isClick
                 ? 'transparent'
                 : AppColors.activeBtnColor,
