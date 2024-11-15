@@ -3,17 +3,11 @@ import React from 'react';
 import {AppColors, ScreenHeight, ScreenWidth} from '../utils/constants';
 import GameBtn from '../components/GameBtn';
 import {useNavigation} from '@react-navigation/native';
-import {useStore} from '../zustand/store';
-import {showModal} from '../components/RootModal';
-import AlertModal from '../components/AlertModal';
 
 type Props = {};
 
 const AboutSrc = (props: Props) => {
-  const setLevelToZero = useStore(state => state.setLevelToZero);
-
   const nav: any = useNavigation();
-  const level = useStore(state => state.level);
   return (
     <View style={styles.mainContainer}>
       <ImageBackground

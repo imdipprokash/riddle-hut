@@ -13,10 +13,10 @@ const coinSlice = createSlice({
   initialState,
   reducers: {
     IncreaseCoin: state => {
-      state.currentCoin = initialState.currentCoin + 50;
+      state.currentCoin += 50;
     },
     DecreaseCoin: state => {
-      state.currentCoin = initialState.currentCoin - 100;
+      state.currentCoin -= 100;
     },
   },
 });

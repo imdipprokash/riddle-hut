@@ -1,6 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
-import {ScreenHeight, ScreenWidth} from '../utils/constants';
 
 type Props = {
   onClose: () => void;
@@ -13,37 +12,22 @@ const ToastMsg = ({onClose, status, message}: Props) => {
     setTimeout(onClose, 1500);
   }, []);
   return (
-    <View
+    <Text
       style={{
-        bottom: 15,
+        color: '#333',
+        fontSize: 18,
+        textAlign: 'center',
         position: 'absolute',
+        bottom: 50,
+        backgroundColor: '#fff',
+        paddingHorizontal: 10,
+        borderRadius: 10,
+        paddingVertical: 5,
+        margin: 'auto',
         alignSelf: 'center',
-        width: ScreenWidth * 0.8,
-        height: ScreenHeight * 0.06,
-        borderRadius: 8,
-        elevation: 5,
-        flexDirection: 'row',
-        overflow: 'hidden',
-        backgroundColor: 'white',
-        alignItems: 'center',
       }}>
-      <View
-        style={{
-          width: 10,
-          height: ScreenHeight * 0.07,
-          backgroundColor: status === 'success' ? 'green' : 'red',
-        }}
-      />
-      <Text
-        style={{
-          color: '#333',
-          fontSize: 18,
-          paddingHorizontal: 10,
-          width: ScreenWidth * 0.68,
-        }}>
-        {message}
-      </Text>
-    </View>
+      {message}
+    </Text>
   );
 };
 

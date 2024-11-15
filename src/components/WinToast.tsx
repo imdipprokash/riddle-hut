@@ -1,16 +1,15 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useEffect} from 'react';
 import {AppColors, ScreenHeight, ScreenWidth} from '../utils/constants';
-import {useStore} from '../zustand/store';
-
 type Props = {
   onClose: () => void;
   status?: 'error' | 'success';
   message?: string;
   HandlerPressPrevious: () => void;
+  isAds?: boolean;
 };
 
-const WinToast = ({onClose, HandlerPressPrevious, message}: Props) => {
+const WinToast = ({onClose, HandlerPressPrevious, message, isAds}: Props) => {
   return (
     <TouchableOpacity
       activeOpacity={1}
@@ -42,7 +41,7 @@ const WinToast = ({onClose, HandlerPressPrevious, message}: Props) => {
           style={{
             position: 'absolute',
             zIndex: 100,
-            top: -25,
+            top: -ScreenHeight * 0.03,
             right: 0,
             backgroundColor: AppColors.bgColor,
             width: 45,
@@ -97,7 +96,7 @@ const WinToast = ({onClose, HandlerPressPrevious, message}: Props) => {
               fontFamily: 'ComicNeue-Bold',
               color: 'black',
             }}>
-            +50
+            {isAds ? +0 : +50}
           </Text>
         </View>
         <View style={{flexDirection: 'row', gap: 20, marginTop: 5}}>

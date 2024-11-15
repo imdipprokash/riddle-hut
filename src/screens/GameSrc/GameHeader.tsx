@@ -9,8 +9,6 @@ const GameHeader = (props: Props) => {
   const level = useAppSelector(state => state.level.currentLevel);
   const Coin = useAppSelector(state => state.coin.currentCoin);
 
-  console.log('This is the level game header ', level);
-
   return (
     <View
       style={{

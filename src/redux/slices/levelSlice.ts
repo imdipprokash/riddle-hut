@@ -13,10 +13,10 @@ const levelSlice = createSlice({
   initialState,
   reducers: {
     IncreaseLevel: state => {
-      state.currentLevel = initialState.currentLevel + 1;
+      state.currentLevel += 1;
     },
     DecreaseLevel: state => {
-      state.currentLevel = initialState.currentLevel - 1;
+      state.currentLevel -= 1;
     },
     ResetLevel: state => {
       state.currentLevel = 0;

@@ -10,11 +10,10 @@ import {
 type Props = {
   answer: string;
   onPress: (e: string) => void;
+  resetKeyboard: boolean;
 };
 
-const CustomKeyboard = ({answer, onPress}: Props) => {
-  const [count, setCount] = useState(0);
-
+const CustomKeyboard = ({answer, onPress, resetKeyboard}: Props) => {
   let KeyboardKeysArray = splitToTwoArrays(answer.split(''));
   let part1 = KeyboardKeysArray.slice(0, 6); // First 6 elements
   let part2 = KeyboardKeysArray.slice(6); // Remaining elements
@@ -50,18 +49,15 @@ const CustomKeyboard = ({answer, onPress}: Props) => {
       })),
     );
   }, [answer]);
-  // setCount(prev => prev + 1);
+
   useEffect(() => {
-    if (count === answer.length) {
-      setCount(0);
-      setFirstRowKeys((prev: any) => {
-        return prev.map((item: any) => ({...item, isClick: false}));
-      });
-      setSecondRowKeys((prev: any) => {
-        return prev.map((item: any) => ({...item, isClick: false}));
-      });
-    }
-  }, [count]);
+    setFirstRowKeys((prev: any) => {
+      return prev.map((item: any) => ({...item, isClick: false}));
+    });
+    setSecondRowKeys((prev: any) => {
+      return prev.map((item: any) => ({...item, isClick: false}));
+    });
+  }, [resetKeyboard]);
 
   return (
     <View
@@ -94,7 +90,6 @@ const CustomKeyboard = ({answer, onPress}: Props) => {
             disabled={item.isClick}
             onPress={() => {
               onPress(item.itemName);
-              setCount(prev => prev + 1);
 
               firstRowKeys[index].isClick = true;
             }}>
@@ -102,7 +97,8 @@ const CustomKeyboard = ({answer, onPress}: Props) => {
               <Text
                 style={{
                   fontFamily: 'JosefinSans-Bold',
-                  fontSize: 30,
+                  fontSize: ScreenWidth * 0.07,
+
                   textAlign: 'center',
                 }}
                 key={item}>
@@ -136,18 +132,14 @@ const CustomKeyboard = ({answer, onPress}: Props) => {
             activeOpacity={0.7}
             onPress={() => {
               onPress(item.itemName);
-              setCount(prev => prev + 1);
 
               secondRowKeys[index].isClick = true;
             }}>
             {!item?.isClick && (
               <Text
                 style={{
-                  width: 55,
-                  height: 60,
-
                   fontFamily: 'JosefinSans-Bold',
-                  fontSize: 30,
+                  fontSize: ScreenWidth * 0.07,
                   textAlign: 'center',
                 }}>
                 {item.itemName}

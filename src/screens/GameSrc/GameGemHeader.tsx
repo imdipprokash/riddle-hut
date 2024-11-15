@@ -11,6 +11,7 @@ import {
 } from 'react-native-google-mobile-ads';
 import {useAppDispatch, useAppSelector} from '../../redux/hook';
 import {DecreaseCoin} from '../../redux/slices/coinSlice';
+import {useFocusEffect} from '@react-navigation/native';
 
 const adsId = __DEV__
   ? TestIds.REWARDED
@@ -33,47 +34,38 @@ const rewarded = RewardedAd.createForAdRequest(adsId, {
 });
 
 const GameGemHeader = ({bulbHandler}: Props) => {
-  // const {decreaseCoin, coin, increaseCoin} = useCoinStore(state => state);
-
   const dispatch = useAppDispatch();
   const coin = useAppSelector(state => state.coin.currentCoin);
   const [loaded, setLoaded] = useState(false);
-  const [isGetGem, setGetGem] = useState(false);
 
-  useEffect(() => {
-    const unsubscribeLoaded = rewarded.addAdEventListener(
-      RewardedAdEventType.LOADED,
-      () => {
-        setLoaded(true);
-      },
-    );
-    const unsubscribeEarned = rewarded.addAdEventListener(
-      RewardedAdEventType.EARNED_REWARD,
-      reward => {
-        console.log(reward);
+  useFocusEffect(
+    React.useCallback(() => {
+      const unsubscribeLoaded = rewarded.addAdEventListener(
+        RewardedAdEventType.LOADED,
+        () => {
+          setLoaded(true);
+        },
+      );
+      const unsubscribeEarned = rewarded.addAdEventListener(
+        RewardedAdEventType.EARNED_REWARD,
+        reward => {
+          setLoaded(false);
+          bulbHandler();
+          rewarded.load();
+        },
+      );
 
-        setLoaded(false);
-        bulbHandler();
+      // Start loading the rewarded ad straight away
+      rewarded.load();
+
+      // Unsubscribe from events on unmount
+      return () => {
+        unsubscribeLoaded();
+        unsubscribeEarned();
         rewarded.load();
-      },
-    );
-
-    // Start loading the rewarded ad straight away
-    rewarded.load();
-
-    // Unsubscribe from events on unmount
-    return () => {
-      unsubscribeLoaded();
-      unsubscribeEarned();
-    };
-  }, []);
-
-  // if (isGetGem) {
-  //   increaseCoin();
-  //   showModal((onClose: () => void) => <GetGemToast onClose={onClose} />);
-  // } else {
-
-  // }
+      };
+    }, []),
+  );
 
   const SkipByShowAds = async (onClose: () => void) => {
     rewarded.load();
@@ -135,8 +127,7 @@ const GameGemHeader = ({bulbHandler}: Props) => {
       }}>
       <TouchableOpacity
         activeOpacity={0.7}
-        // onPress={bulbIconHandler}
-        onPress={bulbHandler}
+        onPress={bulbIconHandler}
         style={{
           width: 50,
           height: 50,
@@ -155,26 +146,6 @@ const GameGemHeader = ({bulbHandler}: Props) => {
           style={{width: 30, height: 30}}
         />
       </TouchableOpacity>
-      {/* <TouchableOpacity
-        activeOpacity={0.7}
-        onPress={bulbHandler}
-        style={{
-          width: 50,
-          height: 50,
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: AppColors.activeBtnColor,
-          borderRadius: 9999,
-        }}>
-        <View style={styles.signViewStyle}>
-          <Text style={styles.textStyle}>+</Text>
-        </View>
-        <Image
-          resizeMode="contain"
-          source={require('../../assets/Images/gem.png')}
-          style={{width: 30, height: 30}}
-        />
-      </TouchableOpacity> */}
     </View>
   );
 };

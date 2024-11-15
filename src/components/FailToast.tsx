@@ -36,24 +36,38 @@ const FailToast = ({onClose, message}: Props) => {
           gap: 10,
         }}>
         {/* Header section*/}
-        <View style={{position: 'absolute', top: -40, flexDirection: 'row'}}>
+        <View
+          style={{
+            position: 'absolute',
+            top: -ScreenHeight * 0.045,
+            flexDirection: 'row',
+          }}>
           <Image
             source={require('../assets/Images/Star.png')}
-            style={{width: 70, height: 70, marginRight: 5}}
+            style={{
+              width: ScreenWidth * 0.19,
+              height: ScreenHeight * 0.08,
+              marginRight: 5,
+            }}
           />
         </View>
         <Text
           style={{
-            fontSize: 50,
+            fontSize: ScreenWidth * 0.12,
             paddingHorizontal: 10,
             fontFamily: 'JosefinSans-Bold',
             color: 'black',
-            top: 35,
+            top: ScreenHeight * 0.04,
           }}>
           Failed !!
         </Text>
 
-        <View style={{flexDirection: 'row', gap: 20, marginTop: 50}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            gap: 20,
+            marginTop: ScreenHeight * 0.06,
+          }}>
           <TouchableOpacity
             onPress={onClose}
             style={{
@@ -65,7 +79,7 @@ const FailToast = ({onClose, message}: Props) => {
             }}>
             <Text
               style={{
-                fontSize: 25,
+                fontSize: ScreenWidth * 0.06,
                 fontFamily: 'JosefinSans-Bold',
                 paddingBottom: 5,
                 color: 'white',

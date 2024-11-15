@@ -1,10 +1,6 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useEffect} from 'react';
+import React from 'react';
 import {AppColors, ScreenHeight, ScreenWidth} from '../utils/constants';
-import Sound from 'react-native-sound';
-import {useCoinStore, useStore} from '../zustand/store';
-import {showModal} from './RootModal';
-import AnswerModal from './AnswerModal';
 
 type Props = {
   status?: 'error' | 'success';

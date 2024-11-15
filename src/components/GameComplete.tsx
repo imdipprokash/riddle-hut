@@ -44,7 +44,7 @@ const GameComplete = ({onClose, message}: Props) => {
         </View>
         <Text
           style={{
-            fontSize: 50,
+            fontSize: ScreenWidth * 0.08,
             paddingHorizontal: 10,
             fontFamily: 'JosefinSans-Bold',
             color: 'black',
@@ -53,7 +53,12 @@ const GameComplete = ({onClose, message}: Props) => {
           Game Complete 🥳
         </Text>
 
-        <View style={{flexDirection: 'row', gap: 20, marginTop: 50}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            gap: 20,
+            marginTop: ScreenHeight * 0.08,
+          }}>
           <TouchableOpacity
             onPress={onClose}
             style={{
@@ -65,7 +70,7 @@ const GameComplete = ({onClose, message}: Props) => {
             }}>
             <Text
               style={{
-                fontSize: 25,
+                fontSize: ScreenWidth * 0.06,
                 fontFamily: 'JosefinSans-Bold',
                 paddingBottom: 5,
                 color: 'white',

@@ -1,5 +1,4 @@
 import {
-  Alert,
   ImageBackground,
   Keyboard,
   StyleSheet,
@@ -7,13 +6,12 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {AppColors, ScreenHeight, ScreenWidth} from '../../utils/constants';
 import GameHeader from './GameHeader';
 import GameGemHeader from './GameGemHeader';
 import {riddles} from '../../data/riddle';
 import CustomKeyboard from './CustomKeyboard';
-
 import LottieView from 'lottie-react-native';
 import {showModal} from '../../components/RootModal';
 import WinToast from '../../components/WinToast';
@@ -32,119 +30,113 @@ type Props = {};
 
 const PlaySrc = (props: Props) => {
   const level = useAppSelector(state => state.level.currentLevel);
+
   const dispatch = useAppDispatch();
 
-  console.log('This is the level ', level);
-
-  const riddle = riddles[level]; //level
+  const [riddle, setRiddle] = useState(riddles[level]);
+  const [resetKeyboard, setResetKeyboard] = useState(false);
 
   const [showCelebration, SetShowCelebration] = useState<boolean>(false);
-  const [answer, setAnswer] = useState('');
   const [answerCharacterArray, setAnswerCharacterArray] = useState(
-    Array(riddle.answer.length).fill(''),
+    Array(riddle?.answer?.length | 0).fill(''),
   );
 
-  useEffect(() => {
-    if (answer.length === riddle.answer.length) {
-      if (answer === riddle.answer.toLowerCase()) {
-        onSuccessHandler();
-        showModal((onClose: any) => (
-          <WinToast
-            message={riddle.answer}
-            onClose={() => {
-              onClose();
-              SetShowCelebration(false);
-              if (level + 1 !== riddles.length) {
-                dispatch(IncreaseLevel());
-              } else {
-                showModal((onClose: () => void) => (
-                  <GameComplete
-                    onClose={() => {
-                      onClose();
-                      // setLevelToZero();
-                      dispatch(ResetLevel());
-                    }}
-                  />
-                ));
-              }
-            }}
-            HandlerPressPrevious={function (): void {
-              if (level > 0) {
-                dispatch(DecreaseLevel());
-              }
-              setAnswer('');
-              setAnswerCharacterArray(Array(riddle.answer.length).fill(''));
-              onClose();
-              SetShowCelebration(false);
-            }}
-          />
-        ));
-      } else {
-        showModal((onClose: any) => (
-          <FailToast
-            message={''}
-            onClose={() => {
-              onClose();
-              setAnswer('');
-              setAnswerCharacterArray(Array(riddle.answer.length).fill(''));
-            }}
-          />
-        ));
-      }
+  const onCompleteHandler = () => {
+    dispatch(IncreaseLevel());
+
+    if (level === riddles.length - 1) {
+      // Show game complete
+      showModal((onClose: () => void) => (
+        <GameComplete
+          onClose={() => {
+            onClose();
+            dispatch(ResetLevel());
+            setRiddle(riddles[0]);
+            setAnswerCharacterArray(Array(riddles[0].answer.length).fill(''));
+          }}
+        />
+      ));
+    } else {
+      setRiddle(riddles[level + 1]);
+      setAnswerCharacterArray(Array(riddles[level + 1].answer.length).fill(''));
     }
-  }, [answer]);
-
-  const onSuccessHandler = () => {
-    if (level < riddles.length) {
-      dispatch(IncreaseLevel());
-    }
-
-    // Coin increase
-    dispatch(IncreaseCoin());
-
-    // clear answerArray
-    setAnswerCharacterArray(Array(riddles[level + 1].answer.length).fill(''));
-
-    // clear user input
-    setAnswer('');
-
-    // Show celebration
-    SetShowCelebration(true);
   };
 
   const completeByAds = () => {
     showModal((onClose: any) => (
       <WinToast
+        isAds={true}
         message={riddle.answer}
         onClose={() => {
-          onClose();
-          setAnswer('');
-          setAnswerCharacterArray(Array(riddle.answer.length).fill(''));
           SetShowCelebration(false);
-          if (level + 1 !== riddles.length) {
-            dispatch(IncreaseLevel());
-          } else {
-            showModal((onClose: () => void) => (
-              <GameComplete
-                onClose={() => {
-                  onClose();
-                  dispatch(ResetLevel());
-                }}
-              />
-            ));
-          }
+          onClose();
+          onCompleteHandler();
         }}
-        HandlerPressPrevious={function (): void {
-          if (level > 0) {
-            dispatch(DecreaseLevel());
-          }
-          setAnswer('');
-          setAnswerCharacterArray(Array(riddle.answer.length).fill(''));
-          onClose();
+        HandlerPressPrevious={() => {
           SetShowCelebration(false);
+          onClose();
+          dispatch(DecreaseLevel());
+          level !== 0 && setRiddle(riddles[level - 1]);
+          level !== 0 &&
+            setAnswerCharacterArray(
+              Array(riddles[level - 1].answer.length).fill(''),
+            );
         }}
       />
     ));
+  };
+
+  // const
+
+  const HandlerKeyPress = (e: string) => {
+    const nextIndex = answerCharacterArray.findIndex(item => item === '');
+    if (nextIndex !== -1) {
+      const newArray = [...answerCharacterArray];
+      newArray[nextIndex] = e;
+      setAnswerCharacterArray(newArray);
+
+      // when both length same
+      if (nextIndex === answerCharacterArray.length - 1) {
+        setResetKeyboard(!resetKeyboard);
+        setAnswerCharacterArray(Array(riddle.answer.length).fill(''));
+
+        if (
+          riddle.answer
+            .split('')
+            .every((value, index) => value === newArray[index])
+        ) {
+          console.log('You win !');
+          // increase level and coin based on that
+          SetShowCelebration(true);
+          dispatch(IncreaseCoin());
+
+          showModal((onClose: () => void) => (
+            <WinToast
+              message={riddle.answer}
+              onClose={() => {
+                SetShowCelebration(false);
+                onClose();
+                onCompleteHandler();
+              }}
+              HandlerPressPrevious={() => {
+                SetShowCelebration(false);
+                onClose();
+
+                dispatch(DecreaseLevel());
+                level !== 0 && setRiddle(riddles[level - 1]);
+                level !== 0 &&
+                  setAnswerCharacterArray(
+                    Array(riddles[level - 1].answer.length).fill(''),
+                  );
+              }}
+            />
+          ));
+        } else {
+          console.log('You lose !');
+          showModal((onClose: () => void) => <FailToast onClose={onClose} />);
+        }
+      }
+    }
   };
 
   return (
@@ -208,36 +200,27 @@ const PlaySrc = (props: Props) => {
                 onFocus={() => Keyboard.dismiss()}
                 onKeyPress={() => Keyboard.dismiss()}
                 style={{
-                  width: ScreenWidth * 0.131,
+                  width: ScreenWidth * 0.13,
                   height: ScreenHeight * 0.065,
-                  fontSize: 30,
+                  fontSize: ScreenWidth * 0.08,
                   borderRadius: 16,
                   backgroundColor:
                     item === '' ? 'transparent' : AppColors.activeBtnColor,
                   borderColor: AppColors.activeBtnColor,
                   borderWidth: 3,
-                  paddingHorizontal: 14,
                   fontFamily: 'JosefinSans-Bold',
                   paddingTop: -10,
                   color: 'black',
+                  textAlign: 'center',
                 }}
               />
             ))}
           </View>
           {/* Keyboard */}
-
           <CustomKeyboard
+            resetKeyboard={resetKeyboard}
             answer={riddle.answer}
-            onPress={e => {
-              answerCharacterArray[answer.length] = e;
-              setAnswer(prev => {
-                if (prev) {
-                  return prev + e;
-                } else {
-                  return e;
-                }
-              });
-            }}
+            onPress={HandlerKeyPress}
           />
         </View>
       </View>
