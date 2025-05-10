@@ -11,7 +11,7 @@ type Props = {}
 const App = (props: Props) => {
   const Stack = createNativeStackNavigator();
   return (
-    <ImageBackground style={{ flex: 1, }} source={require("./assets/imgs/bgImg.png")} resizeMode="cover" >
+    <ImageBackground style={{ flex: 1, opacity:0.9}} source={require("./assets/imgs/bgImg.png")} resizeMode="cover" >
       <SafeAreaProvider>
       <SafeAreaView style={{flex:1}} edges={['top', 'bottom', 'left', 'right']}>
       <RootSiblingParent>
