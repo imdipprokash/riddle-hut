@@ -1,4 +1,4 @@
-package com.jdxpvt.riddlehut
+package com.riddle_hut
 
 import android.app.Application
 import com.facebook.react.PackageList
