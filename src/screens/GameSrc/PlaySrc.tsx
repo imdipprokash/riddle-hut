@@ -224,9 +224,7 @@ const PlaySrc = (props: Props) => {
           />
         </View>
       </View>
-      <View style={{position: 'absolute', bottom: 1}}>
-        <AdsScreen />
-      </View>
+     
     </View>
   );
 };

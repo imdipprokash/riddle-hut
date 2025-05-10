@@ -2,12 +2,10 @@ import {
   ImageBackground,
   StyleSheet,
   Text,
-  TouchableHighlight,
   TouchableOpacity,
-  View,
 } from 'react-native';
 import React from 'react';
-import {AppColors, ScreenHeight, ScreenWidth} from '../utils/constants';
+import { ScreenHeight, ScreenWidth} from '../utils/constants';
 
 type Props = {
   title: string;
