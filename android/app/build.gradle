@@ -78,9 +78,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.jdxpvt.riddlehut"
+    namespace "com.jdxpvt.riddlehutAI"
     defaultConfig {
-        applicationId "com.jdxpvt.riddlehut"
+        applicationId "com.jdxpvt.riddlehutAI"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

@@ -12,7 +12,7 @@ type Props = {
 const BannerAds = ({ sizes }: Props) => {
     const adUnitId = __DEV__
         ? TestIds.BANNER
-        : 'ca-app-pub-3346761957556908/4221803346';
+        : 'ca-app-pub-3346761957556908/1398682855';
     return (
         <GAMBannerAd
             unitId={adUnitId}

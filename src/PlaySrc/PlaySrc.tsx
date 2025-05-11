@@ -12,10 +12,10 @@ import {
 import HintModal from '../../components/HintModal'
 import ShowHint from '../../components/ShowHint'
 
-const adUnitId = __DEV__ ? TestIds.REWARDED : 'ca-app-pub-xxxxxxxxxxxxx/yyyyyyyyyyyyyy';
+const adUnitId = __DEV__ ? TestIds.REWARDED : 'ca-app-pub-3346761957556908/8953206413';
 const adUnitIdInRe = __DEV__
   ? TestIds.REWARDED_INTERSTITIAL
-  : 'ca-app-pub-xxxxxxxxxxxxx/yyyyyyyyyyyyyy';
+  : 'ca-app-pub-3346761957556908/4881024062';
 
 const rewarded = RewardedAd.createForAdRequest(adUnitId, {
   keywords: Keyword,

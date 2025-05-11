@@ -17,11 +17,11 @@ const HomeSrc = (props: Props) => {
   return (
     <View style={{ flex: 1, }}>
       <Image style={styles.imgStyle} source={require("../../assets/imgs/logo_bg.png")} />
-      <Text style={styles.headingText}>Riddle Hut</Text>
+      <Text style={styles.headingText}>Riddle AI</Text>
       <View style={{ gap: hp(3), paddingVertical: hp(7.5), marginHorizontal: wp(10) }}>
-        <Btn title={'Play'} onPress={() => { nav.navigate('PlaySrc')}} />
-        <Btn title={'Continue'} onPress={() => { }} style={{backgroundColor:"#0284c7"}}/>
-        <Btn title={'Solved Riddle'} onPress={() => { }}style={{backgroundColor:"#e879f9"}} />
+        <Btn title={'Play'} onPress={() => { nav.navigate('PlaySrc') }} />
+        <Btn title={'Continue'} onPress={() => { }} style={{ backgroundColor: "#0284c7" }} />
+        <Btn title={'Solved Riddle'} onPress={() => { }} style={{ backgroundColor: "#e879f9" }} />
       </View>
     </View>
   )
@@ -31,7 +31,7 @@ export default HomeSrc
 
 const styles = StyleSheet.create({
   imgStyle: {
-    marginTop:-hp(3),
+    marginTop: -hp(3),
     width: typeof wp === 'function' ? wp(50) : wp * 10,
     height: typeof hp === 'function' ? hp(35) : hp * 10,
     resizeMode: 'contain',
