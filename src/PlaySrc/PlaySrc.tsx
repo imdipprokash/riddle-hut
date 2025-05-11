@@ -1,18 +1,17 @@
 import { StyleSheet, Text, View, TextInput, Image, Pressable, Animated } from 'react-native'
 import LottieView from 'lottie-react-native'
 import React, { useRef, useState, useEffect } from 'react'
-import { hp, wp } from '../../helper/contant'
+import { generateUUID, hp, wp } from '../../helper/contant'
 import { showModal } from '../../components/RootModal'
 import WinModal from '../../components/WinModal'
+import Riddle from "../../data/Riddle.json"
 
 
 type Props = {}
 
 const PlaySrc = (props: Props) => {
-  const RiddleQestion = {
-    'qestion': 'I have cities, but no houses. I have mountains, but no trees. I have water, but no fish. What am I?',
-    'ans': 'Map'
-  }
+  const [currentQuestion, setCurrentQuestion] = useState(0)
+  const RiddleQestion = Riddle[currentQuestion]
   const [keyValueStore, setKeyValueStore] = useState<Record<string, string>>({});
   const [showCelebration, setShowCelebration] = useState<boolean>(false)
   const inputRefs = useRef<Record<string, TextInput | null>>({});
@@ -41,7 +40,7 @@ const PlaySrc = (props: Props) => {
 
   const updateKeyValueStore = (key: string, value: string) => {
     // check if match with the answare
-    const isCorrect = `${Object.values(keyValueStore).join('') + value}`.toLowerCase() === RiddleQestion.ans.toLowerCase();
+    const isCorrect = `${Object.values(keyValueStore).join('') + value}`.toLowerCase() === RiddleQestion.answer.toLowerCase();
 
     setKeyValueStore(prev => ({
       ...prev,
@@ -52,10 +51,12 @@ const PlaySrc = (props: Props) => {
       Object.values(inputRefs.current).forEach((ref) => {
         ref?.blur();
       });
+      setCurrentQuestion((prev) => prev + 1)
       setShowCelebration(true);
+      setKeyValueStore({})
       showModal((onClose: () => void) => (
         <WinModal
-          message={RiddleQestion.ans}
+          message={RiddleQestion.answer}
           onClose={() => {
             setShowCelebration(false);
             onClose()
@@ -103,14 +104,21 @@ const PlaySrc = (props: Props) => {
           />
         </Pressable>
       </View>
+
+
+      {/* Question  Container*/}
       <View style={styles.questionContainer}>
-        <Text style={styles.textStyle}>{RiddleQestion.qestion}</Text>
+        {/* Level */}
+        <Text style={[styles.textStyle, { fontFamily: 'KanchenjungaBold' }]}>Level {currentQuestion + 1}</Text>
+        {/* Question */}
+        <Text style={styles.textStyle}>{RiddleQestion.question}</Text>
       </View>
+
       {/* Answer input */}
       <View style={styles.ansView}>
         {/* <TextInput style={[styles.inputStyle, { backgroundColor: 'darkgreen', color: "#fff", padding: 10, width: wp(40), position: 'absolute', zIndex: 9999, display: 'none' }]} /> */}
-        {RiddleQestion.ans.split('').map((char, index) => (
-          <View key={index} style={styles.charContainer}>
+        {RiddleQestion.answer.split('').map((char, index) => (
+          <View key={generateUUID()} style={styles.charContainer}>
             <TextInput
               style={[
                 styles.inputStyle,
@@ -125,7 +133,7 @@ const PlaySrc = (props: Props) => {
               onChangeText={(text) => {
                 updateKeyValueStore(char, text);
                 if (text) {
-                  if (index < RiddleQestion.ans.length - 1) {
+                  if (index < RiddleQestion.answer.length - 1) {
                     const nextInput = (index + 1).toString();
                     const nextInputRef = inputRefs.current?.[nextInput];
                     if (nextInputRef) {
