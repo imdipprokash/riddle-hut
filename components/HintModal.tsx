@@ -1,23 +1,39 @@
 import React from 'react';
-import { Modal, View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { Modal, View, Text, TouchableOpacity, StyleSheet, Image, Pressable } from 'react-native';
 import { wp, hp } from '../helper/contant';
 import BannerAds from './BannerAds';
 import { BannerAdSize } from 'react-native-google-mobile-ads';
 
-interface WinModalProps {
+interface HintModalProps {
     onClose: () => void;
     message: string;
+    ViewAds?: () => void
+    showInstAds?: () => void
 }
 
-const WinModal: React.FC<WinModalProps> = ({ onClose, message }) => {
+const HintModal: React.FC<HintModalProps> = ({ onClose, ViewAds, showInstAds }) => {
     return (
         <Modal transparent={true} animationType="fade" visible={true}>
             <View style={styles.overlay}>
                 <View style={styles.modalContainer}>
-                    <Image source={require('../assets/icons/trophy-prize.png')} style={{ width: wp(18), height: hp(8) }} resizeMode='contain' />
-                    <Text style={styles.title}>Congratulations!</Text>
-                    <Text style={styles.message}>{message}</Text>
+                    <Pressable onPress={() => {
+                        onClose()
+                        showInstAds?.();
+
+                    }} style={{ flexDirection: 'row', gap: wp(2), alignItems: 'center', borderWidth: 1, paddingHorizontal: 10, paddingVertical: 6, borderRadius: 8 }}>
+                        <Image source={require('../assets/icons/bulb.png')} style={{ width: wp(12), height: hp(5) }} resizeMode='contain' />
+                        <Text style={styles.title}>Get Hint!</Text>
+                    </Pressable>
                     <BannerAds sizes={[BannerAdSize.BANNER]} />
+
+                    <Pressable onPress={() => {
+                        onClose()
+                        ViewAds?.();
+                    }} style={{ flexDirection: 'row', gap: wp(2), alignItems: 'center', borderWidth: 1, paddingHorizontal: 10, paddingVertical: 3, borderRadius: 8 }}>
+                        <Image source={require('../assets/icons/video-ad.png')} style={{ width: wp(12), height: hp(5) }} resizeMode='contain' />
+                        <Text style={styles.title}>Skip </Text>
+                    </Pressable>
+
                     <TouchableOpacity onPress={onClose} style={styles.button}>
                         <Text style={styles.buttonText}>Close</Text>
                     </TouchableOpacity>
@@ -45,7 +61,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 4,
         elevation: 5,
-        gap: hp(1)
+        gap: hp(2)
     },
     title: {
         fontSize: 20,
@@ -69,7 +85,8 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         textAlign: 'center',
+
     },
 });
 
-export default WinModal;
+export default HintModal;

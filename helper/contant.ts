@@ -13,3 +13,19 @@ export const generateUUID = (): string => {
         return value.toString(16);
     });
 };
+
+export const Keyword = [
+    'fashion',
+    'clothing',
+    'designer clothing',
+    'luxury fashion',
+    'sustainable fashion',
+    'dresses',
+    'activeness',
+    'sneakers',
+    'women’s clothing online',
+    'plus-size clothing',
+    'discount clothing',
+    'free shipping',
+
+]

@@ -1,4 +1,8 @@
 {
   "name": "riddle_hut",
-  "displayName": "riddle_hut"
+  "displayName": "riddle_hut",
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-3346761957556908~7801012827",
+    "ios_app_id": "ca-app-pub-xxxxxxxx~xxxxxxxx"
+  }
 }

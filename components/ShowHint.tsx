@@ -4,18 +4,17 @@ import { wp, hp } from '../helper/contant';
 import BannerAds from './BannerAds';
 import { BannerAdSize } from 'react-native-google-mobile-ads';
 
-interface WinModalProps {
+interface ShowHintProps {
     onClose: () => void;
     message: string;
 }
 
-const WinModal: React.FC<WinModalProps> = ({ onClose, message }) => {
+const ShowHint: React.FC<ShowHintProps> = ({ onClose, message }) => {
     return (
         <Modal transparent={true} animationType="fade" visible={true}>
             <View style={styles.overlay}>
                 <View style={styles.modalContainer}>
-                    <Image source={require('../assets/icons/trophy-prize.png')} style={{ width: wp(18), height: hp(8) }} resizeMode='contain' />
-                    <Text style={styles.title}>Congratulations!</Text>
+                    <Text style={styles.title}>Hint!</Text>
                     <Text style={styles.message}>{message}</Text>
                     <BannerAds sizes={[BannerAdSize.BANNER]} />
                     <TouchableOpacity onPress={onClose} style={styles.button}>
@@ -53,7 +52,7 @@ const styles = StyleSheet.create({
         fontFamily: 'KanchenjungaBold'
     },
     message: {
-        fontSize: 16,
+        fontSize: 20,
         color: '#555',
         textAlign: 'center',
         fontFamily: 'KanchenjungaRegular'
@@ -72,4 +71,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default WinModal;
+export default ShowHint;

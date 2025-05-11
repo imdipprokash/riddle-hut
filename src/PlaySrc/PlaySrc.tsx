@@ -1,11 +1,28 @@
-import { StyleSheet, Text, View, TextInput, Image, Pressable, Animated } from 'react-native'
+import { StyleSheet, Text, View, TextInput, Image, Pressable, Animated, Button } from 'react-native'
 import LottieView from 'lottie-react-native'
 import React, { useRef, useState, useEffect } from 'react'
-import { hp, wp } from '../../helper/contant'
+import { hp, Keyword, wp } from '../../helper/contant'
 import { showModal } from '../../components/RootModal'
 import WinModal from '../../components/WinModal'
 import RiddleList from "../../data/Riddle.json"
+import FailedModal from '../../components/FailedModal'
+import {
+  RewardedAd, RewardedAdEventType, TestIds, RewardedInterstitialAd,
+} from 'react-native-google-mobile-ads';
+import HintModal from '../../components/HintModal'
+import ShowHint from '../../components/ShowHint'
 
+const adUnitId = __DEV__ ? TestIds.REWARDED : 'ca-app-pub-xxxxxxxxxxxxx/yyyyyyyyyyyyyy';
+const adUnitIdInRe = __DEV__
+  ? TestIds.REWARDED_INTERSTITIAL
+  : 'ca-app-pub-xxxxxxxxxxxxx/yyyyyyyyyyyyyy';
+
+const rewarded = RewardedAd.createForAdRequest(adUnitId, {
+  keywords: Keyword,
+});
+const rewardedInterstitial = RewardedInterstitialAd.createForAdRequest(adUnitIdInRe, {
+  keywords: Keyword,
+});
 
 type Props = {}
 
@@ -16,6 +33,9 @@ const PlaySrc = (props: Props) => {
   const [showCelebration, setShowCelebration] = useState<boolean>(false)
   const inputRefs = useRef<Record<string, TextInput | null>>({});
   const shakeAnimation = useRef(new Animated.Value(0)).current;
+
+  const [loaded, setLoaded] = useState(false);
+  const [loadedInR, setLoadedInR] = useState(false);
 
   useEffect(() => {
     const startShake = () => {
@@ -63,12 +83,142 @@ const PlaySrc = (props: Props) => {
       ));
 
     } else {
+      // check the length if not match clear ans
+
+      const checkLength = `${Object.values(keyValueStore).join('') + value}`.length === Riddle.answer.length;
+      if (checkLength) {
+        // wong ans
+        showModal((onClose: () => void) => (
+          <FailedModal
+            message={Riddle.answer}
+            onClose={() => {
+              setShowCelebration(false);
+              onClose()
+              setKeyValueStore({})
+            }}
+            ViewAds={() => {
+              setShowCelebration(false);
+              onClose()
+              setKeyValueStore({})
+              if (rewarded.loaded) {
+                rewarded.show();
+              }
+            }}
+          />
+        ));
+      }
+
+
       setKeyValueStore(prev => ({
         ...prev,
         [key]: value,
       }));
     }
   };
+
+  const handlerSkipViaAds = () => {
+    setCurrentQuestion((prev) => prev + 1)
+    setRiddle(RiddleList[currentQuestion + 1])
+    setShowCelebration(true);
+
+    showModal((onClose: () => void) => (
+      <WinModal
+        message={Riddle.answer}
+        onClose={() => {
+          setShowCelebration(false);
+          onClose()
+        }}
+      />
+    ));
+
+  }
+
+
+  // Rewards ads
+
+  useEffect(() => {
+    const unsubscribeLoaded = rewarded.addAdEventListener(RewardedAdEventType.LOADED, () => {
+      setLoaded(true);
+    });
+    const unsubscribeEarned = rewarded.addAdEventListener(
+      RewardedAdEventType.EARNED_REWARD,
+      reward => {
+        console.log('User earned reward of ', reward);
+        handlerSkipViaAds();
+        setTimeout(() => {
+          rewarded.load(); // Load the ad again after a short delay
+        }, 1000);
+      },
+    );
+
+    // Start loading the rewarded ad straight away
+    rewarded.load();
+
+    // Unsubscribe from events on unmount
+    return () => {
+      unsubscribeLoaded();
+      unsubscribeEarned();
+    };
+  }, []);
+
+
+
+  useEffect(() => {
+    const unsubscribeLoaded = rewardedInterstitial.addAdEventListener(
+      RewardedAdEventType.LOADED,
+      () => {
+        setLoadedInR(true);
+      },
+    );
+    const unsubscribeEarned = rewardedInterstitial.addAdEventListener(
+      RewardedAdEventType.EARNED_REWARD,
+      reward => {
+        showModal((onClose: () => void) => <ShowHint onClose={onClose} message={Riddle.hint || ''} />)
+        setTimeout(() => {
+          rewardedInterstitial.load(); // Load the ad again after a short delay
+        }, 1000);
+      },
+    );
+
+    // Start loading the rewarded interstitial ad straight away
+    rewardedInterstitial.load();
+
+    // Unsubscribe from events on unmount
+    return () => {
+      unsubscribeLoaded();
+      unsubscribeEarned();
+    };
+  }, []);
+
+
+
+
+  // Hint 
+  const HintModalHandler = () => {
+    showModal((onClose: () => void) => (
+      <HintModal
+        message={Riddle.answer}
+        onClose={() => {
+          onClose()
+        }}
+        ViewAds={() => {
+          onClose()
+          setKeyValueStore({})
+          if (rewarded.loaded) {
+            rewarded.show();
+          }
+        }}
+        showInstAds={() => {
+
+          if (rewardedInterstitial.loaded) {
+            rewardedInterstitial.show()
+          }
+          onClose()
+        }}
+      />
+    ));
+  }
+
 
 
 
@@ -88,7 +238,7 @@ const PlaySrc = (props: Props) => {
       )}
       {/* Show question */}
       <View style={{ alignItems: 'flex-end', paddingHorizontal: wp(4) }}>
-        <Pressable>
+        <Pressable onPress={HintModalHandler}>
           <Animated.Image
             source={require('../../assets/icons/bulb.png')}
             resizeMode='contain'
@@ -112,7 +262,7 @@ const PlaySrc = (props: Props) => {
       {/* Question  Container*/}
       <View style={styles.questionContainer}>
         {/* Level */}
-        <Text style={[styles.textStyle, { fontFamily: 'KanchenjungaBold' }]}>Level {currentQuestion + 1}</Text>
+        <Text style={[styles.textStyle, { fontFamily: 'KanchenjungaBold', fontSize: wp(7) }]}>Riddle {currentQuestion + 1}</Text>
         {/* Question */}
         <Text style={styles.textStyle}>{Riddle.question}</Text>
       </View>
@@ -161,6 +311,7 @@ const PlaySrc = (props: Props) => {
           </View>
         ))}
       </View>
+
 
     </View>
   )

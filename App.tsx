@@ -7,6 +7,7 @@ import HomeSrc from './src/Home/HomeSrc';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import Header from './components/Header';
 import PlaySrc from './src/PlaySrc/PlaySrc';
+import BannerAds from './components/BannerAds';
 
 type Props = {}
 
@@ -39,6 +40,9 @@ const App = (props: Props) => {
               </Stack.Navigator>
             </NavigationContainer>
           </RootSiblingParent>
+          <View>
+            <BannerAds />
+          </View>
         </SafeAreaView>
       </SafeAreaProvider>
     </ImageBackground>
