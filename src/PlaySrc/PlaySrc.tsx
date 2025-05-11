@@ -1,17 +1,17 @@
 import { StyleSheet, Text, View, TextInput, Image, Pressable, Animated } from 'react-native'
 import LottieView from 'lottie-react-native'
 import React, { useRef, useState, useEffect } from 'react'
-import { generateUUID, hp, wp } from '../../helper/contant'
+import { hp, wp } from '../../helper/contant'
 import { showModal } from '../../components/RootModal'
 import WinModal from '../../components/WinModal'
-import Riddle from "../../data/Riddle.json"
+import RiddleList from "../../data/Riddle.json"
 
 
 type Props = {}
 
 const PlaySrc = (props: Props) => {
   const [currentQuestion, setCurrentQuestion] = useState(0)
-  const RiddleQestion = Riddle[currentQuestion]
+  const [Riddle, setRiddle] = useState(RiddleList[currentQuestion])
   const [keyValueStore, setKeyValueStore] = useState<Record<string, string>>({});
   const [showCelebration, setShowCelebration] = useState<boolean>(false)
   const inputRefs = useRef<Record<string, TextInput | null>>({});
@@ -40,23 +40,21 @@ const PlaySrc = (props: Props) => {
 
   const updateKeyValueStore = (key: string, value: string) => {
     // check if match with the answare
-    const isCorrect = `${Object.values(keyValueStore).join('') + value}`.toLowerCase() === RiddleQestion.answer.toLowerCase();
-
-    setKeyValueStore(prev => ({
-      ...prev,
-      [key]: value,
-    }));
+    const isCorrect = `${Object.values(keyValueStore).join('') + value}`.toLowerCase() === Riddle.answer.toLowerCase();
 
     if (isCorrect) {
+      setKeyValueStore({})
       Object.values(inputRefs.current).forEach((ref) => {
         ref?.blur();
       });
+
       setCurrentQuestion((prev) => prev + 1)
+      setRiddle(RiddleList[currentQuestion + 1])
       setShowCelebration(true);
-      setKeyValueStore({})
+
       showModal((onClose: () => void) => (
         <WinModal
-          message={RiddleQestion.answer}
+          message={Riddle.answer}
           onClose={() => {
             setShowCelebration(false);
             onClose()
@@ -64,6 +62,11 @@ const PlaySrc = (props: Props) => {
         />
       ));
 
+    } else {
+      setKeyValueStore(prev => ({
+        ...prev,
+        [key]: value,
+      }));
     }
   };
 
@@ -111,19 +114,19 @@ const PlaySrc = (props: Props) => {
         {/* Level */}
         <Text style={[styles.textStyle, { fontFamily: 'KanchenjungaBold' }]}>Level {currentQuestion + 1}</Text>
         {/* Question */}
-        <Text style={styles.textStyle}>{RiddleQestion.question}</Text>
+        <Text style={styles.textStyle}>{Riddle.question}</Text>
       </View>
 
       {/* Answer input */}
       <View style={styles.ansView}>
         {/* <TextInput style={[styles.inputStyle, { backgroundColor: 'darkgreen', color: "#fff", padding: 10, width: wp(40), position: 'absolute', zIndex: 9999, display: 'none' }]} /> */}
-        {RiddleQestion.answer.split('').map((char, index) => (
-          <View key={generateUUID()} style={styles.charContainer}>
+        {Riddle.answer.split('').map((char, index) => (
+          <View key={index} style={styles.charContainer}>
             <TextInput
               style={[
                 styles.inputStyle,
               ]}
-              value={keyValueStore[char]}
+              value={keyValueStore[index] || ''}
               placeholder="_"
               placeholderTextColor="#666"
               maxLength={1}
@@ -131,9 +134,13 @@ const PlaySrc = (props: Props) => {
                 inputRefs.current[index.toString()] = ref;
               }}
               onChangeText={(text) => {
-                updateKeyValueStore(char, text);
+                setKeyValueStore((prev) => ({
+                  ...prev,
+                  [index]: text,
+                }));
+                updateKeyValueStore(index.toString(), text);
                 if (text) {
-                  if (index < RiddleQestion.answer.length - 1) {
+                  if (index < Riddle.answer.length - 1) {
                     const nextInput = (index + 1).toString();
                     const nextInputRef = inputRefs.current?.[nextInput];
                     if (nextInputRef) {
