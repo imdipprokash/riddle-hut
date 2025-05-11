@@ -16,7 +16,7 @@ const App = (props: Props) => {
     <ImageBackground style={{ flex: 1, opacity: 1 }} source={require("./assets/imgs/bgImg.png")} resizeMode="cover" >
       <SafeAreaProvider>
         <SafeAreaView style={{ flex: 1 }} edges={['top', 'bottom', 'left', 'right']}>
-          {/* <Header /> */}
+          <Header />
           <RootSiblingParent>
             <NavigationContainer>
               <StatusBar

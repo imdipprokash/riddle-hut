@@ -9,11 +9,11 @@ const Header = ({ showBackBtn }: Props) => {
     <View style={styles.mainStyle}>
       {showBackBtn ? <></> : <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
         <Image source={require("../assets/icons/bill.png")} style={{ width: wp(8), height: hp(5) }} resizeMode='contain' />
-        <Text style={styles.textStyle}>200</Text>
+        <Text style={styles.textStyle}>20</Text>
       </View>}
       <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
         <Image source={require("../assets/icons/coinIcon.png")} style={{ width: wp(8), height: hp(5) }} resizeMode='contain' />
-        <Text style={styles.textStyle}>20000</Text>
+        <Text style={styles.textStyle}>1000</Text>
       </View>
     </View>
   )
