@@ -1,4 +1,4 @@
-package com.riddle_hut
+package com.jdxpvt.riddlehut
 import android.os.Bundle;
 
 import com.facebook.react.ReactActivity
