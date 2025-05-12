@@ -11,6 +11,9 @@ import {
 } from 'react-native-google-mobile-ads';
 import HintModal from '../../components/HintModal'
 import ShowHint from '../../components/ShowHint'
+import { useSelector, useDispatch } from 'react-redux'
+import { RootState, AppDispatch } from '../store'
+import { increment } from '../store/slices/counterSlice'
 
 const adUnitId = __DEV__ ? TestIds.REWARDED : 'ca-app-pub-3346761957556908/8953206413';
 const adUnitIdInRe = __DEV__
@@ -27,7 +30,12 @@ const rewardedInterstitial = RewardedInterstitialAd.createForAdRequest(adUnitIdI
 type Props = {}
 
 const PlaySrc = (props: Props) => {
-  const [currentQuestion, setCurrentQuestion] = useState(0)
+
+  const value = useSelector((state: RootState) => state.counter.value);
+  const dispatch = useDispatch<AppDispatch>();
+
+
+  const [currentQuestion, setCurrentQuestion] = useState(value)
   const [Riddle, setRiddle] = useState(RiddleList[currentQuestion])
   const [keyValueStore, setKeyValueStore] = useState<Record<string, string>>({});
   const [showCelebration, setShowCelebration] = useState<boolean>(false)
@@ -67,7 +75,7 @@ const PlaySrc = (props: Props) => {
       Object.values(inputRefs.current).forEach((ref) => {
         ref?.blur();
       });
-
+      dispatch(increment())
       setCurrentQuestion((prev) => prev + 1)
       setRiddle(RiddleList[currentQuestion + 1])
       setShowCelebration(true);
@@ -118,6 +126,7 @@ const PlaySrc = (props: Props) => {
 
   const handlerSkipViaAds = () => {
     setCurrentQuestion((prev) => prev + 1)
+    dispatch(increment())
     setRiddle(RiddleList[currentQuestion + 1])
     setShowCelebration(true);
 

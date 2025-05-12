@@ -6,6 +6,9 @@ import Btn from '../../components/Btn'
 import { useNavigation } from '@react-navigation/native'
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { RootStackParamList } from '../../type'
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from '../store'
+import { reset } from '../store/slices/counterSlice'
 
 
 type Props = {}
@@ -14,14 +17,19 @@ type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const HomeSrc = (props: Props) => {
   const nav = useNavigation<NavigationProp>()
+  const dispatch = useDispatch<AppDispatch>();
   return (
     <View style={{ flex: 1, }}>
       <Image style={styles.imgStyle} source={require("../../assets/imgs/logo_bg.png")} />
       <Text style={styles.headingText}>Riddle AI</Text>
       <View style={{ gap: hp(3), paddingVertical: hp(7.5), marginHorizontal: wp(10) }}>
-        <Btn title={'Play'} onPress={() => { nav.navigate('PlaySrc') }} />
-        <Btn title={'Continue'} onPress={() => { }} style={{ backgroundColor: "#0284c7" }} />
-        <Btn title={'Solved Riddle'} onPress={() => { }} style={{ backgroundColor: "#e879f9" }} />
+        <Btn title={'Play'} onPress={() => { dispatch(reset()); nav.navigate('PlaySrc') }} />
+        <Btn title={'Continue'} onPress={() => {
+          nav.navigate('PlaySrc')
+        }} style={{ backgroundColor: "#0284c7" }} />
+        <Btn title={'Solved Riddle'} onPress={() => {
+          nav.navigate('SolveRiddle')
+        }} style={{ backgroundColor: "#e879f9" }} />
       </View>
     </View>
   )
