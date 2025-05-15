@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     },
     text: {
         color: '#f2f2f2',
-        fontSize: wp(8),
+        fontSize: hp(3.5),
         // fontWeight: 'bold',
         fontFamily: 'KanchenjungaRegular'
     },

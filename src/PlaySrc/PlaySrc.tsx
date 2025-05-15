@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, Image, Pressable, Animated, Button } from 'react-native'
+import { StyleSheet, Text, View, TextInput, Image, Pressable, Animated, Button, KeyboardAvoidingView } from 'react-native'
 import LottieView from 'lottie-react-native'
 import React, { useRef, useState, useEffect } from 'react'
 import { hp, Keyword, wp } from '../../helper/contant'
@@ -234,7 +234,7 @@ const PlaySrc = (props: Props) => {
 
 
   return (
-    <View style={{ gap: hp(10) }}>
+    <KeyboardAvoidingView behavior="padding" style={{ gap: hp(10) }}>
       {/* show celebtation */}
       {showCelebration && (
         <LottieView
@@ -275,54 +275,54 @@ const PlaySrc = (props: Props) => {
         {/* Question */}
         <Text style={styles.textStyle}>{Riddle.question}</Text>
       </View>
-
       {/* Answer input */}
-      <View style={styles.ansView}>
-        {/* <TextInput style={[styles.inputStyle, { backgroundColor: 'darkgreen', color: "#fff", padding: 10, width: wp(40), position: 'absolute', zIndex: 9999, display: 'none' }]} /> */}
-        {Riddle.answer.split('').map((char, index) => (
-          <View key={index} style={styles.charContainer}>
-            <TextInput
-              style={[
-                styles.inputStyle,
-              ]}
-              value={keyValueStore[index] || ''}
-              placeholder="_"
-              placeholderTextColor="#666"
-              maxLength={1}
-              ref={(ref) => {
-                inputRefs.current[index.toString()] = ref;
-              }}
-              onChangeText={(text) => {
-                setKeyValueStore((prev) => ({
-                  ...prev,
-                  [index]: text,
-                }));
-                updateKeyValueStore(index.toString(), text);
-                if (text) {
-                  if (index < Riddle.answer.length - 1) {
-                    const nextInput = (index + 1).toString();
-                    const nextInputRef = inputRefs.current?.[nextInput];
-                    if (nextInputRef) {
-                      nextInputRef.focus();
+      <View style={{ flex: 1 }}>
+        <View style={styles.ansView}>
+          {Riddle.answer.split('').map((char, index) => (
+            <View key={index} style={styles.charContainer}>
+              <TextInput
+                style={[
+                  styles.inputStyle,
+                ]}
+                value={keyValueStore[index] || ''}
+                placeholder="_"
+                placeholderTextColor="#666"
+                maxLength={1}
+                ref={(ref) => {
+                  inputRefs.current[index.toString()] = ref;
+                }}
+                onChangeText={(text) => {
+                  setKeyValueStore((prev) => ({
+                    ...prev,
+                    [index]: text,
+                  }));
+                  updateKeyValueStore(index.toString(), text);
+                  if (text) {
+                    if (index < Riddle.answer.length - 1) {
+                      const nextInput = (index + 1).toString();
+                      const nextInputRef = inputRefs.current?.[nextInput];
+                      if (nextInputRef) {
+                        nextInputRef.focus();
+                      }
+                    }
+                  } else {
+                    if (index > 0) {
+                      const prevInput = (index - 1).toString();
+                      const prevInputRef = inputRefs.current?.[prevInput];
+                      if (prevInputRef) {
+                        prevInputRef.focus();
+                      }
                     }
                   }
-                } else {
-                  if (index > 0) {
-                    const prevInput = (index - 1).toString();
-                    const prevInputRef = inputRefs.current?.[prevInput];
-                    if (prevInputRef) {
-                      prevInputRef.focus();
-                    }
-                  }
-                }
-              }}
-            />
-          </View>
-        ))}
+                }}
+              />
+            </View>
+          ))}
+        </View>
       </View>
 
 
-    </View>
+    </KeyboardAvoidingView>
   )
 }
 
