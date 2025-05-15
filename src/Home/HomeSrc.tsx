@@ -9,6 +9,7 @@ import { RootStackParamList } from '../../type'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '../store'
 import { reset } from '../store/slices/counterSlice'
+import Header from '../../components/Header'
 
 
 type Props = {}
@@ -20,6 +21,7 @@ const HomeSrc = (props: Props) => {
   const dispatch = useDispatch<AppDispatch>();
   return (
     <View style={{ flex: 1, }}>
+      <Header />
       <Image style={styles.imgStyle} source={require("../../assets/imgs/logo_bg.png")} />
       <Text style={styles.headingText}>Riddle AI</Text>
       <View style={{ gap: hp(3), paddingVertical: hp(7.5), marginHorizontal: wp(10) }}>
@@ -49,7 +51,7 @@ const styles = StyleSheet.create({
     fontFamily: 'KanchenjungaBold',
     fontSize: typeof wp === 'function' ? wp(13) : wp * 13,
     textAlign: 'center',
-    marginTop: typeof hp === 'function' ? -hp(10) : -hp * 10,
+    marginTop: typeof hp === 'function' ? -hp(9) : -hp * 10,
     color: "#57534e"
   }
 })

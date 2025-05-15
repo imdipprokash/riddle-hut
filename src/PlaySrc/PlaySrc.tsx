@@ -14,6 +14,7 @@ import ShowHint from '../../components/ShowHint'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState, AppDispatch } from '../store'
 import { increment } from '../store/slices/counterSlice'
+import Header from '../../components/Header'
 
 const adUnitId = __DEV__ ? TestIds.REWARDED : 'ca-app-pub-3346761957556908/8953206413';
 const adUnitIdInRe = __DEV__
@@ -235,6 +236,7 @@ const PlaySrc = (props: Props) => {
 
   return (
     <KeyboardAvoidingView behavior="padding" style={{ gap: hp(10) }}>
+      <Header />
       {/* show celebtation */}
       {showCelebration && (
         <LottieView
@@ -246,7 +248,7 @@ const PlaySrc = (props: Props) => {
         />
       )}
       {/* Show question */}
-      <View style={{ alignItems: 'flex-end', paddingHorizontal: wp(4) }}>
+      <View style={{ alignItems: 'flex-end', paddingHorizontal: wp(4), top: hp(3) }}>
         <Pressable onPress={HintModalHandler}>
           <Animated.Image
             source={require('../../assets/icons/bulb.png')}

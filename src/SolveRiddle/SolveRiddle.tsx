@@ -8,7 +8,7 @@ import { hp, wp } from '../../helper/contant';
 type Props = {}
 
 const SolveRiddle = (props: Props) => {
-    const maxSolved = useSelector((state: RootState) => state.counter.maxSolved) - 1;
+    const maxSolved = useSelector((state: RootState) => state.counter.maxSolved);
     const itemIndex = Array.from({ length: maxSolved }, (_, i) => i);
     const renderItem = ({ item }: any) => {
 
@@ -22,10 +22,10 @@ const SolveRiddle = (props: Props) => {
 
     return (
         <View style={{ flex: 1, paddingHorizontal: wp(5), paddingVertical: hp(3) }}>
-            <FlatList data={itemIndex}
+            {itemIndex.length > 0 ? <FlatList data={itemIndex}
                 contentContainerStyle={{ gap: hp(1) }}
                 showsVerticalScrollIndicator={false}
-                renderItem={renderItem} />
+                renderItem={renderItem} /> : <Text>Please play riddle</Text>}
         </View>
     )
 }

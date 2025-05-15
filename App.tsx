@@ -12,6 +12,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistor, store } from './src/store';
 import SolveRiddle from './src/SolveRiddle/SolveRiddle';
+import EarnSrc from './src/Earn/EarnSrc';
 
 type Props = {}
 
@@ -44,6 +45,7 @@ const App = (props: Props) => {
                     <Stack.Screen name="MainSrc" component={HomeSrc} />
                     <Stack.Screen name="PlaySrc" component={PlaySrc} />
                     <Stack.Screen name="SolveRiddle" component={SolveRiddle} />
+                    <Stack.Screen name="EarnSrc" component={EarnSrc} />
                   </Stack.Navigator>
                 </NavigationContainer>
               </RootSiblingParent>
