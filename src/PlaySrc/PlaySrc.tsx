@@ -36,15 +36,14 @@ const PlaySrc = (props: Props) => {
   const dispatch = useDispatch<AppDispatch>();
 
 
-  const [currentQuestion, setCurrentQuestion] = useState(value)
-  const [Riddle, setRiddle] = useState(RiddleList[currentQuestion])
+  const [Riddle, setRiddle] = useState(RiddleList[value])
   const [keyValueStore, setKeyValueStore] = useState<Record<string, string>>({});
   const [showCelebration, setShowCelebration] = useState<boolean>(false)
   const inputRefs = useRef<Record<string, TextInput | null>>({});
   const shakeAnimation = useRef(new Animated.Value(0)).current;
 
-  const [loaded, setLoaded] = useState(false);
-  const [loadedInR, setLoadedInR] = useState(false);
+  const [showAns, setShowAns] = useState(false);
+  const [showHint, setShowHint] = useState(false);
 
   useEffect(() => {
     const startShake = () => {
@@ -76,9 +75,7 @@ const PlaySrc = (props: Props) => {
       Object.values(inputRefs.current).forEach((ref) => {
         ref?.blur();
       });
-      dispatch(increment())
-      setCurrentQuestion((prev) => prev + 1)
-      setRiddle(RiddleList[currentQuestion + 1])
+
       setShowCelebration(true);
 
       showModal((onClose: () => void) => (
@@ -87,6 +84,7 @@ const PlaySrc = (props: Props) => {
           onClose={() => {
             setShowCelebration(false);
             onClose()
+            dispatch(increment())
           }}
         />
       ));
@@ -125,36 +123,58 @@ const PlaySrc = (props: Props) => {
     }
   };
 
-  const handlerSkipViaAds = () => {
-    setCurrentQuestion((prev) => prev + 1)
-    dispatch(increment())
-    setRiddle(RiddleList[currentQuestion + 1])
-    setShowCelebration(true);
 
-    showModal((onClose: () => void) => (
-      <WinModal
-        message={Riddle.answer}
-        onClose={() => {
-          setShowCelebration(false);
-          onClose()
-        }}
-      />
-    ));
 
-  }
+
+  useEffect(() => {
+    setRiddle(RiddleList[value])
+  }, [value])
+
+  useEffect(() => {
+    if (showAns) {
+      showModal((onClose: () => void) => (
+        <WinModal
+          message={Riddle.answer}
+          onClose={() => {
+            setShowCelebration(false);
+            setShowAns(false)
+            onClose()
+
+          }}
+        />
+      ));
+
+    }
+  }, [showAns])
+
+  useEffect(() => {
+    if (showHint) {
+      showModal((onClose: () => void) => (
+        <ShowHint
+          message={Riddle.hint}
+          onClose={() => {
+            setShowHint(false)
+            onClose()
+
+          }}
+        />
+      ));
+
+    }
+  }, [showHint])
 
 
   // Rewards ads
 
   useEffect(() => {
     const unsubscribeLoaded = rewarded.addAdEventListener(RewardedAdEventType.LOADED, () => {
-      setLoaded(true);
+
     });
     const unsubscribeEarned = rewarded.addAdEventListener(
       RewardedAdEventType.EARNED_REWARD,
       reward => {
-        console.log('User earned reward of ', reward);
-        handlerSkipViaAds();
+        dispatch(increment())
+        setShowAns(true)
         setTimeout(() => {
           rewarded.load(); // Load the ad again after a short delay
         }, 1000);
@@ -177,13 +197,13 @@ const PlaySrc = (props: Props) => {
     const unsubscribeLoaded = rewardedInterstitial.addAdEventListener(
       RewardedAdEventType.LOADED,
       () => {
-        setLoadedInR(true);
+
       },
     );
     const unsubscribeEarned = rewardedInterstitial.addAdEventListener(
       RewardedAdEventType.EARNED_REWARD,
       reward => {
-        showModal((onClose: () => void) => <ShowHint onClose={onClose} message={Riddle.hint || ''} />)
+        setShowHint(true)
         setTimeout(() => {
           rewardedInterstitial.load(); // Load the ad again after a short delay
         }, 1000);
@@ -273,7 +293,7 @@ const PlaySrc = (props: Props) => {
       {/* Question  Container*/}
       <View style={styles.questionContainer}>
         {/* Level */}
-        <Text style={[styles.textStyle, { fontFamily: 'KanchenjungaBold', fontSize: wp(7) }]}>Riddle {currentQuestion + 1}</Text>
+        <Text style={[styles.textStyle, { fontFamily: 'KanchenjungaBold', fontSize: wp(7) }]}>Riddle {value + 1}</Text>
         {/* Question */}
         <Text style={styles.textStyle}>{Riddle.question}</Text>
       </View>
@@ -350,7 +370,7 @@ const styles = StyleSheet.create({
     color: '#000'
 
   },
-  ansView: { flexDirection: 'row', gap: wp(2), alignSelf: 'center' },
+  ansView: { flexDirection: 'row', gap: wp(2), alignSelf: 'center', },
 
   inputStyle: {
     fontSize: wp(7.3),

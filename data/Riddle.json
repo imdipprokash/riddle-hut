@@ -2,7 +2,147 @@
     {
         "question": "I have cities, but no houses. I have mountains, but no trees. I have water, but no fish. What am I?",
         "answer": "Map",
-        "hint": "I show the world’s features like cities and mountains, but only as simplified outlines or names."
+        "hint": "I show the world's features like cities and mountains, but only as simplified outlines or names."
+    },
+    {
+        "question": "I have wings, but don't fly. I have a body, but no soul. I'm driven, but not alive. What am I?",
+        "answer": "Car",
+        "hint": "My wings are parts of my frame, not for soaring."
+    },
+    {
+        "question": "I have a blade, but no sword. I spin, but don't dance. I'm cool, but not ice. What am I?",
+        "answer": "Fan",
+        "hint": "My blade moves air, not cuts through it."
+    },
+    {
+        "question": "I have a crown, but no tooth. I have a base, but no mountain. I'm worn, but not a shoe. What am I?",
+        "answer": "Hat",
+        "hint": "My crown sits on your head, not in your mouth."
+    },
+    {
+        "question": "I have a crown, but no kingdom. I have a rim, but no wheel. I'm worn, but not a glove. What am I?",
+        "answer": "Cap",
+        "hint": "My crown sits above your forehead, not a throne."
+    },
+    {
+        "question": "I have a shell, but no crab. I have a core, but no apple. I'm cracked, but not an egg. What am I?",
+        "answer": "Nut",
+        "hint": "My shell protects a seed, not a creature."
+    },
+    {
+        "question": "I have a head, but no cap. I have a neck, but no scarf. I'm filled, but not a tank. What am I?",
+        "answer": "Jar",
+        "hint": "My head is a lid, not a skull."
+    },
+    {
+        "question": "I have a neck, but no bottle. I have a bow, but no gift. I'm tied, but not a knot. What am I?",
+        "answer": "Tie",
+        "hint": "My neck wraps around yours, not pours."
+    },
+    {
+        "question": "I have a spine, but no bones. I have covers, but no bed. I'm opened, but not a door. What am I?",
+        "answer": "Book",
+        "hint": "I'm filled with stories, not a skeleton."
+    },
+    {
+        "question": "I have a tongue, but don't taste. I have laces, but no knots. I'm worn, but not a shirt. What am I?",
+        "answer": "Shoe",
+        "hint": "My tongue helps with fit, not flavor."
+    },
+    {
+        "question": "I have a tail, but no body. I flip, but don't swim. I'm metal, but not a tool. What am I?",
+        "answer": "Coin",
+        "hint": "My tail is a side, not a fin."
+    },
+    {
+        "question": "I have a bark, but no dog. I have rings, but no fingers. I grow, but I'm not a child. What am I?",
+        "answer": "Tree",
+        "hint": "My bark is my skin, not a sound."
+    },
+    {
+        "question": "I have a deck, but no cards. I have a hull, but no fruit. I float, but I'm not a raft. What am I?",
+        "answer": "Ship",
+        "hint": "My deck is for walking, not playing games."
+    },
+    {
+        "question": "I have a face, but no features. I have a hand, but no fingers. I'm marked, but not a map. What am I?",
+        "answer": "Dice",
+        "hint": "My face shows numbers, not expressions."
+    },
+    {
+        "question": "I have a shell, but no egg. I have a barrel, but no gun. I'm loud, but not a voice. What am I?",
+        "answer": "Drum",
+        "hint": "My shell resonates with rhythm, not cracks."
+    },
+    {
+        "question": "I have a horn, but no sound. I have a ridge, but no mountain. I'm walked, but not a path. What am I?",
+        "answer": "Shoe",
+        "hint": "My horn is a stiff part, not a noisemaker."
+    },
+    {
+        "question": "I have a spine, but no fish. I have a jacket, but no coat. I'm held, but not a hand. What am I?",
+        "answer": "Book",
+        "hint": "My spine binds pages, not swims."
+    },
+    {
+        "question": "I have a ridge, but no hill. I have a groove, but no valley. I'm turned, but not a wheel. What am I?",
+        "answer": "Knob",
+        "hint": "My ridge helps your grip, not a landscape."
+    },
+    {
+        "question": "I have a pin, but no needle. I have a head, but no hair. I'm small, but not a bead. What am I?",
+        "answer": "Bolt",
+        "hint": "My pin fastens, not sews."
+    },
+    {
+        "question": "I have a reel, but no fish. I have a line, but no rope. I'm wound, but not a clock. What am I?",
+        "answer": "Film",
+        "hint": "My reel holds images, not catches prey."
+    },
+    {
+        "question": "I have a grid, but no graph. I have a pane, but no window. I'm heated, but not a fire. What am I?",
+        "answer": "Oven",
+        "hint": "My grid holds trays, not data."
+    },
+    {
+        "question": "I have a shaft, but no arrow. I have a head, but no mind. I'm driven, but not a car. What am I?",
+        "answer": "Nail",
+        "hint": "My shaft is hammered, not shot."
+    },
+    {
+        "question": "I have a tongue, but no mouth. I have a sole, but no foot. I'm stepped on, but not a mat. What am I?",
+        "answer": "Boot",
+        "hint": "My tongue helps with lacing, not tasting."
+    },
+    {
+        "question": "I have a face, but no smile. I have a hand, but no thumb. I'm spun, but not a top. What am I?",
+        "answer": "Dial",
+        "hint": "My face shows numbers, not emotions."
+    },
+    {
+        "question": "I have a head, but no hair. I have a tail, but no fins. I'm spent, but not a bill. What am I?",
+        "answer": "Dime",
+        "hint": "My head is one side of currency."
+    },
+    {
+        "question": "I have a pin, but no cushion. I have a head, but no brain. I'm struck, but not a match. What am I?",
+        "answer": "Nail",
+        "hint": "My pin is driven into wood, not sewn."
+    },
+    {
+        "question": "I have a bridge, but no stream. I have a deck, but no cards. I'm crossed, but not a road. What am I?",
+        "answer": "Boat",
+        "hint": "My bridge is where the captain stands."
+    },
+    {
+        "question": "I have a band, but no wrist. I have a rim, but no glass. I'm rolled, but not a tire. What am I?",
+        "answer": "Drum",
+        "hint": "My band tightens my skin, not adorns."
+    },
+    {
+        "question": "I have a ridge, but no roof. I have a groove, but no track. I'm pressed, but not a shirt. What am I?",
+        "answer": "Coin",
+        "hint": "My ridge is an edge design, not a hill."
     },
     {
         "question": "I have pages, but no words. I have pictures, but no frames. I am carried, but not read. What am I?",
@@ -10,733 +150,593 @@
         "hint": "I hold memories in images, not stories in text."
     },
     {
-        "question": "I have keys, but no locks. I have space, but no room. You can enter, but not escape. What am I?",
-        "answer": "Keyboard",
-        "hint": "I’m used to type, not to open or close."
-    },
-    {
-        "question": "I have hands, but no fingers. I tell time, but don’t speak. I’m watched, but don’t see. What am I?",
+        "question": "I have hands, but no fingers. I tell time, but don't speak. I'm watched, but don't see. What am I?",
         "answer": "Clock",
         "hint": "I mark the hours with pointers, not digits."
     },
     {
-        "question": "I have a neck, but no head. I have arms, but no hands. I’m worn, but not walked. What am I?",
+        "question": "I have a neck, but no head. I have arms, but no hands. I'm worn, but not walked. What am I?",
         "answer": "Shirt",
-        "hint": "I’m clothing that fits over your shoulders."
+        "hint": "I'm clothing that fits over your shoulders."
     },
     {
-        "question": "I have waves, but no water. I have dunes, but no sand. I’m vast, but not a sea. What am I?",
-        "answer": "Desert",
-        "hint": "My landscape mimics an ocean, but it’s dry."
-    },
-    {
-        "question": "I have branches, but no leaves. I have a trunk, but no bark. I’m wooden, but not a tree. What am I?",
+        "question": "I have branches, but no leaves. I have a trunk, but no bark. I'm wooden, but not a tree. What am I?",
         "answer": "Table",
-        "hint": "I’m furniture with parts named like a plant."
+        "hint": "I'm furniture with parts named like a plant."
     },
     {
-        "question": "I have strings, but no knots. I make music, but don’t sing. I’m played, but not a game. What am I?",
-        "answer": "Guitar",
-        "hint": "My sounds come from plucking, not tying."
-    },
-    {
-        "question": "I have a face, but no eyes. I have a mouth, but don’t eat. I’m flat, but not a coin. What am I?",
+        "question": "I have a face, but no eyes. I have a mouth, but don't eat. I'm flat, but not a coin. What am I?",
         "answer": "Plate",
-        "hint": "I’m used at meals, but I don’t consume food."
+        "hint": "I'm used at meals, but I don't consume food."
     },
     {
-        "question": "I have wings, but don’t fly. I have a body, but no soul. I’m driven, but not alive. What am I?",
-        "answer": "Car",
-        "hint": "My wings are parts of my frame, not for soaring."
-    },
-    {
-        "question": "I have a heart, but no pulse. I’m green, but not alive. I’m eaten, but not meat. What am I?",
-        "answer": "Artichoke",
-        "hint": "My center is named like an organ, but it’s a vegetable."
-    },
-    {
-        "question": "I have a spine, but no bones. I have covers, but no bed. I’m opened, but not a door. What am I?",
-        "answer": "Book",
-        "hint": "I’m filled with stories, not a skeleton."
-    },
-    {
-        "question": "I have eyes, but don’t see. I have a skin, but no flesh. I’m cooked, but not meat. What am I?",
-        "answer": "Potato",
-        "hint": "My eyes are spots, not organs for sight."
-    },
-    {
-        "question": "I have a tongue, but don’t taste. I have laces, but no knots. I’m worn, but not a shirt. What am I?",
-        "answer": "Shoe",
-        "hint": "My tongue helps with fit, not flavor."
-    },
-    {
-        "question": "I have a crown, but no king. I have roots, but no soil. I’m alive, but not an animal. What am I?",
+        "question": "I have a crown, but no king. I have roots, but no soil. I'm alive, but not an animal. What am I?",
         "answer": "Tooth",
         "hint": "My crown is part of your smile, not a royal headpiece."
     },
     {
-        "question": "I have a bell, but don’t ring. I have a saddle, but no horse. I’m ridden, but not alive. What am I?",
-        "answer": "Bicycle",
-        "hint": "My bell is for signaling, but I don’t chime on my own."
-    },
-    {
-        "question": "I have a tail, but no body. I flip, but don’t swim. I’m metal, but not a tool. What am I?",
-        "answer": "Coin",
-        "hint": "My tail is a side, not a fin."
-    },
-    {
-        "question": "I have a bed, but no sleep. I have banks, but no money. I flow, but I’m not alive. What am I?",
+        "question": "I have a bed, but no sleep. I have banks, but no money. I flow, but I'm not alive. What am I?",
         "answer": "River",
         "hint": "My bed is where I rest, not for dreaming."
     },
     {
-        "question": "I have a foot, but no legs. I have a head, but no brain. I’m used, but not alive. What am I?",
+        "question": "I have a foot, but no legs. I have a head, but no brain. I'm used, but not alive. What am I?",
         "answer": "Ruler",
         "hint": "My foot measures distance, not steps."
     },
     {
-        "question": "I have a horn, but don’t blow. I have a hood, but no cloak. I’m driven, but not a car. What am I?",
+        "question": "I have a horn, but don't blow. I have a hood, but no cloak. I'm driven, but not a car. What am I?",
         "answer": "Truck",
         "hint": "My horn is for cargo, not music."
     },
     {
-        "question": "I have a bridge, but no water. I have strings, but no bow. I’m played, but not a sport. What am I?",
-        "answer": "Violin",
-        "hint": "My bridge supports my strings, not traffic."
-    },
-    {
-        "question": "I have a shell, but no turtle. I have a pearl, but no oyster. I’m worn, but not clothes. What am I?",
-        "answer": "Necklace",
-        "hint": "My shell is a decorative casing, not a home."
-    },
-    {
-        "question": "I have a gate, but no fence. I have a terminal, but no end. I’m busy, but not a city. What am I?",
-        "answer": "Airport",
-        "hint": "My gate is for boarding, not enclosing."
-    },
-    {
-        "question": "I have a crown, but no queen. I have leaves, but no branches. I’m green, but not a tree. What am I?",
-        "answer": "Pineapple",
-        "hint": "My crown is a spiky top, not a royal symbol."
-    },
-    {
-        "question": "I have a bark, but no dog. I have rings, but no fingers. I grow, but I’m not a child. What am I?",
-        "answer": "Tree",
-        "hint": "My bark is my skin, not a sound."
-    },
-    {
-        "question": "I have a face, but no nose. I have hands, but no wrists. I’m round, but not a ball. What am I?",
+        "question": "I have a face, but no nose. I have hands, but no wrists. I'm round, but not a ball. What am I?",
         "answer": "Watch",
         "hint": "My face shows time, not emotions."
     },
     {
-        "question": "I have a blade, but no sword. I spin, but don’t dance. I’m cool, but not ice. What am I?",
-        "answer": "Fan",
-        "hint": "My blade moves air, not cuts through it."
-    },
-    {
-        "question": "I have a chain, but no lock. I have gears, but no clock. I move, but I’m not a car. What am I?",
-        "answer": "Bicycle",
-        "hint": "My chain drives my wheels, not secures anything."
-    },
-    {
-        "question": "I have a frame, but no picture. I have lenses, but no camera. I’m worn, but not a hat. What am I?",
-        "answer": "Glasses",
-        "hint": "My lenses help you see, not capture images."
-    },
-    {
-        "question": "I have a deck, but no cards. I have a hull, but no fruit. I float, but I’m not a raft. What am I?",
-        "answer": "Ship",
-        "hint": "My deck is for walking, not playing games."
-    },
-    {
-        "question": "I have a crown, but no tooth. I have a base, but no mountain. I’m worn, but not a shoe. What am I?",
-        "answer": "Hat",
-        "hint": "My crown sits on your head, not in your mouth."
-    },
-    {
-        "question": "I have a core, but no fruit. I have a mantle, but no fireplace. I’m round, but not a ball. What am I?",
+        "question": "I have a core, but no fruit. I have a mantle, but no fireplace. I'm round, but not a ball. What am I?",
         "answer": "Earth",
         "hint": "My core is deep inside, not edible."
     },
     {
-        "question": "I have a strap, but no belt. I have a face, but no mouth. I’m carried, but not a bag. What am I?",
+        "question": "I have a strap, but no belt. I have a face, but no mouth. I'm carried, but not a bag. What am I?",
         "answer": "Watch",
         "hint": "My strap holds me to your wrist, not your waist."
     },
     {
-        "question": "I have a horn, but no music. I have a cab, but no taxi. I’m large, but not a building. What am I?",
+        "question": "I have a horn, but no music. I have a cab, but no taxi. I'm large, but not a building. What am I?",
         "answer": "Train",
         "hint": "My horn signals my approach, not a melody."
     },
     {
-        "question": "I have a web, but no spider. I have links, but no chains. I’m vast, but not an ocean. What am I?",
-        "answer": "Internet",
-        "hint": "My web connects information, not traps prey."
-    },
-    {
-        "question": "I have a vault, but no money. I have a beam, but no light. I’m active, but not a person. What am I?",
-        "answer": "Gymnasium",
-        "hint": "My vault is for jumping, not storing cash."
-    },
-    {
-        "question": "I have a pitch, but no song. I have a base, but no foundation. I’m played, but not an instrument. What am I?",
-        "answer": "Baseball",
-        "hint": "My pitch is thrown, not sung."
-    },
-    {
-        "question": "I have a band, but no music. I have a dial, but no phone. I’m worn, but not a ring. What am I?",
+        "question": "I have a band, but no music. I have a dial, but no phone. I'm worn, but not a ring. What am I?",
         "answer": "Watch",
         "hint": "My band wraps around your wrist, not a stage."
     },
     {
-        "question": "I have a ridge, but no mountain. I have a valley, but no river. I’m small, but not a pebble. What am I?",
-        "answer": "Fingerprint",
-        "hint": "My ridges are on your skin, not a landscape."
-    },
-    {
-        "question": "I have a case, but no trial. I have a strap, but no belt. I’m carried, but not a purse. What am I?",
-        "answer": "Briefcase",
-        "hint": "My case holds documents, not a courtroom."
-    },
-    {
-        "question": "I have a bolt, but no lock. I have a thread, but no needle. I’m metal, but not a coin. What am I?",
+        "question": "I have a bolt, but no lock. I have a thread, but no needle. I'm metal, but not a coin. What am I?",
         "answer": "Screw",
         "hint": "My thread spirals to hold things together."
     },
     {
-        "question": "I have a seal, but no animal. I have a stamp, but no post. I’m official, but not a law. What am I?",
-        "answer": "Passport",
-        "hint": "My seal proves your identity, not a creature."
-    },
-    {
-        "question": "I have a bar, but no drink. I have a code, but no secret. I’m scanned, but not a book. What am I?",
-        "answer": "Barcode",
-        "hint": "My bars are lines for machines to read."
-    },
-    {
-        "question": "I have a port, but no ship. I have a drive, but no car. I’m plugged in, but not a lamp. What am I?",
-        "answer": "Computer",
-        "hint": "My port connects devices, not harbors vessels."
-    },
-    {
-        "question": "I have a crown, but no head. I have a stem, but no flower. I’m edible, but not a fruit. What am I?",
-        "answer": "Broccoli",
-        "hint": "My crown is green and eaten, not worn."
-    },
-    {
-        "question": "I have a frame, but no art. I have a pane, but no glass. I’m outside, but not a door. What am I?",
-        "answer": "Window",
-        "hint": "My frame holds a view, not a painting."
-    },
-    {
-        "question": "I have a track, but no train. I have a loop, but no rope. I’m run, but not a race. What am I?",
-        "answer": "Record",
-        "hint": "My track plays music, not carries trains."
-    },
-    {
-        "question": "I have a cell, but no prison. I have a wall, but no room. I’m alive, but not an animal. What am I?",
+        "question": "I have a cell, but no prison. I have a wall, but no room. I'm alive, but not an animal. What am I?",
         "answer": "Plant",
         "hint": "My cell is microscopic, not a jail."
     },
     {
-        "question": "I have a bow, but no arrow. I have a bridge, but no river. I’m played, but not a game. What am I?",
+        "question": "I have a bow, but no arrow. I have a bridge, but no river. I'm played, but not a game. What am I?",
         "answer": "Cello",
         "hint": "My bow glides to make music, not shoot."
     },
     {
-        "question": "I have a crown, but no kingdom. I have a rim, but no wheel. I’m worn, but not a glove. What am I?",
-        "answer": "Cap",
-        "hint": "My crown sits above your forehead, not a throne."
-    },
-    {
-        "question": "I have a field, but no grass. I have a goal, but no game. I’m studied, but not a book. What am I?",
-        "answer": "Science",
-        "hint": "My field is a branch of knowledge, not a meadow."
-    },
-    {
-        "question": "I have a coil, but no snake. I have a spring, but no water. I’m soft, but not a pillow. What am I?",
-        "answer": "Mattress",
-        "hint": "My coils support your sleep, not slither."
-    },
-    {
-        "question": "I have a vein, but no blood. I have a leaf, but no tree. I’m solid, but not a rock. What am I?",
-        "answer": "Marble",
-        "hint": "My veins are patterns in stone, not vessels."
-    },
-    {
-        "question": "I have a gate, but no garden. I have a latch, but no door. I’m carried, but not a bag. What am I?",
-        "answer": "Suitcase",
-        "hint": "My gate secures your belongings, not a yard."
-    },
-    {
-        "question": "I have a face, but no features. I have a hand, but no fingers. I’m marked, but not a map. What am I?",
-        "answer": "Dice",
-        "hint": "My face shows numbers, not expressions."
-    },
-    {
-        "question": "I have a shell, but no egg. I have a barrel, but no gun. I’m loud, but not a voice. What am I?",
-        "answer": "Drum",
-        "hint": "My shell resonates with rhythm, not cracks."
-    },
-    {
-        "question": "I have a band, but no singers. I have a groove, but no dance. I spin, but I’m not a top. What am I?",
-        "answer": "Record",
-        "hint": "My band is a track of music, not performers."
-    },
-    {
-        "question": "I have a crest, but no hill. I have a beak, but no bird. I’m worn, but not a coat. What am I?",
-        "answer": "Helmet",
-        "hint": "My crest is a design, not a peak."
-    },
-    {
-        "question": "I have a pool, but no water. I have a cue, but no question. I’m played, but not a song. What am I?",
-        "answer": "Billiards",
-        "hint": "My pool is a table, not a swim."
-    },
-    {
-        "question": "I have a horn, but no sound. I have a ridge, but no mountain. I’m walked, but not a path. What am I?",
-        "answer": "Shoe",
-        "hint": "My horn is a stiff part, not a noisemaker."
-    },
-    {
-        "question": "I have a bulb, but no light. I have a root, but no soil. I’m eaten, but not a fruit. What am I?",
+        "question": "I have a bulb, but no light. I have a root, but no soil. I'm eaten, but not a fruit. What am I?",
         "answer": "Onion",
         "hint": "My bulb grows underground, not glows."
     },
     {
-        "question": "I have a frame, but no photo. I have a stand, but no legs. I’m watched, but not a clock. What am I?",
-        "answer": "Television",
-        "hint": "My frame holds a screen, not a picture."
-    },
-    {
-        "question": "I have a net, but no fish. I have a court, but no judge. I’m played, but not a card. What am I?",
-        "answer": "Tennis",
-        "hint": "My net divides players, not catches prey."
-    },
-    {
-        "question": "I have a spine, but no fish. I have a jacket, but no coat. I’m held, but not a hand. What am I?",
-        "answer": "Book",
-        "hint": "My spine binds pages, not swims."
-    },
-    {
-        "question": "I have a wing, but no bird. I have a flap, but no door. I fly, but I’m not alive. What am I?",
-        "answer": "Airplane",
-        "hint": "My wing lifts me skyward, not flaps."
-    },
-    {
-        "question": "I have a bank, but no coins. I have a bed, but no rest. I’m wet, but not a sponge. What am I?",
-        "answer": "Stream",
-        "hint": "My bank holds water, not money."
-    },
-    {
-        "question": "I have a brush, but no paint. I have a handle, but no door. I’m used, but not a tool. What am I?",
-        "answer": "Toothbrush",
-        "hint": "My brush cleans teeth, not canvases."
-    },
-    {
-        "question": "I have a chord, but no music. I have a plug, but no sink. I’m electric, but not a light. What am I?",
-        "answer": "Appliance",
-        "hint": "My chord powers my function, not a melody."
-    },
-    {
-        "question": "I have a crown, but no jewel. I have a base, but no stand. I’m tall, but not a tower. What am I?",
-        "answer": "Mountain",
-        "hint": "My crown is a peak, not a gem."
-    },
-    {
-        "question": "I have a tape, but no music. I have a roll, but no bread. I’m sticky, but not a candy. What am I?",
-        "answer": "Adhesive",
-        "hint": "My tape binds things, not plays songs."
-    },
-    {
-        "question": "I have a lens, but no eye. I have a flash, but no storm. I capture, but don’t hold. What am I?",
-        "answer": "Camera",
-        "hint": "My lens records moments, not sees them."
-    },
-    {
-        "question": "I have a chain, but no necklace. I have a link, but no website. I’m strong, but not a muscle. What am I?",
+        "question": "I have a chain, but no necklace. I have a link, but no website. I'm strong, but not a muscle. What am I?",
         "answer": "Fence",
         "hint": "My chain forms a barrier, not jewelry."
     },
     {
-        "question": "I have a vault, but no bank. I have a beam, but no roof. I’m jumped, but not a rope. What am I?",
-        "answer": "Gymnastics",
-        "hint": "My vault is an apparatus, not a safe."
-    },
-    {
-        "question": "I have a seal, but no envelope. I have a flap, but no wing. I’m mailed, but not a letter. What am I?",
-        "answer": "Package",
-        "hint": "My seal keeps contents secure, not a stamp."
-    },
-    {
-        "question": "I have a ridge, but no hill. I have a groove, but no valley. I’m turned, but not a wheel. What am I?",
-        "answer": "Knob",
-        "hint": "My ridge helps your grip, not a landscape."
-    },
-    {
-        "question": "I have a wave, but no ocean. I have a signal, but no flag. I’m heard, but not a voice. What am I?",
+        "question": "I have a wave, but no ocean. I have a signal, but no flag. I'm heard, but not a voice. What am I?",
         "answer": "Radio",
         "hint": "My wave carries music, not water."
     },
     {
-        "question": "I have a pin, but no needle. I have a head, but no hair. I’m small, but not a bead. What am I?",
-        "answer": "Bolt",
-        "hint": "My pin fastens, not sews."
-    },
-    {
-        "question": "I have a plate, but no food. I have a ridge, but no mountain. I’m tectonic, but not a quake. What am I?",
+        "question": "I have a plate, but no food. I have a ridge, but no mountain. I'm tectonic, but not a quake. What am I?",
         "answer": "Crust",
         "hint": "My plate shifts the earth, not holds a meal."
     },
     {
-        "question": "I have a coil, but no wire. I have a twist, but no dance. I’m edible, but not a fruit. What am I?",
-        "answer": "Pretzel",
-        "hint": "My coil is baked dough, not metal."
-    },
-    {
-        "question": "I have a bolt, but no thunder. I have a strike, but no match. I’m played, but not a card. What am I?",
-        "answer": "Bowling",
-        "hint": "My strike is a score, not a spark."
-    },
-    {
-        "question": "I have a reel, but no fish. I have a line, but no rope. I’m wound, but not a clock. What am I?",
-        "answer": "Film",
-        "hint": "My reel holds images, not catches prey."
-    },
-    {
-        "question": "I have a band, but no ring. I have a clasp, but no lock. I’m worn, but not a shoe. What am I?",
-        "answer": "Bracelet",
-        "hint": "My band adorns your wrist, not your finger."
-    },
-    {
-        "question": "I have a port, but no boat. I have a dock, but no water. I’m connected, but not a bridge. What am I?",
-        "answer": "Laptop",
-        "hint": "My port links devices, not ships."
-    },
-    {
-        "question": "I have a crest, but no wave. I have a trough, but no valley. I’m measured, but not a ruler. What am I?",
+        "question": "I have a crest, but no wave. I have a trough, but no valley. I'm measured, but not a ruler. What am I?",
         "answer": "Graph",
         "hint": "My crest is a peak in data, not water."
     },
     {
-        "question": "I have a loop, but no knot. I have a belt, but no buckle. I’m moving, but not a car. What am I?",
-        "answer": "Conveyor",
-        "hint": "My loop carries goods, not ties rope."
-    },
-    {
-        "question": "I have a cell, but no phone. I have a wall, but no house. I’m tiny, but not a speck. What am I?",
-        "answer": "Tissue",
-        "hint": "My cell is a building block of life, not a device."
-    },
-    {
-        "question": "I have a key, but no lock. I have a scale, but no weight. I’m played, but not a sport. What am I?",
+        "question": "I have a key, but no lock. I have a scale, but no weight. I'm played, but not a sport. What am I?",
         "answer": "Piano",
         "hint": "My key produces notes, not opens doors."
     },
     {
-        "question": "I have a head, but no neck. I have a tail, but no legs. I’m flipped, but not a pancake. What am I?",
+        "question": "I have a head, but no neck. I have a tail, but no legs. I'm flipped, but not a pancake. What am I?",
         "answer": "Penny",
         "hint": "My head is a side, not a face."
     },
     {
-        "question": "I have a frame, but no window. I have a seat, but no chair. I’m ridden, but not a horse. What am I?",
-        "answer": "Motorcycle",
-        "hint": "My frame supports wheels, not glass."
-    },
-    {
-        "question": "I have a bed, but no mattress. I have a canopy, but no tent. I’m green, but not a lime. What am I?",
-        "answer": "Forest",
-        "hint": "My bed is a floor of plants, not for sleep."
-    },
-    {
-        "question": "I have a disc, but no player. I have a ring, but no finger. I’m thrown, but not a ball. What am I?",
-        "answer": "Frisbee",
-        "hint": "My disc soars through the air, not spins music."
-    },
-    {
-        "question": "I have a neck, but no throat. I have a rim, but no edge. I’m filled, but not a bucket. What am I?",
-        "answer": "Bottle",
-        "hint": "My neck narrows to pour, not swallow."
-    },
-    {
-        "question": "I have a grid, but no graph. I have a pane, but no window. I’m heated, but not a fire. What am I?",
-        "answer": "Oven",
-        "hint": "My grid holds trays, not data."
-    },
-    {
-        "question": "I have a shaft, but no arrow. I have a head, but no mind. I’m driven, but not a car. What am I?",
-        "answer": "Nail",
-        "hint": "My shaft is hammered, not shot."
-    },
-    {
-        "question": "I have a lens, but no glasses. I have a beam, but no flashlight. I’m bright, but not a star. What am I?",
-        "answer": "Projector",
-        "hint": "My lens casts images, not corrects vision."
-    },
-    {
-        "question": "I have a ridge, but no spine. I have a groove, but no record. I’m cut, but not a wound. What am I?",
+        "question": "I have a ridge, but no spine. I have a groove, but no record. I'm cut, but not a wound. What am I?",
         "answer": "Board",
         "hint": "My ridge is carved wood, not a backbone."
     },
     {
-        "question": "I have a bar, but no gym. I have a code, but no cipher. I’m read, but not a book. What am I?",
+        "question": "I have a bar, but no gym. I have a code, but no cipher. I'm read, but not a book. What am I?",
         "answer": "Label",
         "hint": "My bar is scanned, not lifted."
     },
     {
-        "question": "I have a coil, but no spring. I have a wick, but no candle. I’m lit, but not a lamp. What am I?",
-        "answer": "Incense",
-        "hint": "My coil burns to scent, not bounce."
-    },
-    {
-        "question": "I have a crown, but no throne. I have a neck, but no face. I’m poured, but not a stream. What am I?",
-        "answer": "Bottle",
-        "hint": "My crown is a cap, not a royal symbol."
-    },
-    {
-        "question": "I have a tongue, but no mouth. I have a sole, but no foot. I’m stepped on, but not a mat. What am I?",
-        "answer": "Boot",
-        "hint": "My tongue helps with lacing, not tasting."
-    },
-    {
-        "question": "I have a face, but no smile. I have a hand, but no thumb. I’m spun, but not a top. What am I?",
-        "answer": "Dial",
-        "hint": "My face shows numbers, not emotions."
-    },
-    {
-        "question": "I have a blade, but no knife. I have a handle, but no door. I’m sharp, but not a sword. What am I?",
+        "question": "I have a blade, but no knife. I have a handle, but no door. I'm sharp, but not a sword. What am I?",
         "answer": "Razor",
         "hint": "My blade shaves, not cuts food."
     },
     {
-        "question": "I have a belt, but no waist. I have a loop, but no knot. I’m worn, but not a coat. What am I?",
+        "question": "I have a belt, but no waist. I have a loop, but no knot. I'm worn, but not a coat. What am I?",
         "answer": "Pants",
         "hint": "My belt holds me up, not a buckle."
     },
     {
-        "question": "I have a head, but no hair. I have a tail, but no fins. I’m spent, but not a bill. What am I?",
-        "answer": "Dime",
-        "hint": "My head is one side of currency."
-    },
-    {
-        "question": "I have a wall, but no house. I have a gate, but no yard. I’m tall, but not a tree. What am I?",
-        "answer": "Castle",
-        "hint": "My wall protects a fortress, not a home."
-    },
-    {
-        "question": "I have a horn, but no goat. I have a wheel, but no car. I’m steered, but not a ship. What am I?",
-        "answer": "Tractor",
-        "hint": "My horn warns, not plays music."
-    },
-    {
-        "question": "I have a spine, but no back. I have a cover, but no blanket. I’m read, but not a sign. What am I?",
-        "answer": "Magazine",
-        "hint": "My spine holds pages, not bones."
-    },
-    {
-        "question": "I have a lens, but no scope. I have a frame, but no art. I’m looked through, but not a window. What am I?",
-        "answer": "Monocle",
-        "hint": "My lens aids one eye, not a camera."
-    },
-    {
-        "question": "I have a pin, but no cushion. I have a head, but no brain. I’m struck, but not a match. What am I?",
-        "answer": "Nail",
-        "hint": "My pin is driven into wood, not sewn."
-    },
-    {
-        "question": "I have a bed, but no pillow. I have a bank, but no cash. I’m flowing, but not a breeze. What am I?",
+        "question": "I have a bed, but no pillow. I have a bank, but no cash. I'm flowing, but not a breeze. What am I?",
         "answer": "Creek",
         "hint": "My bed is made of pebbles, not sheets."
     },
     {
-        "question": "I have a string, but no kite. I have a bead, but no necklace. I’m worn, but not a scarf. What am I?",
-        "answer": "Bracelet",
-        "hint": "My string holds charms, not flies."
-    },
-    {
-        "question": "I have a wing, but no feather. I have a nose, but no face. I soar, but I’m not a bird. What am I?",
-        "answer": "Glider",
-        "hint": "My wing catches air, not flaps."
-    },
-    {
-        "question": "I have a key, but no door. I have a ridge, but no hill. I’m pressed, but not a button. What am I?",
-        "answer": "Typewriter",
-        "hint": "My key types letters, not unlocks."
-    },
-    {
-        "question": "I have a crown, but no prince. I have a stem, but no leaf. I’m sweet, but not a candy. What am I?",
-        "answer": "Cherry",
-        "hint": "My crown is where the pit sits."
-    },
-    {
-        "question": "I have a shell, but no crab. I have a core, but no apple. I’m cracked, but not an egg. What am I?",
-        "answer": "Nut",
-        "hint": "My shell protects a seed, not a creature."
-    },
-    {
-        "question": "I have a bridge, but no stream. I have a deck, but no cards. I’m crossed, but not a road. What am I?",
-        "answer": "Boat",
-        "hint": "My bridge is where the captain stands."
-    },
-    {
-        "question": "I have a coil, but no rope. I have a glow, but no bulb. I’m hot, but not a fire. What am I?",
-        "answer": "Heater",
-        "hint": "My coil warms a room, not ties."
-    },
-    {
-        "question": "I have a face, but no cheeks. I have a rim, but no tire. I’m turned, but not a knob. What am I?",
-        "answer": "Saucer",
-        "hint": "My face holds a cup, not expressions."
-    },
-    {
-        "question": "I have a band, but no drummer. I have a loop, but no hoop. I’m stretched, but not a muscle. What am I?",
-        "answer": "Elastic",
-        "hint": "My band snaps back, not plays tunes."
-    },
-    {
-        "question": "I have a horn, but no tune. I have a ridge, but no slope. I’m curved, but not a bow. What am I?",
-        "answer": "Saddle",
-        "hint": "My horn is for grip, not sound."
-    },
-    {
-        "question": "I have a frame, but no canvas. I have a bar, but no gym. I’m swung, but not a door. What am I?",
-        "answer": "Racket",
-        "hint": "My frame hits a ball, not holds art."
-    },
-    {
-        "question": "I have a cell, but no battery. I have a wall, but no brick. I’m green, but not an emerald. What am I?",
+        "question": "I have a cell, but no battery. I have a wall, but no brick. I'm green, but not an emerald. What am I?",
         "answer": "Algae",
         "hint": "My cell is microscopic, not electronic."
     },
     {
-        "question": "I have a crest, but no rooster. I have a base, but no pedestal. I’m tall, but not a skyscraper. What am I?",
+        "question": "I have a crest, but no rooster. I have a base, but no pedestal. I'm tall, but not a skyscraper. What am I?",
         "answer": "Ridge",
         "hint": "My crest is a high point, not feathers."
     },
     {
-        "question": "I have a tape, but no cassette. I have a strip, but no cloth. I’m measured, but not a ruler. What am I?",
+        "question": "I have a tape, but no cassette. I have a strip, but no cloth. I'm measured, but not a ruler. What am I?",
         "answer": "Gauge",
         "hint": "My tape measures length, not plays music."
     },
     {
-        "question": "I have a head, but no cap. I have a neck, but no scarf. I’m filled, but not a tank. What am I?",
-        "answer": "Jar",
-        "hint": "My head is a lid, not a skull."
-    },
-    {
-        "question": "I have a web, but no silk. I have a node, but no rope. I’m connected, but not a chain. What am I?",
-        "answer": "Network",
-        "hint": "My web links devices, not traps flies."
-    },
-    {
-        "question": "I have a pin, but no badge. I have a clip, but no paper. I’m worn, but not a tie. What am I?",
-        "answer": "Cufflink",
-        "hint": "My pin fastens sleeves, not decorates."
-    },
-    {
-        "question": "I have a vault, but no treasure. I have a dome, but no sky. I’m arched, but not a bridge. What am I?",
-        "answer": "Ceiling",
-        "hint": "My vault is an architectural curve."
-    },
-    {
-        "question": "I have a blade, but no grass. I have a shaft, but no spear. I’m spun, but not a wheel. What am I?",
-        "answer": "Propeller",
-        "hint": "My blade drives a plane, not cuts."
-    },
-    {
-        "question": "I have a strap, but no bag. I have a buckle, but no belt. I’m worn, but not a watch. What am I?",
-        "answer": "Sandals",
-        "hint": "My strap secures feet, not carries."
-    },
-    {
-        "question": "I have a coil, but no spiral. I have a tube, but no straw. I’m squeezed, but not a fruit. What am I?",
-        "answer": "Toothpaste",
-        "hint": "My coil holds paste, not unwinds."
-    },
-    {
-        "question": "I have a gate, but no wall. I have a latch, but no lock. I’m opened, but not a book. What am I?",
-        "answer": "Briefcase",
-        "hint": "My gate secures papers, not a yard."
-    },
-    {
-        "question": "I have a band, but no wrist. I have a rim, but no glass. I’m rolled, but not a tire. What am I?",
-        "answer": "Drum",
-        "hint": "My band tightens my skin, not adorns."
-    },
-    {
-        "question": "I have a wing, but no plane. I have a flap, but no envelope. I’m sewn, but not a shirt. What am I?",
-        "answer": "Jacket",
-        "hint": "My wing is a collar fold, not for flight."
-    },
-    {
-        "question": "I have a core, but no seed. I have a shell, but no nut. I’m charged, but not a battery. What am I?",
-        "answer": "Reactor",
-        "hint": "My core powers, not grows."
-    },
-    {
-        "question": "I have a neck, but no bottle. I have a bow, but no gift. I’m tied, but not a knot. What am I?",
-        "answer": "Tie",
-        "hint": "My neck wraps around yours, not pours."
-    },
-    {
-        "question": "I have a ridge, but no roof. I have a groove, but no track. I’m pressed, but not a shirt. What am I?",
-        "answer": "Coin",
-        "hint": "My ridge is an edge design, not a hill."
-    },
-    {
-        "question": "I have a bar, but no soap. I have a grip, but no hand. I’m lifted, but not a weight. What am I?",
+        "question": "I have a bar, but no soap. I have a grip, but no hand. I'm lifted, but not a weight. What am I?",
         "answer": "Towel",
         "hint": "My bar is for hanging, not cleaning."
     },
     {
-        "question": "I have a lens, but no telescope. I have a slide, but no playground. I’m viewed, but not a screen. What am I?",
-        "answer": "Microscope",
-        "hint": "My lens magnifies tiny worlds."
-    },
-    {
-        "question": "I have a crest, but no shield. I have a point, but no pencil. I’m worn, but not a ring. What am I?",
+        "question": "I have a crest, but no shield. I have a point, but no pencil. I'm worn, but not a ring. What am I?",
         "answer": "Badge",
         "hint": "My crest is a symbol, not a wave."
     },
     {
-        "question": "I have a bed, but no frame. I have a sheet, but no blanket. I’m flat, but not a plain. What am I?",
-        "answer": "Garden",
-        "hint": "My bed grows flowers, not for sleep."
-    },
-    {
-        "question": "I have a track, but no path. I have a groove, but no ridge. I’m played, but not a sport. What am I?",
+        "question": "I have a track, but no path. I have a groove, but no ridge. I'm played, but not a sport. What am I?",
         "answer": "Vinyl",
         "hint": "My track holds music, not trains."
     },
     {
-        "question": "I have a seal, but no wax. I have a flap, but no tent. I’m sent, but not a message. What am I?",
-        "answer": "Envelope",
-        "hint": "My seal closes paper, not a contract."
-    },
-    {
-        "question": "I have a head, but no crown. I have a shaft, but no mine. I’m turned, but not a knob. What am I?",
-        "answer": "Screwdriver",
-        "hint": "My head fits a slot, not wears a crown."
-    },
-    {
-        "question": "I have a loop, but no belt. I have a hook, but no fish. I’m hung, but not a picture. What am I?",
-        "answer": "Hanger",
-        "hint": "My loop holds clothes, not ties."
-    },
-    {
-        "question": "I have a cell, but no organism. I have a tower, but no castle. I’m connected, but not a wire. What am I?",
+        "question": "I have a cell, but no organism. I have a tower, but no castle. I'm connected, but not a wire. What am I?",
         "answer": "Phone",
         "hint": "My cell is for signals, not biology."
     },
     {
-        "question": "I have a pin, but no seam. I have a ridge, but no cliff. I’m rolled, but not a ball. What am I?",
+        "question": "I have waves, but no water. I have dunes, but no sand. I'm vast, but not a sea. What am I?",
+        "answer": "Desert",
+        "hint": "My landscape mimics an ocean, but it's dry."
+    },
+    {
+        "question": "I have strings, but no knots. I make music, but don't sing. I'm played, but not a game. What am I?",
+        "answer": "Guitar",
+        "hint": "My sounds come from plucking, not tying."
+    },
+    {
+        "question": "I have eyes, but don't see. I have a skin, but no flesh. I'm cooked, but not meat. What am I?",
+        "answer": "Potato",
+        "hint": "My eyes are spots, not organs for sight."
+    },
+    {
+        "question": "I have a bridge, but no water. I have strings, but no bow. I'm played, but not a sport. What am I?",
+        "answer": "Violin",
+        "hint": "My bridge supports my strings, not traffic."
+    },
+    {
+        "question": "I have a frame, but no art. I have a pane, but no glass. I'm outside, but not a door. What am I?",
+        "answer": "Window",
+        "hint": "My frame holds a view, not a painting."
+    },
+    {
+        "question": "I have a track, but no train. I have a loop, but no rope. I'm run, but not a race. What am I?",
+        "answer": "Record",
+        "hint": "My track plays music, not carries trains."
+    },
+    {
+        "question": "I have a vein, but no blood. I have a leaf, but no tree. I'm solid, but not a rock. What am I?",
+        "answer": "Marble",
+        "hint": "My veins are patterns in stone, not vessels."
+    },
+    {
+        "question": "I have a band, but no singers. I have a groove, but no dance. I spin, but I'm not a top. What am I?",
+        "answer": "Record",
+        "hint": "My band is a track of music, not performers."
+    },
+    {
+        "question": "I have a crest, but no hill. I have a beak, but no bird. I'm worn, but not a coat. What am I?",
+        "answer": "Helmet",
+        "hint": "My crest is a design, not a peak."
+    },
+    {
+        "question": "I have a net, but no fish. I have a court, but no judge. I'm played, but not a card. What am I?",
+        "answer": "Tennis",
+        "hint": "My net divides players, not catches prey."
+    },
+    {
+        "question": "I have a bank, but no coins. I have a bed, but no rest. I'm wet, but not a sponge. What am I?",
+        "answer": "Stream",
+        "hint": "My bank holds water, not money."
+    },
+    {
+        "question": "I have a lens, but no eye. I have a flash, but no storm. I capture, but don't hold. What am I?",
+        "answer": "Camera",
+        "hint": "My lens records moments, not sees them."
+    },
+    {
+        "question": "I have a port, but no boat. I have a dock, but no water. I'm connected, but not a bridge. What am I?",
+        "answer": "Laptop",
+        "hint": "My port links devices, not ships."
+    },
+    {
+        "question": "I have a cell, but no phone. I have a wall, but no house. I'm tiny, but not a speck. What am I?",
+        "answer": "Tissue",
+        "hint": "My cell is a building block of life, not a device."
+    },
+    {
+        "question": "I have a bed, but no mattress. I have a canopy, but no tent. I'm green, but not a lime. What am I?",
+        "answer": "Forest",
+        "hint": "My bed is a floor of plants, not for sleep."
+    },
+    {
+        "question": "I have a neck, but no throat. I have a rim, but no edge. I'm filled, but not a bucket. What am I?",
+        "answer": "Bottle",
+        "hint": "My neck narrows to pour, not swallow."
+    },
+    {
+        "question": "I have a crown, but no throne. I have a neck, but no face. I'm poured, but not a stream. What am I?",
+        "answer": "Bottle",
+        "hint": "My crown is a cap, not a royal symbol."
+    },
+    {
+        "question": "I have a wall, but no house. I have a gate, but no yard. I'm tall, but not a tree. What am I?",
+        "answer": "Castle",
+        "hint": "My wall protects a fortress, not a home."
+    },
+    {
+        "question": "I have a wing, but no feather. I have a nose, but no face. I soar, but I'm not a bird. What am I?",
+        "answer": "Glider",
+        "hint": "My wing catches air, not flaps."
+    },
+    {
+        "question": "I have a crown, but no prince. I have a stem, but no leaf. I'm sweet, but not a candy. What am I?",
+        "answer": "Cherry",
+        "hint": "My crown is where the pit sits."
+    },
+    {
+        "question": "I have a coil, but no rope. I have a glow, but no bulb. I'm hot, but not a fire. What am I?",
+        "answer": "Heater",
+        "hint": "My coil warms a room, not ties."
+    },
+    {
+        "question": "I have a face, but no cheeks. I have a rim, but no tire. I'm turned, but not a knob. What am I?",
+        "answer": "Saucer",
+        "hint": "My face holds a cup, not expressions."
+    },
+    {
+        "question": "I have a horn, but no tune. I have a ridge, but no slope. I'm curved, but not a bow. What am I?",
+        "answer": "Saddle",
+        "hint": "My horn is for grip, not sound."
+    },
+    {
+        "question": "I have a frame, but no canvas. I have a bar, but no gym. I'm swung, but not a door. What am I?",
+        "answer": "Racket",
+        "hint": "My frame hits a ball, not holds art."
+    },
+    {
+        "question": "I have a wing, but no plane. I have a flap, but no envelope. I'm sewn, but not a shirt. What am I?",
+        "answer": "Jacket",
+        "hint": "My wing is a collar fold, not for flight."
+    },
+    {
+        "question": "I have a bed, but no frame. I have a sheet, but no blanket. I'm flat, but not a plain. What am I?",
+        "answer": "Garden",
+        "hint": "My bed grows flowers, not for sleep."
+    },
+    {
+        "question": "I have a loop, but no belt. I have a hook, but no fish. I'm hung, but not a picture. What am I?",
+        "answer": "Hanger",
+        "hint": "My loop holds clothes, not ties."
+    },
+    {
+        "question": "I have a pin, but no seam. I have a ridge, but no cliff. I'm rolled, but not a ball. What am I?",
         "answer": "Roller",
         "hint": "My pin spreads paint, not fastens."
     },
     {
-        "question": "I have a band, but no orchestra. I have a clasp, but no bag. I’m stretched, but not a rubber. What am I?",
+        "question": "I have a band, but no orchestra. I have a clasp, but no bag. I'm stretched, but not a rubber. What am I?",
         "answer": "Garter",
         "hint": "My band holds stockings, not instruments."
+    },
+    {
+        "question": "I have a bell, but don't ring. I have a saddle, but no horse. I'm ridden, but not alive. What am I?",
+        "answer": "Bicycle",
+        "hint": "My bell is for signaling, but I don't chime on my own."
+    },
+    {
+        "question": "I have a gate, but no fence. I have a terminal, but no end. I'm busy, but not a city. What am I?",
+        "answer": "Airport",
+        "hint": "My gate is for boarding, not enclosing."
+    },
+    {
+        "question": "I have a chain, but no lock. I have gears, but no clock. I move, but I'm not a car. What am I?",
+        "answer": "Bicycle",
+        "hint": "My chain drives my wheels, not secures anything."
+    },
+    {
+        "question": "I have a frame, but no picture. I have lenses, but no camera. I'm worn, but not a hat. What am I?",
+        "answer": "Glasses",
+        "hint": "My lenses help you see, not capture images."
+    },
+    {
+        "question": "I have a bar, but no drink. I have a code, but no secret. I'm scanned, but not a book. What am I?",
+        "answer": "Barcode",
+        "hint": "My bars are lines for machines to read."
+    },
+    {
+        "question": "I have a field, but no grass. I have a goal, but no game. I'm studied, but not a book. What am I?",
+        "answer": "Science",
+        "hint": "My field is a branch of knowledge, not a meadow."
+    },
+    {
+        "question": "I have a seal, but no envelope. I have a flap, but no wing. I'm mailed, but not a letter. What am I?",
+        "answer": "Package",
+        "hint": "My seal keeps contents secure, not a stamp."
+    },
+    {
+        "question": "I have a coil, but no wire. I have a twist, but no dance. I'm edible, but not a fruit. What am I?",
+        "answer": "Pretzel",
+        "hint": "My coil is baked dough, not metal."
+    },
+    {
+        "question": "I have a bolt, but no thunder. I have a strike, but no match. I'm played, but not a card. What am I?",
+        "answer": "Bowling",
+        "hint": "My strike is a score, not a spark."
+    },
+    {
+        "question": "I have a disc, but no player. I have a ring, but no finger. I'm thrown, but not a ball. What am I?",
+        "answer": "Frisbee",
+        "hint": "My disc soars through the air, not spins music."
+    },
+    {
+        "question": "I have a coil, but no spring. I have a wick, but no candle. I'm lit, but not a lamp. What am I?",
+        "answer": "Incense",
+        "hint": "My coil burns to scent, not bounce."
+    },
+    {
+        "question": "I have a horn, but no goat. I have a wheel, but no car. I'm steered, but not a ship. What am I?",
+        "answer": "Tractor",
+        "hint": "My horn warns, not plays music."
+    },
+    {
+        "question": "I have a lens, but no scope. I have a frame, but no art. I'm looked through, but not a window. What am I?",
+        "answer": "Monocle",
+        "hint": "My lens aids one eye, not a camera."
+    },
+    {
+        "question": "I have a band, but no drummer. I have a loop, but no hoop. I'm stretched, but not a muscle. What am I?",
+        "answer": "Elastic",
+        "hint": "My band snaps back, not plays tunes."
+    },
+    {
+        "question": "I have a web, but no silk. I have a node, but no rope. I'm connected, but not a chain. What am I?",
+        "answer": "Network",
+        "hint": "My web links devices, not traps flies."
+    },
+    {
+        "question": "I have a vault, but no treasure. I have a dome, but no sky. I'm arched, but not a bridge. What am I?",
+        "answer": "Ceiling",
+        "hint": "My vault is an architectural curve."
+    },
+    {
+        "question": "I have a strap, but no bag. I have a buckle, but no belt. I'm worn, but not a watch. What am I?",
+        "answer": "Sandals",
+        "hint": "My strap secures feet, not carries."
+    },
+    {
+        "question": "I have a core, but no seed. I have a shell, but no nut. I'm charged, but not a battery. What am I?",
+        "answer": "Reactor",
+        "hint": "My core powers, not grows."
+    },
+    {
+        "question": "I have keys, but no locks. I have space, but no room. You can enter, but not escape. What am I?",
+        "answer": "Keyboard",
+        "hint": "I'm used to type, not to open or close."
+    },
+    {
+        "question": "I have a shell, but no turtle. I have a pearl, but no oyster. I'm worn, but not clothes. What am I?",
+        "answer": "Necklace",
+        "hint": "My shell is a decorative casing, not a home."
+    },
+    {
+        "question": "I have a web, but no spider. I have links, but no chains. I'm vast, but not an ocean. What am I?",
+        "answer": "Internet",
+        "hint": "My web connects information, not traps prey."
+    },
+    {
+        "question": "I have a pitch, but no song. I have a base, but no foundation. I'm played, but not an instrument. What am I?",
+        "answer": "Baseball",
+        "hint": "My pitch is thrown, not sung."
+    },
+    {
+        "question": "I have a seal, but no animal. I have a stamp, but no post. I'm official, but not a law. What am I?",
+        "answer": "Passport",
+        "hint": "My seal proves your identity, not a creature."
+    },
+    {
+        "question": "I have a port, but no ship. I have a drive, but no car. I'm plugged in, but not a lamp. What am I?",
+        "answer": "Computer",
+        "hint": "My port connects devices, not harbors vessels."
+    },
+    {
+        "question": "I have a crown, but no head. I have a stem, but no flower. I'm edible, but not a fruit. What am I?",
+        "answer": "Broccoli",
+        "hint": "My crown is green and eaten, not worn."
+    },
+    {
+        "question": "I have a coil, but no snake. I have a spring, but no water. I'm soft, but not a pillow. What am I?",
+        "answer": "Mattress",
+        "hint": "My coils support your sleep, not slither."
+    },
+    {
+        "question": "I have a gate, but no garden. I have a latch, but no door. I'm carried, but not a bag. What am I?",
+        "answer": "Suitcase",
+        "hint": "My gate secures your belongings, not a yard."
+    },
+    {
+        "question": "I have a wing, but no bird. I have a flap, but no door. I fly, but I'm not alive. What am I?",
+        "answer": "Airplane",
+        "hint": "My wing lifts me skyward, not flaps."
+    },
+    {
+        "question": "I have a crown, but no jewel. I have a base, but no stand. I'm tall, but not a tower. What am I?",
+        "answer": "Mountain",
+        "hint": "My crown is a peak, not a gem."
+    },
+    {
+        "question": "I have a tape, but no music. I have a roll, but no bread. I'm sticky, but not a candy. What am I?",
+        "answer": "Adhesive",
+        "hint": "My tape binds things, not plays songs."
+    },
+    {
+        "question": "I have a band, but no ring. I have a clasp, but no lock. I'm worn, but not a shoe. What am I?",
+        "answer": "Bracelet",
+        "hint": "My band adorns your wrist, not your finger."
+    },
+    {
+        "question": "I have a loop, but no knot. I have a belt, but no buckle. I'm moving, but not a car. What am I?",
+        "answer": "Conveyor",
+        "hint": "My loop carries goods, not ties rope."
+    },
+    {
+        "question": "I have a spine, but no back. I have a cover, but no blanket. I'm read, but not a sign. What am I?",
+        "answer": "Magazine",
+        "hint": "My spine holds pages, not bones."
+    },
+    {
+        "question": "I have a string, but no kite. I have a bead, but no necklace. I'm worn, but not a scarf. What am I?",
+        "answer": "Bracelet",
+        "hint": "My string holds charms, not flies."
+    },
+    {
+        "question": "I have a pin, but no badge. I have a clip, but no paper. I'm worn, but not a tie. What am I?",
+        "answer": "Cufflink",
+        "hint": "My pin fastens sleeves, not decorates."
+    },
+    {
+        "question": "I have a seal, but no wax. I have a flap, but no tent. I'm sent, but not a message. What am I?",
+        "answer": "Envelope",
+        "hint": "My seal closes paper, not a contract."
+    },
+    {
+        "question": "I have a heart, but no pulse. I'm green, but not alive. I'm eaten, but not meat. What am I?",
+        "answer": "Artichoke",
+        "hint": "My center is named like an organ, but it's a vegetable."
+    },
+    {
+        "question": "I have a crown, but no queen. I have leaves, but no branches. I'm green, but not a tree. What am I?",
+        "answer": "Pineapple",
+        "hint": "My crown is a spiky top, not a royal symbol."
+    },
+    {
+        "question": "I have a vault, but no money. I have a beam, but no light. I'm active, but not a person. What am I?",
+        "answer": "Gymnasium",
+        "hint": "My vault is for jumping, not storing cash."
+    },
+    {
+        "question": "I have a case, but no trial. I have a strap, but no belt. I'm carried, but not a purse. What am I?",
+        "answer": "Briefcase",
+        "hint": "My case holds documents, not a courtroom."
+    },
+    {
+        "question": "I have a pool, but no water. I have a cue, but no question. I'm played, but not a song. What am I?",
+        "answer": "Billiards",
+        "hint": "My pool is a table, not a swim."
+    },
+    {
+        "question": "I have a chord, but no music. I have a plug, but no sink. I'm electric, but not a light. What am I?",
+        "answer": "Appliance",
+        "hint": "My chord powers my function, not a melody."
+    },
+    {
+        "question": "I have a lens, but no glasses. I have a beam, but no flashlight. I'm bright, but not a star. What am I?",
+        "answer": "Projector",
+        "hint": "My lens casts images, not corrects vision."
+    },
+    {
+        "question": "I have a blade, but no grass. I have a shaft, but no spear. I'm spun, but not a wheel. What am I?",
+        "answer": "Propeller",
+        "hint": "My blade drives a plane, not cuts."
+    },
+    {
+        "question": "I have a gate, but no wall. I have a latch, but no lock. I'm opened, but not a book. What am I?",
+        "answer": "Briefcase",
+        "hint": "My gate secures papers, not a yard."
+    },
+    {
+        "question": "I have a frame, but no photo. I have a stand, but no legs. I'm watched, but not a clock. What am I?",
+        "answer": "Television",
+        "hint": "My frame holds a screen, not a picture."
+    },
+    {
+        "question": "I have a brush, but no paint. I have a handle, but no door. I'm used, but not a tool. What am I?",
+        "answer": "Toothbrush",
+        "hint": "My brush cleans teeth, not canvases."
+    },
+    {
+        "question": "I have a vault, but no bank. I have a beam, but no roof. I'm jumped, but not a rope. What am I?",
+        "answer": "Gymnastics",
+        "hint": "My vault is an apparatus, not a safe."
+    },
+    {
+        "question": "I have a frame, but no window. I have a seat, but no chair. I'm ridden, but not a horse. What am I?",
+        "answer": "Motorcycle",
+        "hint": "My frame supports wheels, not glass."
+    },
+    {
+        "question": "I have a key, but no door. I have a ridge, but no hill. I'm pressed, but not a button. What am I?",
+        "answer": "Typewriter",
+        "hint": "My key types letters, not unlocks."
+    },
+    {
+        "question": "I have a coil, but no spiral. I have a tube, but no straw. I'm squeezed, but not a fruit. What am I?",
+        "answer": "Toothpaste",
+        "hint": "My coil holds paste, not unwinds."
+    },
+    {
+        "question": "I have a lens, but no telescope. I have a slide, but no playground. I'm viewed, but not a screen. What am I?",
+        "answer": "Microscope",
+        "hint": "My lens magnifies tiny worlds."
+    },
+    {
+        "question": "I have a ridge, but no mountain. I have a valley, but no river. I'm small, but not a pebble. What am I?",
+        "answer": "Fingerprint",
+        "hint": "My ridges are on your skin, not a landscape."
+    },
+    {
+        "question": "I have a head, but no crown. I have a shaft, but no mine. I'm turned, but not a knob. What am I?",
+        "answer": "Screwdriver",
+        "hint": "My head fits a slot, not wears a crown."
     }
 ]
