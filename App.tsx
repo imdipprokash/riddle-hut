@@ -5,7 +5,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { RootSiblingParent } from 'react-native-root-siblings';
 import HomeSrc from './src/Home/HomeSrc';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import Header from './components/Header';
 import PlaySrc from './src/PlaySrc/PlaySrc';
 import BannerAds from './components/BannerAds';
 import { Provider } from 'react-redux';
@@ -13,6 +12,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { persistor, store } from './src/store';
 import SolveRiddle from './src/SolveRiddle/SolveRiddle';
 import EarnSrc from './src/Earn/EarnSrc';
+import levels from './src/show-levels/Levels';
 
 type Props = {}
 
@@ -46,6 +46,7 @@ const App = (props: Props) => {
                     <Stack.Screen name="PlaySrc" component={PlaySrc} />
                     <Stack.Screen name="SolveRiddle" component={SolveRiddle} />
                     <Stack.Screen name="EarnSrc" component={EarnSrc} />
+                    <Stack.Screen name="levels" component={levels} />
                   </Stack.Navigator>
                 </NavigationContainer>
               </RootSiblingParent>

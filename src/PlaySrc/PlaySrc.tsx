@@ -1,22 +1,37 @@
-import { StyleSheet, Text, View, TextInput, Image, Pressable, Animated, Button, KeyboardAvoidingView } from 'react-native'
-import LottieView from 'lottie-react-native'
-import React, { useRef, useState, useEffect } from 'react'
-import { hp, Keyword, wp } from '../../helper/contant'
-import { showModal } from '../../components/RootModal'
-import WinModal from '../../components/WinModal'
-import RiddleList from "../../data/Riddle.json"
-import FailedModal from '../../components/FailedModal'
 import {
-  RewardedAd, RewardedAdEventType, TestIds, RewardedInterstitialAd,
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Image,
+  Pressable,
+  Animated,
+  Button,
+  KeyboardAvoidingView,
+} from 'react-native';
+import LottieView from 'lottie-react-native';
+import React, {useRef, useState, useEffect} from 'react';
+import {hp, Keyword, wp} from '../../helper/constant';
+import {showModal} from '../../components/RootModal';
+import WinModal from '../../components/WinModal';
+import RiddleList from '../../data/Riddle.json';
+import FailedModal from '../../components/FailedModal';
+import {
+  RewardedAd,
+  RewardedAdEventType,
+  TestIds,
+  RewardedInterstitialAd,
 } from 'react-native-google-mobile-ads';
-import HintModal from '../../components/HintModal'
-import ShowHint from '../../components/ShowHint'
-import { useSelector, useDispatch } from 'react-redux'
-import { RootState, AppDispatch } from '../store'
-import { increment } from '../store/slices/counterSlice'
-import Header from '../../components/Header'
+import HintModal from '../../components/HintModal';
+import ShowHint from '../../components/ShowHint';
+import {useSelector, useDispatch} from 'react-redux';
+import {RootState, AppDispatch} from '../store';
+import {increment} from '../store/slices/counterSlice';
+import Header from '../../components/Header';
 
-const adUnitId = __DEV__ ? TestIds.REWARDED : 'ca-app-pub-3346761957556908/8953206413';
+const adUnitId = __DEV__
+  ? TestIds.REWARDED
+  : 'ca-app-pub-3346761957556908/8953206413';
 const adUnitIdInRe = __DEV__
   ? TestIds.REWARDED_INTERSTITIAL
   : 'ca-app-pub-3346761957556908/4881024062';
@@ -24,21 +39,24 @@ const adUnitIdInRe = __DEV__
 const rewarded = RewardedAd.createForAdRequest(adUnitId, {
   keywords: Keyword,
 });
-const rewardedInterstitial = RewardedInterstitialAd.createForAdRequest(adUnitIdInRe, {
-  keywords: Keyword,
-});
+const rewardedInterstitial = RewardedInterstitialAd.createForAdRequest(
+  adUnitIdInRe,
+  {
+    keywords: Keyword,
+  },
+);
 
-type Props = {}
+type Props = {};
 
 const PlaySrc = (props: Props) => {
-
   const value = useSelector((state: RootState) => state.counter.value);
   const dispatch = useDispatch<AppDispatch>();
 
-
-  const [Riddle, setRiddle] = useState(RiddleList[value])
-  const [keyValueStore, setKeyValueStore] = useState<Record<string, string>>({});
-  const [showCelebration, setShowCelebration] = useState<boolean>(false)
+  const [Riddle, setRiddle] = useState(RiddleList[value]);
+  const [keyValueStore, setKeyValueStore] = useState<Record<string, string>>(
+    {},
+  );
+  const [showCelebration, setShowCelebration] = useState<boolean>(false);
   const inputRefs = useRef<Record<string, TextInput | null>>({});
   const shakeAnimation = useRef(new Animated.Value(0)).current;
 
@@ -59,7 +77,7 @@ const PlaySrc = (props: Props) => {
             duration: 100,
             useNativeDriver: true,
           }),
-        ])
+        ]),
       ).start();
     };
 
@@ -68,11 +86,13 @@ const PlaySrc = (props: Props) => {
 
   const updateKeyValueStore = (key: string, value: string) => {
     // check if match with the answare
-    const isCorrect = `${Object.values(keyValueStore).join('') + value}`.toLowerCase() === Riddle.answer.toLowerCase();
+    const isCorrect =
+      `${Object.values(keyValueStore).join('') + value}`.toLowerCase() ===
+      Riddle.answer.toLowerCase();
 
     if (isCorrect) {
-      setKeyValueStore({})
-      Object.values(inputRefs.current).forEach((ref) => {
+      setKeyValueStore({});
+      Object.values(inputRefs.current).forEach(ref => {
         ref?.blur();
       });
 
@@ -83,16 +103,17 @@ const PlaySrc = (props: Props) => {
           message={Riddle.answer}
           onClose={() => {
             setShowCelebration(false);
-            onClose()
-            dispatch(increment())
+            onClose();
+            dispatch(increment());
           }}
         />
       ));
-
     } else {
       // check the length if not match clear ans
 
-      const checkLength = `${Object.values(keyValueStore).join('') + value}`.length === Riddle.answer.length;
+      const checkLength =
+        `${Object.values(keyValueStore).join('') + value}`.length ===
+        Riddle.answer.length;
       if (checkLength) {
         // wong ans
         showModal((onClose: () => void) => (
@@ -100,13 +121,13 @@ const PlaySrc = (props: Props) => {
             message={Riddle.answer}
             onClose={() => {
               setShowCelebration(false);
-              onClose()
-              setKeyValueStore({})
+              onClose();
+              setKeyValueStore({});
             }}
             ViewAds={() => {
               setShowCelebration(false);
-              onClose()
-              setKeyValueStore({})
+              onClose();
+              setKeyValueStore({});
               if (rewarded.loaded) {
                 rewarded.show();
               }
@@ -115,7 +136,6 @@ const PlaySrc = (props: Props) => {
         ));
       }
 
-
       setKeyValueStore(prev => ({
         ...prev,
         [key]: value,
@@ -123,12 +143,9 @@ const PlaySrc = (props: Props) => {
     }
   };
 
-
-
-
   useEffect(() => {
-    setRiddle(RiddleList[value])
-  }, [value])
+    setRiddle(RiddleList[value]);
+  }, [value]);
 
   useEffect(() => {
     if (showAns) {
@@ -137,15 +154,14 @@ const PlaySrc = (props: Props) => {
           message={Riddle.answer}
           onClose={() => {
             setShowCelebration(false);
-            setShowAns(false)
-            onClose()
-
+            setShowAns(false);
+            dispatch(increment());
+            onClose();
           }}
         />
       ));
-
     }
-  }, [showAns])
+  }, [showAns]);
 
   useEffect(() => {
     if (showHint) {
@@ -153,28 +169,25 @@ const PlaySrc = (props: Props) => {
         <ShowHint
           message={Riddle.hint}
           onClose={() => {
-            setShowHint(false)
-            onClose()
-
+            setShowHint(false);
+            onClose();
           }}
         />
       ));
-
     }
-  }, [showHint])
-
+  }, [showHint]);
 
   // Rewards ads
 
   useEffect(() => {
-    const unsubscribeLoaded = rewarded.addAdEventListener(RewardedAdEventType.LOADED, () => {
-
-    });
+    const unsubscribeLoaded = rewarded.addAdEventListener(
+      RewardedAdEventType.LOADED,
+      () => {},
+    );
     const unsubscribeEarned = rewarded.addAdEventListener(
       RewardedAdEventType.EARNED_REWARD,
       reward => {
-        dispatch(increment())
-        setShowAns(true)
+        setShowAns(true);
         setTimeout(() => {
           rewarded.load(); // Load the ad again after a short delay
         }, 1000);
@@ -191,19 +204,15 @@ const PlaySrc = (props: Props) => {
     };
   }, []);
 
-
-
   useEffect(() => {
     const unsubscribeLoaded = rewardedInterstitial.addAdEventListener(
       RewardedAdEventType.LOADED,
-      () => {
-
-      },
+      () => {},
     );
     const unsubscribeEarned = rewardedInterstitial.addAdEventListener(
       RewardedAdEventType.EARNED_REWARD,
       reward => {
-        setShowHint(true)
+        setShowHint(true);
         setTimeout(() => {
           rewardedInterstitial.load(); // Load the ad again after a short delay
         }, 1000);
@@ -220,43 +229,33 @@ const PlaySrc = (props: Props) => {
     };
   }, []);
 
-
-
-
-  // Hint 
+  // Hint
   const HintModalHandler = () => {
     showModal((onClose: () => void) => (
       <HintModal
         message={Riddle.answer}
         onClose={() => {
-          onClose()
+          onClose();
         }}
         ViewAds={() => {
-          onClose()
-          setKeyValueStore({})
+          onClose();
+          setKeyValueStore({});
           if (rewarded.loaded) {
             rewarded.show();
           }
         }}
         showInstAds={() => {
-
           if (rewardedInterstitial.loaded) {
-            rewardedInterstitial.show()
+            rewardedInterstitial.show();
           }
-          onClose()
+          onClose();
         }}
       />
     ));
-  }
-
-
-
-
-
+  };
 
   return (
-    <KeyboardAvoidingView behavior="padding" style={{ gap: hp(10) }}>
-      <Header />
+    <KeyboardAvoidingView behavior="padding" style={{gap: hp(10)}}>
       {/* show celebtation */}
       {showCelebration && (
         <LottieView
@@ -268,14 +267,15 @@ const PlaySrc = (props: Props) => {
         />
       )}
       {/* Show question */}
-      <View style={{ alignItems: 'flex-end', paddingHorizontal: wp(4), top: hp(3) }}>
+      <View
+        style={{alignItems: 'flex-end', paddingHorizontal: wp(4), top: hp(2)}}>
         <Pressable onPress={HintModalHandler}>
           <Animated.Image
             source={require('../../assets/icons/bulb.png')}
-            resizeMode='contain'
+            resizeMode="contain"
             style={{
-              width: wp(9),
-              height: hp(6),
+              width: wp(12),
+              height: hp(6.5),
               transform: [
                 {
                   rotate: shakeAnimation.interpolate({
@@ -289,32 +289,35 @@ const PlaySrc = (props: Props) => {
         </Pressable>
       </View>
 
-
       {/* Question  Container*/}
       <View style={styles.questionContainer}>
         {/* Level */}
-        <Text style={[styles.textStyle, { fontFamily: 'KanchenjungaBold', fontSize: wp(7) }]}>Riddle {value + 1}</Text>
+        <Text
+          style={[
+            styles.textStyle,
+            {fontFamily: 'KanchenjungaBold', fontSize: wp(7)},
+          ]}>
+          Riddle {value + 1}
+        </Text>
         {/* Question */}
         <Text style={styles.textStyle}>{Riddle.question}</Text>
       </View>
       {/* Answer input */}
-      <View style={{ flex: 1 }}>
+      <View style={{flex: 1}}>
         <View style={styles.ansView}>
           {Riddle.answer.split('').map((char, index) => (
             <View key={index} style={styles.charContainer}>
               <TextInput
-                style={[
-                  styles.inputStyle,
-                ]}
+                style={[styles.inputStyle]}
                 value={keyValueStore[index] || ''}
                 placeholder="_"
                 placeholderTextColor="#666"
                 maxLength={1}
-                ref={(ref) => {
+                ref={ref => {
                   inputRefs.current[index.toString()] = ref;
                 }}
-                onChangeText={(text) => {
-                  setKeyValueStore((prev) => ({
+                onChangeText={text => {
+                  setKeyValueStore(prev => ({
                     ...prev,
                     [index]: text,
                   }));
@@ -342,35 +345,31 @@ const PlaySrc = (props: Props) => {
           ))}
         </View>
       </View>
-
-
     </KeyboardAvoidingView>
-  )
-}
+  );
+};
 
-export default PlaySrc
+export default PlaySrc;
 
 const styles = StyleSheet.create({
-
   questionContainer: {
-    backgroundColor: "#f2f2f2",
+    backgroundColor: '#f2f2f2',
     marginHorizontal: wp(8),
     paddingHorizontal: wp(3),
     paddingVertical: hp(2),
     borderRadius: 8,
-    elevation: 10
+    elevation: 10,
   },
 
   textStyle: {
     fontSize: wp(6),
     fontFamily: 'KanchenjungaRegular',
     fontWeight: '600',
-    textAlign: "center",
+    textAlign: 'center',
     paddingHorizontal: wp(1),
-    color: '#000'
-
+    color: '#000',
   },
-  ansView: { flexDirection: 'row', gap: wp(2), alignSelf: 'center', },
+  ansView: {flexDirection: 'row', gap: wp(2), alignSelf: 'center'},
 
   inputStyle: {
     fontSize: wp(7.3),
@@ -380,7 +379,7 @@ const styles = StyleSheet.create({
     width: wp(10),
     height: hp(6.8),
     borderRadius: 4,
-    color: "#000",
+    color: '#000',
   },
   charContainer: {
     justifyContent: 'center',
@@ -390,7 +389,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#000',
     borderRadius: 4,
-    backgroundColor: '#fff1f2'
+    backgroundColor: '#fff1f2',
   },
   lottie: {
     position: 'absolute',
@@ -401,5 +400,4 @@ const styles = StyleSheet.create({
     zIndex: 1000,
     pointerEvents: 'none',
   },
-})
-
+});
