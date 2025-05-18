@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "996738798254",
-    "project_id": "riddle-hut",
-    "storage_bucket": "riddle-hut.firebasestorage.app"
+    "project_number": "834186052718",
+    "project_id": "riddle-ai-d98bc",
+    "storage_bucket": "riddle-ai-d98bc.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:996738798254:android:51a504f9409d26076dd33f",
+        "mobilesdk_app_id": "1:834186052718:android:bc19cfd1e23a0a24de927f",
         "android_client_info": {
           "package_name": "com.jdxpvt.riddlehutAI"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCSCRyQAmcAclztSlZDNBgYuUr4-Go07F0"
+          "current_key": "AIzaSyAuBgBwbllP1RvjtYwuvkgG1jLxKQCNszs"
         }
       ],
       "services": {
