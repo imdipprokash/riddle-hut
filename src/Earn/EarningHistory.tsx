@@ -1,12 +1,42 @@
-import {FlatList, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
-import {hp, wp} from '../../helper/constant';
+import {
+  ActivityIndicator,
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+import React, {useEffect} from 'react';
+import {formatDate, hp, wp} from '../../helper/constant';
+import {getEarningHistory} from '../../helper/Firebase';
 
 type Props = {};
 
+export interface ItemProps {
+  id: string;
+  question: string;
+  timestamp: Timestamp;
+  amount: number;
+  uid: string;
+}
+
+export interface Timestamp {
+  seconds: number;
+  nanoseconds: number;
+}
+
 const EarningHistory = (props: Props) => {
-  const tab1Data = ['Item 1', 'Item 2', 'Item 3'];
-  const _renderItem = ({item}: {item: string}) => (
+  const [data, setData] = React.useState<ItemProps[]>([]);
+  const [loading, setLoading] = React.useState<boolean>(true);
+  useEffect(() => {
+    if (loading) {
+      getEarningHistory().then((res: any) => {
+        setData(res);
+        setLoading(false);
+      });
+    }
+  }, [loading]);
+  //
+  const _renderItem = ({item}: {item: any}) => (
     <View style={styles?.riddleContainerView}>
       <View style={{flex: 1}}>
         <Text
@@ -15,9 +45,7 @@ const EarningHistory = (props: Props) => {
             fontSize: hp(2),
             fontFamily: 'KanchenjungaRegular',
           }}>
-          {/* {item} */}
-          Q. I have a ridge, but no mountain. I have a valley, but no river. I'm
-          small, but not a pebble. What am I?
+          Q. {item?.question}
         </Text>
         <View
           style={{
@@ -31,7 +59,7 @@ const EarningHistory = (props: Props) => {
               fontSize: hp(1.8),
               fontFamily: 'KanchenjungaRegular',
             }}>
-            18/05/2025 9:26 AM
+            {formatDate(item?.timestamp)}
           </Text>
           <Text
             numberOfLines={1}
@@ -40,14 +68,16 @@ const EarningHistory = (props: Props) => {
               fontFamily: 'KanchenjungaBold',
               color: 'darkgreen',
             }}>
-            + ₹0.25
+            + ₹{item?.amount}
           </Text>
         </View>
       </View>
     </View>
   );
 
-  return (
+  return loading ? (
+    <ActivityIndicator size={40} />
+  ) : (
     <FlatList
       contentContainerStyle={{
         width: wp(90),
@@ -56,7 +86,7 @@ const EarningHistory = (props: Props) => {
       }}
       showsHorizontalScrollIndicator={false}
       showsVerticalScrollIndicator={false}
-      data={tab1Data}
+      data={data}
       keyExtractor={(item, index) => index.toString()}
       renderItem={_renderItem}
     />

@@ -1,12 +1,44 @@
-import {FlatList, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
-import {hp, wp} from '../../helper/constant';
+import {
+  ActivityIndicator,
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+import React, {useEffect} from 'react';
+import {formatDate, hp, wp} from '../../helper/constant';
+import {getWithdrawHistory} from '../../helper/Firebase';
 
 type Props = {};
 
+export interface WithdrawHistoryProps {
+  id: string;
+  status: string;
+  payment_id: string;
+  timestamp: Timestamp;
+  amount: number;
+  uid: string;
+}
+
+interface Timestamp {
+  seconds: number;
+  nanoseconds: number;
+}
+
 const WithdrawHistory = (props: Props) => {
-  const tab1Data = ['Item 1', 'Item 2', 'Item 3'];
-  const _renderItem = ({item}: {item: string}) => (
+  const [data, setData] = React.useState<WithdrawHistoryProps[]>([]);
+  const [loading, setLoading] = React.useState<boolean>(true);
+  useEffect(() => {
+    if (loading) {
+      getWithdrawHistory().then((res: any) => {
+        console.log('Withdraw History', res);
+        setData(res);
+        setLoading(false);
+      });
+    }
+  }, [loading]);
+
+  const _renderItem = ({item}: {item: WithdrawHistoryProps}) => (
     <View style={styles?.riddleContainerView}>
       <View style={{flex: 1}}>
         <View
@@ -22,7 +54,7 @@ const WithdrawHistory = (props: Props) => {
               fontFamily: 'KanchenjungaRegular',
             }}>
             {/* {item} */}
-            UPI Id : xxxxxxxxx@upi
+            UPI Id : xxxx{item?.payment_id?.slice(-10)}
           </Text>
           <Text
             numberOfLines={1}
@@ -37,7 +69,7 @@ const WithdrawHistory = (props: Props) => {
               textAlign: 'center',
             }}>
             {/* {item} Pending / Failed / Success*/}
-            Pending
+            {item?.status || 'pending'}
           </Text>
         </View>
         <View
@@ -52,7 +84,7 @@ const WithdrawHistory = (props: Props) => {
               fontSize: hp(1.8),
               fontFamily: 'KanchenjungaRegular',
             }}>
-            18/05/2025 9:26 AM
+            {formatDate(item?.timestamp)}
           </Text>
           <Text
             numberOfLines={1}
@@ -61,14 +93,16 @@ const WithdrawHistory = (props: Props) => {
               fontFamily: 'KanchenjungaBold',
               color: 'red',
             }}>
-            - ₹10
+            - ₹{item?.amount}
           </Text>
         </View>
       </View>
     </View>
   );
 
-  return (
+  return loading ? (
+    <ActivityIndicator size={40} />
+  ) : (
     <FlatList
       contentContainerStyle={{
         width: wp(90),
@@ -77,7 +111,7 @@ const WithdrawHistory = (props: Props) => {
       }}
       showsHorizontalScrollIndicator={false}
       showsVerticalScrollIndicator={false}
-      data={tab1Data}
+      data={data || []}
       keyExtractor={(item, index) => index.toString()}
       renderItem={_renderItem}
     />

@@ -13,16 +13,19 @@ import {persistor, store} from './src/store';
 import SolveRiddle from './src/SolveRiddle/SolveRiddle';
 import EarnSrc from './src/Earn/EarnSrc';
 import Levels from './src/show-levels/Levels';
-import {handleAnonymousAuth} from './helper/Firebase';
+import {createUserInfo, signInAnonymously} from './helper/Firebase';
 
 type Props = {};
 
 const App = (props: Props) => {
+  useEffect(() => {
+    // Uncomment the following line to enable anonymous sign-in
+    signInAnonymously();
+    // Replace the following values with actual user data as needed
+    createUserInfo();
+  }, []);
   const Stack = createNativeStackNavigator();
 
-  useEffect(() => {
-    handleAnonymousAuth();
-  }, []);
   return (
     <ImageBackground
       style={{flex: 1, opacity: 1}}

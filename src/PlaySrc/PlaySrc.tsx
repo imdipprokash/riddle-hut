@@ -27,6 +27,7 @@ import ShowHint from '../../components/ShowHint';
 import {useSelector, useDispatch} from 'react-redux';
 import {RootState, AppDispatch} from '../store';
 import {increment} from '../store/slices/counterSlice';
+import {addEarningHistory, addPlayHistory} from '../../helper/Firebase';
 
 const adUnitId = __DEV__
   ? TestIds.REWARDED
@@ -96,6 +97,14 @@ const PlaySrc = (props: Props) => {
       });
 
       setShowCelebration(true);
+      addPlayHistory({
+        solvedQuestion: Riddle.question,
+        answer: Riddle.answer,
+        hint: Riddle.hint,
+      });
+
+      // Earn history
+      addEarningHistory({question: Riddle.question});
 
       showModal((onClose: () => void) => (
         <WinModal
@@ -148,6 +157,8 @@ const PlaySrc = (props: Props) => {
 
   useEffect(() => {
     if (showAns) {
+      setShowCelebration(true);
+
       showModal((onClose: () => void) => (
         <WinModal
           message={Riddle.answer}
@@ -156,6 +167,14 @@ const PlaySrc = (props: Props) => {
             setShowAns(false);
             dispatch(increment());
             onClose();
+            // Play history
+            addPlayHistory({
+              solvedQuestion: Riddle.question,
+              answer: Riddle.answer,
+              hint: Riddle.hint,
+            });
+            // Earn history
+            addEarningHistory({question: Riddle.question});
           }}
         />
       ));

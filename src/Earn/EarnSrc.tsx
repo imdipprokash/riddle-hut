@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {use, useEffect} from 'react';
 import {hp, wp} from '../../helper/constant';
 import {useState} from 'react';
 import EarningHistory from './EarningHistory';
@@ -14,22 +14,33 @@ import WithdrawHistory from './WithdrawHistory';
 import {showModal} from '../../components/RootModal';
 import WithdrawModal from './WithdrawModal';
 import ToastMsg from '../../components/ToastMsg';
+import {getAvailableAmount} from '../../helper/Firebase';
 
 type Props = {};
 
 const EarnSrc = (props: Props) => {
   const tabs = ['Earning History', 'Withdraw History'];
+  const [availableAmount, setAvailableAmount] = useState<any>(null);
+  const [reload, setReload] = useState(0);
+
+  useEffect(() => {
+    getAvailableAmount().then((res: any) => {
+      setAvailableAmount(res);
+    });
+  }, [reload]);
 
   const [activeTab, setActiveTab] = useState(0);
   const handleWithdraw = () => {
-    // showModal((onClose: any) => (
-    //   <WithdrawModal
-    //     message=""
-    //     onClose={() => {
-    //       onClose();
-    //     }}
-    //   />
-    // ));
+    showModal((onClose: any) => (
+      <WithdrawModal
+        maxAmount={availableAmount}
+        message=""
+        onClose={() => {
+          onClose();
+          setReload(reload + 1);
+        }}
+      />
+    ));
 
     // showModal((onClose: any) => (
     //   <ToastMsg
@@ -40,15 +51,15 @@ const EarnSrc = (props: Props) => {
     //     }}
     //   />
     // ));
-    showModal((onClose: any) => (
-      <ToastMsg
-        message="You have not enough balance to withdraw"
-        type="error"
-        onClose={() => {
-          onClose();
-        }}
-      />
-    ));
+    // showModal((onClose: any) => (
+    //   <ToastMsg
+    //     message="You have not enough balance to withdraw"
+    //     type="error"
+    //     onClose={() => {
+    //       onClose();
+    //     }}
+    //   />
+    // ));
   };
   return (
     <View style={{marginVertical: hp(2)}}>
@@ -56,7 +67,7 @@ const EarnSrc = (props: Props) => {
       <View style={styles.earningContainer}>
         <View style={{flexDirection: 'row', gap: wp(2)}}>
           <Text style={styles.normalTextStyle}>Total Earnings</Text>
-          <Text style={styles.title}>₹100</Text>
+          <Text style={styles.title}>₹{availableAmount}</Text>
         </View>
         <TouchableOpacity
           style={[styles.btnStyle, {backgroundColor: '#0284c7'}]}
