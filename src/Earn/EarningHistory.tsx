@@ -78,18 +78,19 @@ const EarningHistory = (props: Props) => {
   return loading ? (
     <ActivityIndicator size={40} />
   ) : (
-    <FlatList
-      contentContainerStyle={{
-        width: wp(90),
-        alignSelf: 'center',
-        height: hp(65),
-      }}
-      showsHorizontalScrollIndicator={false}
-      showsVerticalScrollIndicator={false}
-      data={data}
-      keyExtractor={(item, index) => index.toString()}
-      renderItem={_renderItem}
-    />
+    <View style={{height: hp(59)}}>
+      <FlatList
+        contentContainerStyle={{
+          width: wp(90),
+          alignSelf: 'center',
+        }}
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
+        data={data}
+        keyExtractor={(item, index) => item.timestamp.toString()}
+        renderItem={_renderItem}
+      />
+    </View>
   );
 };
 

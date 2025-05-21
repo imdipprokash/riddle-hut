@@ -1,6 +1,7 @@
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import {getUniqueId} from 'react-native-device-info';
+import riddles from '../data/Riddle.json';
 
 export const signInAnonymously = async () => {
   try {
@@ -32,25 +33,27 @@ export const createUserInfo = async (
   mobileNo?: string,
 ) => {
   const user = await signInAnonymously();
-
   const uid = user.uid;
-
   const deviceUniqueId = await getUniqueId();
 
   if (!uid) {
-    console.log('UID, UPI ID, and Mobile Number are required.');
+    console.log('UID is required.');
+    return;
   }
 
-  // Validate mobile number format
-  // if (!mobileNo || !/^\d{10}$/.test(mobileNo)) {
-  //   console.log('Invalid mobile number format.');
-  // }
+  // Check if a user with this deviceUniqueId already exists
+  const existingQuery = await firestore()
+    .collection('user_info')
+    .where('deviceId', '==', deviceUniqueId)
+    .get();
 
-  // Check if user already exists
-  const existingDoc = await firestore().collection('user_info').doc(uid).get();
-  if (existingDoc.exists()) {
-    console.log('User already exists.');
+  if (!existingQuery.empty) {
+    // Return the first existing user with this deviceId
+    const existingUser = existingQuery.docs[0].data();
+    console.log('User already exists for this device:', existingUser.uid);
+    return existingUser;
   }
+
   try {
     await firestore()
       .collection('user_info')
@@ -64,6 +67,13 @@ export const createUserInfo = async (
         created_at: firestore.FieldValue.serverTimestamp(),
       });
     console.log('User created successfully:', uid);
+    return {
+      uid,
+      current_level: currentLevel ?? 1,
+      upi_id: upiId || '',
+      mobile_no: mobileNo || '',
+      deviceId: deviceUniqueId || '',
+    };
   } catch (error) {
     console.error('Error creating user:', error);
     throw new Error('Something went wrong while saving user data.');
@@ -464,5 +474,45 @@ export const getAvailableAmount = async () => {
   } catch (error) {
     console.error('Error calculating available amount:', error);
     throw new Error('Failed to calculate available amount.');
+  }
+};
+
+const createRiddles = async () => {
+  const user = await signInAnonymously();
+  const uid = user.uid;
+
+  if (!uid) {
+    console.log('UID is required.');
+    return;
+  }
+
+  // Check if a user with this deviceUniqueId already exists
+  const existingQuery = await firestore().collection('riddles').get();
+
+  if (!existingQuery.empty) {
+    // Return the first existing user with this deviceId
+    const existingUser = existingQuery.docs[0].data();
+    console.log('User already exists for this device:', existingUser.uid);
+    return existingUser;
+  }
+
+  try {
+    riddles.map(async (riddle: any, index: number) => {
+      await firestore()
+        .collection('riddles')
+        .add({
+          id: index + 1,
+          ...riddle,
+          created_at: firestore.FieldValue.serverTimestamp(),
+        });
+      console.log('Riddle added', uid);
+    });
+
+    return {
+      uid,
+    };
+  } catch (error) {
+    console.error('Error creating user:', error);
+    throw new Error('Something went wrong while saving user data.');
   }
 };

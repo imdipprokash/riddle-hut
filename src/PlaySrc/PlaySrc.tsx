@@ -27,7 +27,11 @@ import ShowHint from '../../components/ShowHint';
 import {useSelector, useDispatch} from 'react-redux';
 import {RootState, AppDispatch} from '../store';
 import {increment} from '../store/slices/counterSlice';
-import {addEarningHistory, addPlayHistory} from '../../helper/Firebase';
+import {
+  addEarningHistory,
+  addPlayHistory,
+  updateUserInfo,
+} from '../../helper/Firebase';
 
 const adUnitId = __DEV__
   ? TestIds.REWARDED
@@ -49,10 +53,10 @@ const rewardedInterstitial = RewardedInterstitialAd.createForAdRequest(
 type Props = {};
 
 const PlaySrc = (props: Props) => {
-  const value = useSelector((state: RootState) => state.counter.value);
+  const riddleNo = useSelector((state: RootState) => state.counter.value);
   const dispatch = useDispatch<AppDispatch>();
 
-  const [Riddle, setRiddle] = useState(RiddleList[value]);
+  const [Riddle, setRiddle] = useState(RiddleList[riddleNo]);
   const [keyValueStore, setKeyValueStore] = useState<Record<string, string>>(
     {},
   );
@@ -152,8 +156,11 @@ const PlaySrc = (props: Props) => {
   };
 
   useEffect(() => {
-    setRiddle(RiddleList[value]);
-  }, [value]);
+    setRiddle(RiddleList[riddleNo]);
+    updateUserInfo({current_level: Number(riddleNo)}).then((res: any) => {
+      console.log(res);
+    });
+  }, [riddleNo]);
 
   useEffect(() => {
     if (showAns) {
@@ -175,6 +182,7 @@ const PlaySrc = (props: Props) => {
             });
             // Earn history
             addEarningHistory({question: Riddle.question});
+            // update user info
           }}
         />
       ));
@@ -315,7 +323,7 @@ const PlaySrc = (props: Props) => {
             styles.textStyle,
             {fontFamily: 'KanchenjungaBold', fontSize: wp(7)},
           ]}>
-          Riddle {value + 1}
+          Riddle {riddleNo + 1}
         </Text>
         {/* Question */}
         <Text style={styles.textStyle}>{Riddle.question}</Text>
