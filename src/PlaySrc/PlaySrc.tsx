@@ -27,7 +27,6 @@ import ShowHint from '../../components/ShowHint';
 import {useSelector, useDispatch} from 'react-redux';
 import {RootState, AppDispatch} from '../store';
 import {increment} from '../store/slices/counterSlice';
-import Header from '../../components/Header';
 
 const adUnitId = __DEV__
   ? TestIds.REWARDED

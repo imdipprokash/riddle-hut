@@ -13,6 +13,7 @@ import EarningHistory from './EarningHistory';
 import WithdrawHistory from './WithdrawHistory';
 import {showModal} from '../../components/RootModal';
 import WithdrawModal from './WithdrawModal';
+import ToastMsg from '../../components/ToastMsg';
 
 type Props = {};
 
@@ -21,10 +22,28 @@ const EarnSrc = (props: Props) => {
 
   const [activeTab, setActiveTab] = useState(0);
   const handleWithdraw = () => {
-    console.log('Hlw');
+    // showModal((onClose: any) => (
+    //   <WithdrawModal
+    //     message=""
+    //     onClose={() => {
+    //       onClose();
+    //     }}
+    //   />
+    // ));
+
+    // showModal((onClose: any) => (
+    //   <ToastMsg
+    //     message="You have successfully withdrawn ₹0.25"
+    //     type="success"
+    //     onClose={() => {
+    //       onClose();
+    //     }}
+    //   />
+    // ));
     showModal((onClose: any) => (
-      <WithdrawModal
-        message=""
+      <ToastMsg
+        message="You have not enough balance to withdraw"
+        type="error"
         onClose={() => {
           onClose();
         }}

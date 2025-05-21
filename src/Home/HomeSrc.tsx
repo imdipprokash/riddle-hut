@@ -68,7 +68,7 @@ const HomeSrc = (props: Props) => {
         <Btn
           title={'Show Levels'}
           onPress={() => {
-            nav.navigate('levels');
+            nav.navigate('Levels');
           }}
           style={{backgroundColor: '#0284c7'}}
         />

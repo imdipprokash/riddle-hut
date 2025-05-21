@@ -12,7 +12,7 @@ import {PersistGate} from 'redux-persist/integration/react';
 import {persistor, store} from './src/store';
 import SolveRiddle from './src/SolveRiddle/SolveRiddle';
 import EarnSrc from './src/Earn/EarnSrc';
-import levels from './src/show-levels/Levels';
+import Levels from './src/show-levels/Levels';
 import {handleAnonymousAuth} from './helper/Firebase';
 
 type Props = {};
@@ -57,7 +57,7 @@ const App = (props: Props) => {
                     <Stack.Screen name="PlaySrc" component={PlaySrc} />
                     <Stack.Screen name="SolveRiddle" component={SolveRiddle} />
                     <Stack.Screen name="EarnSrc" component={EarnSrc} />
-                    <Stack.Screen name="levels" component={levels} />
+                    <Stack.Screen name="Levels" component={Levels} />
                   </Stack.Navigator>
                 </NavigationContainer>
               </RootSiblingParent>

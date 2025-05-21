@@ -1,5 +1,12 @@
 import React from 'react';
-import {TouchableOpacity, Text, StyleSheet, Image, View} from 'react-native';
+import {
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  Image,
+  View,
+  Animated,
+} from 'react-native';
 //@ts-ignore
 import PlayIcon from '../assets/icons/playIcon.png';
 import {hp, wp} from '../helper/constant';
@@ -10,20 +17,53 @@ interface BtnProps {
   textStyle?: object;
 }
 const Btn: React.FC<BtnProps> = ({title, onPress, style, textStyle}) => {
+  const scaleAnim = React.useRef(new Animated.Value(1)).current;
+
+  const handlePressIn = () => {
+    Animated.spring(scaleAnim, {
+      toValue: 0.95,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const handlePressOut = () => {
+    Animated.spring(scaleAnim, {
+      toValue: 1,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const handlePress = () => {
+    if (onPress) {
+      onPress();
+    }
+  };
+
   return (
-    <View style={styles.mainContainer}>
+    <Animated.View
+      style={[styles.mainContainer, {transform: [{scale: scaleAnim}]}]}>
       <TouchableOpacity
         activeOpacity={0.7}
         style={[styles.button, style]}
-        onPress={onPress}>
-        <Text style={[styles.text, textStyle]}>{title}</Text>
-        <Image
-          source={PlayIcon}
-          resizeMode="contain"
-          style={{width: 40, height: 40}}
-        />
+        onPressIn={handlePressIn}
+        onPressOut={handlePressOut}
+        onPress={handlePress}>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            width: '100%',
+          }}>
+          <Text style={[styles.text, textStyle]}>{title}</Text>
+          <Image
+            source={PlayIcon}
+            resizeMode="contain"
+            style={{width: 40, height: 40}}
+          />
+        </View>
       </TouchableOpacity>
-    </View>
+    </Animated.View>
   );
 };
 

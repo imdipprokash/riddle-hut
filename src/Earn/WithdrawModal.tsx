@@ -39,6 +39,7 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({onClose, message}) => {
               <TextInput
                 inputMode="numeric"
                 placeholder={'10'}
+                editable={false}
                 style={[
                   styles.title,
                   {

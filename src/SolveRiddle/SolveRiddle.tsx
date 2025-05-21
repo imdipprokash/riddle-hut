@@ -33,7 +33,18 @@ const SolveRiddle = (props: Props) => {
           renderItem={renderItem}
         />
       ) : (
-        <Text>Please play riddle</Text>
+        <Text
+          style={[
+            styles.titleStyle,
+            {
+              fontFamily: 'KanchenjungaBold',
+              textAlign: 'center',
+              fontSize: wp(5.2),
+              marginTop: hp(40),
+            },
+          ]}>
+          You didn't solve any riddles 😢 !
+        </Text>
       )}
     </View>
   );

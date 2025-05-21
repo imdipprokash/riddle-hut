@@ -1,22 +1,30 @@
 import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {hp, wp} from '../../helper/constant';
+import RiddleList from '../../data/Riddle.json';
 
 type Props = {};
 
-const levels = (props: Props) => {
-  const _renderItem = ({item}: {item: string}) => {
+const Levels = (props: Props) => {
+  const currentLevel = 1; // useSelector((state: RootState) => state.counter.value);
+  const _renderItem = ({
+    item,
+    index,
+  }: {
+    item: {question: string};
+    index: number;
+  }) => {
     return (
       <View
         style={{
-          padding: 4,
-          backgroundColor: item === 'hlw' ? 'lightgray' : 'lightblue', //
+          padding: 8,
+          backgroundColor: currentLevel < index + 1 ? 'lightgray' : 'lightblue', //
           width: wp(90),
           borderRadius: hp(1),
           paddingHorizontal: hp(2),
-          height: hp(8),
+          height: hp(10),
         }}>
-        {item === 'hlw' && (
+        {currentLevel < index + 1 && (
           <Image
             source={require('../../assets/icons/lock.png')}
             style={{
@@ -31,20 +39,20 @@ const levels = (props: Props) => {
         <Text
           numberOfLines={1}
           style={{
-            fontSize: hp(2),
+            fontSize: hp(2.2),
             fontFamily: 'KanchenjungaBold',
             textAlign: 'center',
           }}>
-          Level 1
+          Level {index + 1}
         </Text>
         <Text
           numberOfLines={1}
           style={{
             fontSize: hp(2),
+            marginTop: hp(0.8),
             fontFamily: 'KanchenjungaRegular',
           }}>
-          Q. I have a ridge, but no mountain. I have a valley, but no river. I'm
-          small, but not a pebble. What am I?
+          Q. {item?.question}
         </Text>
       </View>
     );
@@ -53,7 +61,8 @@ const levels = (props: Props) => {
     <View style={{flex: 1, alignItems: 'center'}}>
       <Text style={styles.title}>Levels</Text>
       <FlatList
-        data={['hlw', 'hlw1', 'hlw2']}
+        showsVerticalScrollIndicator={false}
+        data={RiddleList || []}
         contentContainerStyle={{gap: hp(1.5)}}
         renderItem={_renderItem}
       />
@@ -61,7 +70,7 @@ const levels = (props: Props) => {
   );
 };
 
-export default levels;
+export default Levels;
 
 const styles = StyleSheet.create({
   title: {
