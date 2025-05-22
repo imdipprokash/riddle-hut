@@ -42,6 +42,7 @@ const App = (props: Props) => {
 
   const checkVersionInfo = async () => {
     const version = await checkVersion();
+    console.log(version.needsUpdate);
     if (version.needsUpdate) {
       showModal(() => (
         <VersionModal
