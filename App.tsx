@@ -17,6 +17,8 @@ import {createUserInfo, signInAnonymously} from './helper/Firebase';
 import {useNetInfoInstance} from '@react-native-community/netinfo';
 import {showModal} from './components/RootModal';
 import ToastMsg from './components/ToastMsg';
+import {checkVersion} from 'react-native-check-version';
+import VersionModal from './components/VersionModal';
 
 type Props = {};
 
@@ -33,6 +35,22 @@ const App = (props: Props) => {
       ));
     }
   }, [netInfo]);
+
+  useEffect(() => {
+    checkVersionInfo();
+  }, []);
+
+  const checkVersionInfo = async () => {
+    const version = await checkVersion();
+    if (version.needsUpdate) {
+      showModal(() => (
+        <VersionModal
+          message={`New update available! Enjoy better performance and new features.`}
+          link={version.url}
+        />
+      ));
+    }
+  };
 
   useEffect(() => {
     // Uncomment the following line to enable anonymous sign-in
