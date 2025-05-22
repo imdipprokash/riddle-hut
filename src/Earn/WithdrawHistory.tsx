@@ -8,6 +8,7 @@ import {
 import React, {useEffect} from 'react';
 import {formatDate, hp, wp} from '../../helper/constant';
 import {getWithdrawHistory} from '../../helper/Firebase';
+import {BannerAd, BannerAdSize, TestIds} from 'react-native-google-mobile-ads';
 
 type Props = {};
 
@@ -24,6 +25,10 @@ interface Timestamp {
   seconds: number;
   nanoseconds: number;
 }
+
+const adUnitId = __DEV__
+  ? TestIds.BANNER
+  : 'ca-app-pub-3346761957556908/1398682855';
 
 const WithdrawHistory = (props: Props) => {
   const [data, setData] = React.useState<WithdrawHistoryProps[]>([]);
@@ -114,6 +119,17 @@ const WithdrawHistory = (props: Props) => {
         data={data || []}
         keyExtractor={(item, index) => item.timestamp.toString()}
         renderItem={_renderItem}
+        ListEmptyComponent={() => (
+          <View style={{alignItems: 'center', marginVertical: hp(2)}}>
+            <BannerAd
+              unitId={adUnitId}
+              size={BannerAdSize.MEDIUM_RECTANGLE}
+              requestOptions={{
+                requestNonPersonalizedAdsOnly: true,
+              }}
+            />
+          </View>
+        )}
       />
     </View>
   );

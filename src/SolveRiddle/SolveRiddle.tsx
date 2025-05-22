@@ -2,6 +2,7 @@ import {FlatList, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
 import {formatDate, hp, wp} from '../../helper/constant';
 import {getPlayHistory} from '../../helper/Firebase';
+import {BannerAd, BannerAdSize, TestIds} from 'react-native-google-mobile-ads';
 
 type Props = {};
 
@@ -30,6 +31,10 @@ const SolveRiddle = (props: Props) => {
       setPlayHistory(res);
     });
   }, []);
+
+  const adUnitId = __DEV__
+    ? TestIds.BANNER
+    : 'ca-app-pub-3346761957556908/1398682855';
 
   const renderItem = ({item}: {item: playHistoryProps}) => {
     return (
@@ -64,7 +69,22 @@ const SolveRiddle = (props: Props) => {
         data={playHistory}
         contentContainerStyle={{gap: hp(1)}}
         showsVerticalScrollIndicator={false}
-        renderItem={renderItem}
+        renderItem={({item, index}) => (
+          <>
+            {renderItem({item})}
+            {(index + 1) % 3 === 0 && index !== 0 ? (
+              <View style={{alignItems: 'center', marginVertical: hp(2)}}>
+                <BannerAd
+                  unitId={adUnitId}
+                  size={BannerAdSize.MEDIUM_RECTANGLE}
+                  requestOptions={{
+                    requestNonPersonalizedAdsOnly: true,
+                  }}
+                />
+              </View>
+            ) : null}
+          </>
+        )}
         keyExtractor={item => item.id}
         ListEmptyComponent={
           loading ? (

@@ -8,6 +8,7 @@ import {
 import React, {useEffect} from 'react';
 import {formatDate, hp, wp} from '../../helper/constant';
 import {getEarningHistory} from '../../helper/Firebase';
+import {BannerAd, BannerAdSize, TestIds} from 'react-native-google-mobile-ads';
 
 type Props = {};
 
@@ -23,6 +24,9 @@ export interface Timestamp {
   seconds: number;
   nanoseconds: number;
 }
+const adUnitId = __DEV__
+  ? TestIds.BANNER
+  : 'ca-app-pub-3346761957556908/1398682855';
 
 const EarningHistory = (props: Props) => {
   const [data, setData] = React.useState<ItemProps[]>([]);
@@ -45,7 +49,7 @@ const EarningHistory = (props: Props) => {
             fontSize: hp(2),
             fontFamily: 'KanchenjungaRegular',
           }}>
-          Q. {item?.question}
+          {item?.question}
         </Text>
         <View
           style={{
@@ -89,6 +93,17 @@ const EarningHistory = (props: Props) => {
         data={data}
         keyExtractor={(item, index) => item.timestamp.toString()}
         renderItem={_renderItem}
+        ListEmptyComponent={() => (
+          <View style={{alignItems: 'center', marginVertical: hp(2)}}>
+            <BannerAd
+              unitId={adUnitId}
+              size={BannerAdSize.MEDIUM_RECTANGLE}
+              requestOptions={{
+                requestNonPersonalizedAdsOnly: true,
+              }}
+            />
+          </View>
+        )}
       />
     </View>
   );

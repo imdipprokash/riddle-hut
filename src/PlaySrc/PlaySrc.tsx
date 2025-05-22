@@ -3,10 +3,8 @@ import {
   Text,
   View,
   TextInput,
-  Image,
   Pressable,
   Animated,
-  Button,
   KeyboardAvoidingView,
 } from 'react-native';
 import LottieView from 'lottie-react-native';
@@ -14,13 +12,14 @@ import React, {useRef, useState, useEffect} from 'react';
 import {hp, Keyword, wp} from '../../helper/constant';
 import {showModal} from '../../components/RootModal';
 import WinModal from '../../components/WinModal';
-import RiddleList from '../../data/Riddle.json';
 import FailedModal from '../../components/FailedModal';
 import {
   RewardedAd,
   RewardedAdEventType,
   TestIds,
   RewardedInterstitialAd,
+  InterstitialAd,
+  AdEventType,
 } from 'react-native-google-mobile-ads';
 import HintModal from '../../components/HintModal';
 import ShowHint from '../../components/ShowHint';
@@ -42,6 +41,10 @@ const adUnitIdInRe = __DEV__
   ? TestIds.REWARDED_INTERSTITIAL
   : 'ca-app-pub-3346761957556908/4881024062';
 
+const adUnitIdInterstitial = __DEV__
+  ? TestIds.INTERSTITIAL
+  : 'ca-app-pub-3346761957556908~9788610089';
+
 const rewarded = RewardedAd.createForAdRequest(adUnitId, {
   keywords: Keyword,
 });
@@ -51,6 +54,10 @@ const rewardedInterstitial = RewardedInterstitialAd.createForAdRequest(
     keywords: Keyword,
   },
 );
+
+const interstitial = InterstitialAd.createForAdRequest(adUnitIdInterstitial, {
+  keywords: Keyword,
+});
 
 type Props = {};
 
@@ -123,17 +130,20 @@ const PlaySrc = (props: Props) => {
 
       // Earn history
       addEarningHistory({question: Riddle.question});
-
-      showModal((onClose: () => void) => (
-        <WinModal
-          message={Riddle.answer}
-          onClose={() => {
-            setShowCelebration(false);
-            onClose();
-            dispatch(increment());
-          }}
-        />
-      ));
+      if (interstitial.loaded) {
+        interstitial.show();
+      } else {
+        showModal((onClose: () => void) => (
+          <WinModal
+            message={Riddle?.answer || ''}
+            onClose={() => {
+              setShowCelebration(false);
+              onClose();
+              dispatch(increment());
+            }}
+          />
+        ));
+      }
     } else {
       // check if the length of the answer is equal to the length of the riddle
       const checkLength =
@@ -305,6 +315,47 @@ const PlaySrc = (props: Props) => {
       />
     ));
   };
+
+  // Interstitial ads
+  useEffect(() => {
+    const unsubscribeLoaded = interstitial.addAdEventListener(
+      AdEventType.LOADED,
+      () => {},
+    );
+
+    const unsubscribeOpened = interstitial.addAdEventListener(
+      AdEventType.OPENED,
+      () => {},
+    );
+
+    const unsubscribeClosed = interstitial.addAdEventListener(
+      AdEventType.CLOSED,
+      () => {
+        interstitial.load(); // Load the ad again when it is closed
+
+        showModal((onClose: () => void) => (
+          <WinModal
+            message={Riddle?.answer || ''}
+            onClose={() => {
+              setShowCelebration(false);
+              onClose();
+              dispatch(increment());
+            }}
+          />
+        ));
+      },
+    );
+
+    // Start loading the interstitial straight away
+    interstitial.load();
+
+    // Unsubscribe from events on unmount
+    return () => {
+      unsubscribeLoaded();
+      unsubscribeOpened();
+      unsubscribeClosed();
+    };
+  }, []);
 
   return (
     <KeyboardAvoidingView behavior="padding" style={{gap: hp(10)}}>

@@ -2,6 +2,7 @@ import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
 import {hp, wp} from '../../helper/constant';
 import {getAllRiddles, getPlayHistory} from '../../helper/Firebase';
+import {BannerAd, BannerAdSize, TestIds} from 'react-native-google-mobile-ads';
 
 type Props = {};
 
@@ -18,6 +19,9 @@ interface CreatedAt {
   nanoseconds: number;
 }
 
+const adUnitId = __DEV__
+  ? TestIds.BANNER
+  : 'ca-app-pub-3346761957556908/1398682855';
 const Levels = (props: Props) => {
   const [riddleList, setRiddleList] = React.useState<riddlesProps[]>([]);
   const [playHistory, setPlayHistory] = React.useState<any[]>([]);
@@ -35,8 +39,7 @@ const Levels = (props: Props) => {
     });
   }, []);
 
-  const currentLevel = 1; // useSelector((state: RootState) => state.counter.value);
-  const _renderItem = ({
+  const RenderItem = ({
     item,
     index,
   }: {
@@ -97,8 +100,23 @@ const Levels = (props: Props) => {
         showsVerticalScrollIndicator={false}
         data={riddleList || []}
         contentContainerStyle={{gap: hp(1.5)}}
-        renderItem={_renderItem}
-        // keyExtractor={item => item.id}
+        renderItem={({item, index}) => (
+          <>
+            <RenderItem index={index} item={item} />
+            {(index + 1) % 5 === 0 && index !== 0 ? (
+              <View style={{alignItems: 'center', marginVertical: hp(2)}}>
+                <BannerAd
+                  unitId={adUnitId}
+                  size={BannerAdSize.MEDIUM_RECTANGLE}
+                  requestOptions={{
+                    requestNonPersonalizedAdsOnly: true,
+                  }}
+                />
+              </View>
+            ) : null}
+          </>
+        )}
+        keyExtractor={item => item.id.toString()}
         ListEmptyComponent={
           loading ? (
             <Text

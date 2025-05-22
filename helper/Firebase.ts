@@ -64,6 +64,12 @@ export const createUserInfo = async (
         mobile_no: mobileNo || '',
         created_at: firestore.FieldValue.serverTimestamp(),
       });
+    await firestore().collection('earning_history').add({
+      uid,
+      question: 'New User Bonus',
+      amount: 5, // Default amount, can be updated later
+      timestamp: firestore.FieldValue.serverTimestamp(),
+    });
     console.log('User created successfully:', uid);
     return {
       uid,

@@ -1,13 +1,6 @@
-import {
-  Button,
-  FlatList,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import React, {use, useEffect} from 'react';
-import {hp, wp} from '../../helper/constant';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, {useEffect} from 'react';
+import {hp, Keyword, wp} from '../../helper/constant';
 import {useState} from 'react';
 import EarningHistory from './EarningHistory';
 import WithdrawHistory from './WithdrawHistory';
@@ -15,8 +8,21 @@ import {showModal} from '../../components/RootModal';
 import WithdrawModal from './WithdrawModal';
 import ToastMsg from '../../components/ToastMsg';
 import {getAvailableAmount, getTotalEarnings} from '../../helper/Firebase';
+import {
+  TestIds,
+  InterstitialAd,
+  AdEventType,
+} from 'react-native-google-mobile-ads';
 
 type Props = {};
+
+const adUnitIdInterstitial = __DEV__
+  ? TestIds.INTERSTITIAL
+  : 'ca-app-pub-3346761957556908~9788610089';
+
+const interstitial = InterstitialAd.createForAdRequest(adUnitIdInterstitial, {
+  keywords: Keyword,
+});
 
 const EarnSrc = (props: Props) => {
   const tabs = ['Earning History', 'Withdraw History'];
@@ -32,7 +38,6 @@ const EarnSrc = (props: Props) => {
 
   useEffect(() => {
     getTotalEarnings().then((res: any) => {
-      console.log('Total Earnings', res);
       setTotalEarning(res);
     });
   }, []);
@@ -50,27 +55,64 @@ const EarnSrc = (props: Props) => {
         />
       ));
     } else {
-      showModal((onClose: any) => (
-        <WithdrawModal
-          maxAmount={availableAmount}
-          message=""
-          onClose={() => {
-            onClose();
-            setReload(reload + 1);
-            showModal((onClose: any) => (
-              <ToastMsg
-                message={`Your request for withdrawal of ₹${availableAmount} has been successfully submitted`}
-                type="success"
-                onClose={() => {
-                  onClose();
-                }}
-              />
-            ));
-          }}
-        />
-      ));
+      if (interstitial.loaded) {
+        interstitial.show();
+      } else {
+        showModal((onClose: any) => (
+          <WithdrawModal
+            maxAmount={availableAmount}
+            message=""
+            onClose={() => {
+              onClose();
+              setReload(reload + 1);
+            }}
+          />
+        ));
+      }
     }
   };
+
+  // Interstitial ads
+  useEffect(() => {
+    const unsubscribeLoaded = interstitial.addAdEventListener(
+      AdEventType.LOADED,
+      () => {},
+    );
+
+    const unsubscribeOpened = interstitial.addAdEventListener(
+      AdEventType.OPENED,
+      () => {},
+    );
+
+    const unsubscribeClosed = interstitial.addAdEventListener(
+      AdEventType.CLOSED,
+      () => {
+        interstitial.load(); // Load the ad again when it is closed
+
+        showModal((onClose: any) => (
+          <WithdrawModal
+            maxAmount={availableAmount}
+            message=""
+            onClose={() => {
+              onClose();
+              setReload(reload + 1);
+            }}
+          />
+        ));
+      },
+    );
+
+    // Start loading the interstitial straight away
+    interstitial.load();
+
+    // Unsubscribe from events on unmount
+    return () => {
+      unsubscribeLoaded();
+      unsubscribeOpened();
+      unsubscribeClosed();
+    };
+  }, []);
+
   return (
     <View style={{marginVertical: hp(2)}}>
       {/* show earnings */}

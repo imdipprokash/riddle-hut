@@ -62,6 +62,7 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({
     addWithdrawal(amount, userInfo?.upi_id).then((res: any) => {
       onClose();
       if (res?.success) {
+        // show success message and ads
         showModal((onClose: any) => (
           <ToastMsg
             message={`${res?.message} ₹${amount}`}
@@ -95,6 +96,8 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({
                 style={styles.TextInputStyle}
                 placeholder="Enter mobile no."
                 onChangeText={setMobileNo}
+                maxLength={10}
+                keyboardType="numeric"
               />
               <View style={{flexDirection: 'row', gap: wp(4)}}>
                 <TouchableOpacity
@@ -212,6 +215,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: wp(60),
     borderRadius: hp(1),
+    paddingHorizontal: wp(3),
   },
 });
 

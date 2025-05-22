@@ -14,10 +14,26 @@ import SolveRiddle from './src/SolveRiddle/SolveRiddle';
 import EarnSrc from './src/Earn/EarnSrc';
 import Levels from './src/show-levels/Levels';
 import {createUserInfo, signInAnonymously} from './helper/Firebase';
+import {useNetInfoInstance} from '@react-native-community/netinfo';
+import {showModal} from './components/RootModal';
+import ToastMsg from './components/ToastMsg';
 
 type Props = {};
 
 const App = (props: Props) => {
+  const {netInfo, refresh} = useNetInfoInstance();
+  useEffect(() => {
+    if (!netInfo.isConnected) {
+      showModal((onClose: () => void) => (
+        <ToastMsg
+          onClose={onClose}
+          type="error"
+          message="No Internet Connection"
+        />
+      ));
+    }
+  }, [netInfo]);
+
   useEffect(() => {
     // Uncomment the following line to enable anonymous sign-in
     signInAnonymously();

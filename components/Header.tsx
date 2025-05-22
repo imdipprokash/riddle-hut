@@ -7,16 +7,30 @@ import {
   View,
 } from 'react-native';
 import React, {useEffect, useRef} from 'react';
-import {hp, wp} from '../helper/constant';
+import {hp, Keyword, wp} from '../helper/constant';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../type';
+import {
+  InterstitialAd,
+  AdEventType,
+  TestIds,
+} from 'react-native-google-mobile-ads';
+
+const adUnitIdInterstitial = __DEV__
+  ? TestIds.INTERSTITIAL
+  : 'ca-app-pub-3346761957556908~9788610089';
+
+const interstitial = InterstitialAd.createForAdRequest(adUnitIdInterstitial, {
+  keywords: Keyword,
+});
 
 type Props = {showBackBtn?: boolean};
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 const Header = ({showBackBtn}: Props) => {
   const nav = useNavigation<NavigationProp>();
   const shakeAnimation = useRef(new Animated.Value(0)).current;
+
   useEffect(() => {
     const startShake = () => {
       Animated.loop(
@@ -37,13 +51,51 @@ const Header = ({showBackBtn}: Props) => {
 
     startShake();
   }, [shakeAnimation]);
+
+  // Interstitial ads
+  useEffect(() => {
+    const unsubscribeLoaded = interstitial.addAdEventListener(
+      AdEventType.LOADED,
+      () => {},
+    );
+
+    const unsubscribeOpened = interstitial.addAdEventListener(
+      AdEventType.OPENED,
+      () => {},
+    );
+
+    const unsubscribeClosed = interstitial.addAdEventListener(
+      AdEventType.CLOSED,
+      () => {
+        interstitial.load(); // Load the ad again when it is closed
+        nav.navigate('EarnSrc');
+      },
+    );
+
+    // Start loading the interstitial straight away
+    interstitial.load();
+
+    // Unsubscribe from events on unmount
+    return () => {
+      unsubscribeLoaded();
+      unsubscribeOpened();
+      unsubscribeClosed();
+    };
+  }, []);
+
   return (
     <View style={styles.mainStyle}>
       {showBackBtn ? (
         <></>
       ) : (
         <TouchableOpacity
-          onPress={() => nav.navigate('EarnSrc')}
+          onPress={() => {
+            if (interstitial.loaded) {
+              interstitial.show();
+            } else {
+              nav.navigate('EarnSrc');
+            }
+          }}
           style={{flexDirection: 'row', alignItems: 'center', gap: 4}}>
           <Animated.Image
             source={require('../assets/icons/bill.png')}
