@@ -2,16 +2,16 @@
   "migIndex": 1,
   "data": [
     {
-      "path": "src/assets/fonts/ComicNeue-Bold.ttf",
-      "sha1": "7909abf21cee16951e045b0a3d24955b3803475a"
+      "path": "assets/fonts/IBMPlexSans.ttf",
+      "sha1": "690050cb89d4e9e9067e5540f034081f7ba9b0db"
     },
     {
-      "path": "src/assets/fonts/JosefinSans-Bold.ttf",
-      "sha1": "57aae89112d94e577486ffa80b64e6f68efad405"
+      "path": "assets/fonts/KanchenjungaBold.ttf",
+      "sha1": "ed7c179a60222569f4dba46ff94d88979ad80187"
     },
     {
-      "path": "src/assets/fonts/JosefinSans-Regular.ttf",
-      "sha1": "6536e6e113fbc08c6b53ca4ce261015c462c8718"
+      "path": "assets/fonts/KanchenjungaRegular.ttf",
+      "sha1": "789bac1da19025d729b4ac1e50f28660e3f58267"
     }
   ]
 }

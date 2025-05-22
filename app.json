@@ -1,23 +1,8 @@
 {
-  "name": "WordGame",
-  "displayName": "WordGame",
-
+  "name": "riddle_hut",
+  "displayName": "riddle_hut",
   "react-native-google-mobile-ads": {
-    "android_app_id": "ca-app-pub-3346761957556908~7801012827"
-  },
-  "plugins": [
-    [
-      "react-native-fbsdk-next",
-      {
-        "appID": "1068001327948771",
-        "clientToken": "469143343707504",
-        "displayName": "RiddleHut",
-        "advertiserIDCollectionEnabled": false,
-        "autoLogAppEventsEnabled": false,
-        "isAutoInitEnabled": true,
-        "iosUserTrackingPermission": "This identifier will be used to deliver personalized ads to you."
-      }
-    ],
-    "react-native-fbads"
-  ]
+    "android_app_id": "ca-app-pub-3346761957556908~9788610089",
+    "ios_app_id": "ca-app-pub-xxxxxxxx~xxxxxxxx"
+  }
 }

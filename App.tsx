@@ -1,55 +1,93 @@
-import { StatusBar, StyleSheet, Text, View } from 'react-native';
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { AppColors } from './src/utils/constants';
-import MainSrc from './src/screens/MainSrc';
-import PlaySrc from './src/screens/GameSrc/PlaySrc';
-import { RootSiblingParent } from 'react-native-root-siblings';
-import AboutSrc from './src/screens/AboutSrc';
-import { Provider } from 'react-redux';
-import { persistor, store } from './src/redux/store';
-import { PersistGate } from 'redux-persist/integration/react';
-import AdsScreen from './src/components/ads/AdsScreen';
+import {ImageBackground, StatusBar, StyleSheet, Text, View} from 'react-native';
+import React, {useEffect} from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {RootSiblingParent} from 'react-native-root-siblings';
+import HomeSrc from './src/Home/HomeSrc';
+import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
+import PlaySrc from './src/PlaySrc/PlaySrc';
+import BannerAds from './components/BannerAds';
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/integration/react';
+import {persistor, store} from './src/store';
+import SolveRiddle from './src/SolveRiddle/SolveRiddle';
+import EarnSrc from './src/Earn/EarnSrc';
+import Levels from './src/show-levels/Levels';
+import {createUserInfo, signInAnonymously} from './helper/Firebase';
+import {useNetInfoInstance} from '@react-native-community/netinfo';
+import {showModal} from './components/RootModal';
+import ToastMsg from './components/ToastMsg';
 
 type Props = {};
 
 const App = (props: Props) => {
+  const {netInfo, refresh} = useNetInfoInstance();
+  useEffect(() => {
+    if (!netInfo.isConnected) {
+      showModal((onClose: () => void) => (
+        <ToastMsg
+          onClose={onClose}
+          type="error"
+          message="No Internet Connection"
+        />
+      ));
+    }
+  }, [netInfo]);
+
+  useEffect(() => {
+    // Uncomment the following line to enable anonymous sign-in
+    signInAnonymously();
+    // Replace the following values with actual user data as needed
+    createUserInfo();
+  }, []);
   const Stack = createNativeStackNavigator();
-  const Tab = createBottomTabNavigator();
 
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <RootSiblingParent>
-          <NavigationContainer>
-            <StatusBar
-              translucent
-              backgroundColor={'transparent'}
-              barStyle={'light-content'}
-            />
-            <Stack.Navigator
-              initialRouteName="MainSrc"
-              screenOptions={{
-                headerShown: false,
-                contentStyle: { backgroundColor: AppColors.bgColor },
-              }}
-            >
-              <Stack.Screen name="MainSrc" component={MainSrc} />
-              <Stack.Screen name="PlaySrc" component={PlaySrc} />
-              <Stack.Screen name="ResumeSrc" component={PlaySrc} />
-              <Stack.Screen name="AboutSrc" component={AboutSrc} />
-
-
-            </Stack.Navigator>
-            <View style={{ position: 'absolute', bottom: 1 }}>
-              <AdsScreen />
-            </View>
-          </NavigationContainer>
-        </RootSiblingParent>
-      </PersistGate>
-    </Provider>
+    <ImageBackground
+      style={{flex: 1, opacity: 1}}
+      source={require('./assets/imgs/bgImg.png')}
+      resizeMode="cover">
+      <SafeAreaProvider>
+        <SafeAreaView
+          style={{flex: 1}}
+          edges={['top', 'bottom', 'left', 'right']}>
+          {/* <Header /> */}
+          <Provider store={store}>
+            <PersistGate
+              loading={<Text>Loading...</Text>}
+              persistor={persistor}>
+              <RootSiblingParent>
+                <NavigationContainer>
+                  <StatusBar
+                    translucent
+                    backgroundColor={'transparent'}
+                    barStyle={'dark-content'}
+                  />
+                  <Stack.Navigator
+                    initialRouteName="MainSrc"
+                    screenOptions={{
+                      headerShown: false,
+                      contentStyle: {
+                        backgroundColor: 'transparent',
+                      },
+                      animation: 'slide_from_right', // Adding transition animation
+                    }}>
+                    <Stack.Screen name="MainSrc" component={HomeSrc} />
+                    <Stack.Screen name="PlaySrc" component={PlaySrc} />
+                    <Stack.Screen name="SolveRiddle" component={SolveRiddle} />
+                    <Stack.Screen name="EarnSrc" component={EarnSrc} />
+                    <Stack.Screen name="Levels" component={Levels} />
+                  </Stack.Navigator>
+                </NavigationContainer>
+              </RootSiblingParent>
+            </PersistGate>
+          </Provider>
+          <View>
+            <BannerAds />
+          </View>
+        </SafeAreaView>
+      </SafeAreaProvider>
+    </ImageBackground>
   );
 };
 
