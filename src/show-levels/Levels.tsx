@@ -1,11 +1,40 @@
 import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {hp, wp} from '../../helper/constant';
-import RiddleList from '../../data/Riddle.json';
+import {getAllRiddles, getPlayHistory} from '../../helper/Firebase';
 
 type Props = {};
 
+interface riddlesProps {
+  id: number;
+  hint: string;
+  created_at: CreatedAt;
+  question: string;
+  answer: string;
+}
+
+interface CreatedAt {
+  seconds: number;
+  nanoseconds: number;
+}
+
 const Levels = (props: Props) => {
+  const [riddleList, setRiddleList] = React.useState<riddlesProps[]>([]);
+  const [playHistory, setPlayHistory] = React.useState<any[]>([]);
+  const [loading, setLoading] = React.useState(false);
+  useEffect(() => {
+    setLoading(true);
+    getAllRiddles().then((res: any) => {
+      setLoading(false);
+
+      setRiddleList(res);
+    });
+
+    getPlayHistory().then((res: any) => {
+      setPlayHistory(res);
+    });
+  }, []);
+
   const currentLevel = 1; // useSelector((state: RootState) => state.counter.value);
   const _renderItem = ({
     item,
@@ -14,17 +43,21 @@ const Levels = (props: Props) => {
     item: {question: string};
     index: number;
   }) => {
+    const isSolved = playHistory.some(
+      (history: {solved_question: string}) =>
+        history.solved_question === item.question,
+    );
     return (
       <View
         style={{
           padding: 8,
-          backgroundColor: currentLevel < index + 1 ? 'lightgray' : 'lightblue', //
+          backgroundColor: isSolved ? 'lightblue' : 'lightgray', //
           width: wp(90),
           borderRadius: hp(1),
           paddingHorizontal: hp(2),
-          height: hp(10),
+          height: hp(12),
         }}>
-        {currentLevel < index + 1 && (
+        {!isSolved && (
           <Image
             source={require('../../assets/icons/lock.png')}
             style={{
@@ -32,7 +65,7 @@ const Levels = (props: Props) => {
               width: wp(7),
               height: hp(4),
               alignSelf: 'flex-end',
-              margin: 8,
+              margin: 20,
             }}
           />
         )}
@@ -62,9 +95,35 @@ const Levels = (props: Props) => {
       <Text style={styles.title}>Levels</Text>
       <FlatList
         showsVerticalScrollIndicator={false}
-        data={RiddleList || []}
+        data={riddleList || []}
         contentContainerStyle={{gap: hp(1.5)}}
         renderItem={_renderItem}
+        // keyExtractor={item => item.id}
+        ListEmptyComponent={
+          loading ? (
+            <Text
+              style={{
+                textAlign: 'center',
+                marginVertical: hp(2),
+                fontSize: hp(2.5),
+              }}>
+              Loading...
+            </Text>
+          ) : (
+            <Text
+              style={[
+                // styles.titleStyle,
+                {
+                  fontFamily: 'KanchenjungaBold',
+                  textAlign: 'center',
+                  fontSize: wp(5.2),
+                  marginTop: hp(40),
+                },
+              ]}>
+              You didn't solve any riddles 😢 !
+            </Text>
+          )
+        }
       />
     </View>
   );

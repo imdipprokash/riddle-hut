@@ -1,51 +1,97 @@
 import {FlatList, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
-import {useSelector} from 'react-redux';
-import {RootState} from '../store';
-import RiddleList from '../../data/Riddle.json';
-import {hp, wp} from '../../helper/constant';
+import React, {useEffect} from 'react';
+import {formatDate, hp, wp} from '../../helper/constant';
+import {getPlayHistory} from '../../helper/Firebase';
 
 type Props = {};
 
+interface playHistoryProps {
+  id: string;
+  timestamp: Timestamp;
+  hint: string;
+  solved_question: string;
+  answer: string;
+  uid: string;
+}
+
+interface Timestamp {
+  seconds: number;
+  nanoseconds: number;
+}
+
 const SolveRiddle = (props: Props) => {
-  const maxSolved = useSelector((state: RootState) => state.counter.maxSolved);
-  const itemIndex = Array.from({length: maxSolved}, (_, i) => i);
-  const renderItem = ({item}: any) => {
-    const riddle = RiddleList[item];
+  const [playHistory, setPlayHistory] = React.useState<playHistoryProps[]>([]);
+  const [loading, setLoading] = React.useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    getPlayHistory().then((res: any) => {
+      setLoading(false);
+      setPlayHistory(res);
+    });
+  }, []);
+
+  const renderItem = ({item}: {item: playHistoryProps}) => {
     return (
       <View style={styles.riddleContainer}>
-        <Text style={styles.titleStyle}>Q. {riddle.question}</Text>
+        <Text style={styles.titleStyle}>Q. {item?.solved_question || ''}</Text>
         <Text style={[styles.titleStyle, {fontSize: wp(4.5)}]}>
-          hint. {riddle.hint}
+          hint. {item?.hint || ''}
         </Text>
-        <Text style={[styles.titleStyle]}>Ans. {riddle.answer}</Text>
+        <Text style={[styles.titleStyle]}>Ans. {item?.answer || ''}</Text>
+        <Text style={[styles.titleStyle]}>
+          Time. {formatDate(item?.timestamp)}
+        </Text>
       </View>
     );
   };
 
   return (
     <View style={{flex: 1, paddingHorizontal: wp(5), paddingVertical: hp(3)}}>
-      {itemIndex.length > 0 ? (
-        <FlatList
-          data={itemIndex}
-          contentContainerStyle={{gap: hp(1)}}
-          showsVerticalScrollIndicator={false}
-          renderItem={renderItem}
-        />
-      ) : (
-        <Text
-          style={[
-            styles.titleStyle,
-            {
-              fontFamily: 'KanchenjungaBold',
-              textAlign: 'center',
-              fontSize: wp(5.2),
-              marginTop: hp(40),
-            },
-          ]}>
-          You didn't solve any riddles 😢 !
-        </Text>
-      )}
+      <Text
+        style={[
+          styles.titleStyle,
+          {
+            textAlign: 'center',
+            marginBottom: hp(0.8),
+            fontSize: hp(3),
+            fontFamily: 'KanchenjungaBold',
+          },
+        ]}>
+        Solved Riddles
+      </Text>
+      <FlatList
+        data={playHistory}
+        contentContainerStyle={{gap: hp(1)}}
+        showsVerticalScrollIndicator={false}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+        ListEmptyComponent={
+          loading ? (
+            <Text
+              style={{
+                textAlign: 'center',
+                marginVertical: hp(2),
+                fontSize: hp(2.5),
+              }}>
+              Loading...
+            </Text>
+          ) : (
+            <Text
+              style={[
+                styles.titleStyle,
+                {
+                  fontFamily: 'KanchenjungaBold',
+                  textAlign: 'center',
+                  fontSize: wp(5.2),
+                  marginTop: hp(40),
+                },
+              ]}>
+              You didn't solve any riddles 😢 !
+            </Text>
+          )
+        }
+      />
     </View>
   );
 };

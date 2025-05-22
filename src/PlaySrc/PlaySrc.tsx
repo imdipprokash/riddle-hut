@@ -30,6 +30,7 @@ import {increment} from '../store/slices/counterSlice';
 import {
   addEarningHistory,
   addPlayHistory,
+  getRiddleById,
   updateUserInfo,
 } from '../../helper/Firebase';
 
@@ -52,11 +53,24 @@ const rewardedInterstitial = RewardedInterstitialAd.createForAdRequest(
 
 type Props = {};
 
+export interface RiddleProps {
+  id: number;
+  hint: string;
+  created_at: CreatedAt;
+  answer: string;
+  question: string;
+}
+
+export interface CreatedAt {
+  seconds: number;
+  nanoseconds: number;
+}
+
 const PlaySrc = (props: Props) => {
   const riddleNo = useSelector((state: RootState) => state.counter.value);
   const dispatch = useDispatch<AppDispatch>();
 
-  const [Riddle, setRiddle] = useState(RiddleList[riddleNo]);
+  const [Riddle, setRiddle] = useState<RiddleProps>();
   const [keyValueStore, setKeyValueStore] = useState<Record<string, string>>(
     {},
   );
@@ -92,7 +106,7 @@ const PlaySrc = (props: Props) => {
     // check if match with the answare
     const isCorrect =
       `${Object.values(keyValueStore).join('') + value}`.toLowerCase() ===
-      Riddle.answer.toLowerCase();
+      Riddle?.answer.toLowerCase();
 
     if (isCorrect) {
       setKeyValueStore({});
@@ -121,11 +135,10 @@ const PlaySrc = (props: Props) => {
         />
       ));
     } else {
-      // check the length if not match clear ans
-
+      // check if the length of the answer is equal to the length of the riddle
       const checkLength =
         `${Object.values(keyValueStore).join('') + value}`.length ===
-        Riddle.answer.length;
+        Riddle?.answer.length;
       if (checkLength) {
         // wong ans
         showModal((onClose: () => void) => (
@@ -156,8 +169,14 @@ const PlaySrc = (props: Props) => {
   };
 
   useEffect(() => {
-    setRiddle(RiddleList[riddleNo]);
-    updateUserInfo({current_level: Number(riddleNo)}).then((res: any) => {
+    getRiddleById({id: riddleNo + 1}).then((res: any) => {
+      setRiddle(res[0]);
+      console.log('Riddle', res);
+    });
+    // check if the riddleNo is greater than the length of the riddles
+    // setRiddle(RiddleList[riddleNo]);
+    // update user info
+    updateUserInfo({current_level: Number(riddleNo + 1)}).then((res: any) => {
       console.log(res);
     });
   }, [riddleNo]);
@@ -168,7 +187,7 @@ const PlaySrc = (props: Props) => {
 
       showModal((onClose: () => void) => (
         <WinModal
-          message={Riddle.answer}
+          message={Riddle?.answer || ''}
           onClose={() => {
             setShowCelebration(false);
             setShowAns(false);
@@ -176,12 +195,12 @@ const PlaySrc = (props: Props) => {
             onClose();
             // Play history
             addPlayHistory({
-              solvedQuestion: Riddle.question,
-              answer: Riddle.answer,
-              hint: Riddle.hint,
+              solvedQuestion: Riddle?.question || '',
+              answer: Riddle?.answer || '',
+              hint: Riddle?.hint || '',
             });
             // Earn history
-            addEarningHistory({question: Riddle.question});
+            addEarningHistory({question: Riddle?.question || ''});
             // update user info
           }}
         />
@@ -193,7 +212,7 @@ const PlaySrc = (props: Props) => {
     if (showHint) {
       showModal((onClose: () => void) => (
         <ShowHint
-          message={Riddle.hint}
+          message={Riddle?.hint || ''}
           onClose={() => {
             setShowHint(false);
             onClose();
@@ -259,7 +278,7 @@ const PlaySrc = (props: Props) => {
   const HintModalHandler = () => {
     showModal((onClose: () => void) => (
       <HintModal
-        message={Riddle.answer}
+        message={Riddle?.answer || ''}
         onClose={() => {
           onClose();
         }}
@@ -326,12 +345,12 @@ const PlaySrc = (props: Props) => {
           Riddle {riddleNo + 1}
         </Text>
         {/* Question */}
-        <Text style={styles.textStyle}>{Riddle.question}</Text>
+        <Text style={styles.textStyle}>{Riddle?.question || ''}</Text>
       </View>
       {/* Answer input */}
       <View style={{flex: 1}}>
         <View style={styles.ansView}>
-          {Riddle.answer.split('').map((char, index) => (
+          {Riddle?.answer.split('').map((char, index) => (
             <View key={index} style={styles.charContainer}>
               <TextInput
                 style={[styles.inputStyle]}
