@@ -32,9 +32,8 @@ export const createUserInfo = async (
   upiId?: string,
   mobileNo?: string,
 ) => {
-  const deviceUniqueId = await getUniqueId();
   const uid = await getUniqueId();
-  if (!deviceUniqueId) {
+  if (!uid) {
     console.log('UID is required.');
     return;
   }
@@ -42,8 +41,10 @@ export const createUserInfo = async (
   // Check if a user with this deviceUniqueId already exists
   const existingQuery = await firestore()
     .collection('user_info')
-    .where('deviceId', '==', deviceUniqueId)
+    .where('uid', '==', uid)
     .get();
+
+  console.log('existingQuery', existingQuery.empty);
 
   if (!existingQuery.empty) {
     // Return the first existing user with this deviceId
@@ -57,8 +58,8 @@ export const createUserInfo = async (
       .collection('user_info')
       .doc(uid)
       .set({
-        uid: deviceUniqueId || '',
-        current_level: currentLevel ?? 1,
+        uid,
+        current_level: 1,
         upi_id: upiId || '',
         mobile_no: mobileNo || '',
         created_at: firestore.FieldValue.serverTimestamp(),
@@ -69,7 +70,6 @@ export const createUserInfo = async (
       current_level: currentLevel ?? 1,
       upi_id: upiId || '',
       mobile_no: mobileNo || '',
-      deviceId: deviceUniqueId || '',
     };
   } catch (error) {
     console.error('Error creating user:', error);

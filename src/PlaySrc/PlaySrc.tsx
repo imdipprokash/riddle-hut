@@ -26,11 +26,12 @@ import HintModal from '../../components/HintModal';
 import ShowHint from '../../components/ShowHint';
 import {useSelector, useDispatch} from 'react-redux';
 import {RootState, AppDispatch} from '../store';
-import {increment} from '../store/slices/counterSlice';
+import {increment, incrementBy} from '../store/slices/counterSlice';
 import {
   addEarningHistory,
   addPlayHistory,
   getRiddleById,
+  getUserInfo,
   updateUserInfo,
 } from '../../helper/Firebase';
 
@@ -67,9 +68,8 @@ export interface CreatedAt {
 }
 
 const PlaySrc = (props: Props) => {
-  const riddleNo = useSelector((state: RootState) => state.counter.value);
   const dispatch = useDispatch<AppDispatch>();
-
+  const riddleNo = useSelector((state: RootState) => state.counter.value);
   const [Riddle, setRiddle] = useState<RiddleProps>();
   const [keyValueStore, setKeyValueStore] = useState<Record<string, string>>(
     {},
@@ -168,15 +168,22 @@ const PlaySrc = (props: Props) => {
     }
   };
 
+  // get current level
+  useEffect(() => {
+    getUserInfo().then((res: any) => {
+      dispatch(incrementBy({value: res?.current_level || 1}));
+    });
+  }, []);
+
+  // Get riddle by id and update user info
   useEffect(() => {
     getRiddleById({id: riddleNo + 1}).then((res: any) => {
       setRiddle(res[0]);
-      console.log('Riddle', res);
+      console.log('Riddle', res, riddleNo);
     });
-    // check if the riddleNo is greater than the length of the riddles
-    // setRiddle(RiddleList[riddleNo]);
+
     // update user info
-    updateUserInfo({current_level: Number(riddleNo + 1)}).then((res: any) => {
+    updateUserInfo({current_level: Number(riddleNo) || 1}).then((res: any) => {
       console.log(res);
     });
   }, [riddleNo]);
