@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     borderWidth: 0.9,
     padding: 10,
     borderRadius: 8,
-    gap: hp(1.5),
+    gap: hp(1),
   },
   titleStyle: {
     fontSize: wp(5),

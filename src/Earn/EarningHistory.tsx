@@ -82,7 +82,7 @@ const EarningHistory = (props: Props) => {
   return loading ? (
     <ActivityIndicator size={40} />
   ) : (
-    <View style={{height: hp(59)}}>
+    <View>
       <FlatList
         contentContainerStyle={{
           width: wp(90),

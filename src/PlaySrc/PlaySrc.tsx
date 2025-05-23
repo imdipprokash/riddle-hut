@@ -33,6 +33,7 @@ import {
   getUserInfo,
   updateUserInfo,
 } from '../../helper/Firebase';
+import BannerAds from '../../components/BannerAds';
 
 const adUnitId = __DEV__
   ? TestIds.REWARDED
@@ -358,7 +359,7 @@ const PlaySrc = (props: Props) => {
   }, []);
 
   return (
-    <KeyboardAvoidingView behavior="padding" style={{gap: hp(10)}}>
+    <KeyboardAvoidingView behavior="padding" style={{gap: hp(10), flex: 1}}>
       {/* show celebtation */}
       {showCelebration && (
         <LottieView
@@ -447,6 +448,15 @@ const PlaySrc = (props: Props) => {
             </View>
           ))}
         </View>
+      </View>
+      {/* ads */}
+      <View
+        style={{
+          alignItems: 'center',
+          position: 'absolute',
+          bottom: 0,
+        }}>
+        <BannerAds />
       </View>
     </KeyboardAvoidingView>
   );

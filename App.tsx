@@ -101,9 +101,6 @@ const App = (props: Props) => {
               </RootSiblingParent>
             </PersistGate>
           </Provider>
-          <View>
-            <BannerAds />
-          </View>
         </SafeAreaView>
       </SafeAreaProvider>
     </ImageBackground>

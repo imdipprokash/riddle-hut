@@ -13,6 +13,7 @@ import {
   InterstitialAd,
   AdEventType,
 } from 'react-native-google-mobile-ads';
+import BannerAds from '../../components/BannerAds';
 
 type Props = {};
 
@@ -185,8 +186,13 @@ const EarnSrc = (props: Props) => {
             </TouchableOpacity>
           ))}
         </View>
-
-        {activeTab === 0 ? <EarningHistory /> : <WithdrawHistory />}
+        <View style={{height: hp(59.5)}}>
+          {activeTab === 0 ? <EarningHistory /> : <WithdrawHistory />}
+        </View>
+        {/* ads */}
+        <View>
+          <BannerAds />
+        </View>
       </>
     </View>
   );
