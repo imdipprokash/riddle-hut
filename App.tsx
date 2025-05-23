@@ -23,18 +23,18 @@ import VersionModal from './components/VersionModal';
 type Props = {};
 
 const App = (props: Props) => {
-  const {netInfo, refresh} = useNetInfoInstance();
-  useEffect(() => {
-    if (!netInfo.isConnected) {
-      showModal((onClose: () => void) => (
-        <ToastMsg
-          onClose={onClose}
-          type="error"
-          message="No Internet Connection"
-        />
-      ));
-    }
-  }, [netInfo]);
+  // const {netInfo, refresh} = useNetInfoInstance();
+  // useEffect(() => {
+  //   if (!netInfo.isConnected) {
+  //     showModal((onClose: () => void) => (
+  //       <ToastMsg
+  //         onClose={onClose}
+  //         type="error"
+  //         message="No Internet Connection"
+  //       />
+  //     ));
+  //   }
+  // }, [netInfo]);
 
   useEffect(() => {
     checkVersionInfo();
