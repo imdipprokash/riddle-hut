@@ -19,7 +19,7 @@ type Props = {};
 
 const adUnitIdInterstitial = __DEV__
   ? TestIds.INTERSTITIAL
-  : 'ca-app-pub-3346761957556908~9788610089';
+  : 'ca-app-pub-3346761957556908/7268320156';
 
 const interstitial = InterstitialAd.createForAdRequest(adUnitIdInterstitial, {
   keywords: Keyword,

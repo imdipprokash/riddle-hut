@@ -40,6 +40,10 @@ const App = (props: Props) => {
   };
 
   useEffect(() => {
+    // Anonymous sign-in for the user
+    signInAnonymously().then(() => {
+      console.log('User signed in anonymously');
+    });
     // Replace the following values with actual user data as needed
     createUserInfo();
   }, []);
