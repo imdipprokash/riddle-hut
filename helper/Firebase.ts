@@ -70,7 +70,7 @@ export const createUserInfo = async (
       amount: 5, // Default amount, can be updated later
       timestamp: firestore.FieldValue.serverTimestamp(),
     });
-    console.log('User created successfully:', uid);
+
     return {
       uid,
       current_level: currentLevel ?? 1,
