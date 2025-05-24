@@ -67,14 +67,19 @@ const WithdrawHistory = (props: Props) => {
               fontSize: hp(2),
               fontFamily: 'KanchenjungaRegular',
               color: 'black', //darkgreen
-              backgroundColor: 'yellow', //green // red //yellow
+              backgroundColor:
+                item?.status === 'pending'
+                  ? 'yellow'
+                  : item?.status === 'success'
+                  ? '#14b8a6'
+                  : '#f87171', //green // red //yellow
               paddingVertical: hp(0.2),
               borderRadius: 6,
               width: wp(25),
               textAlign: 'center',
             }}>
             {/* {item} Pending / Failed / Success*/}
-            {item?.status || 'pending'}
+            {item?.status || 'Pending'}
           </Text>
         </View>
         <View

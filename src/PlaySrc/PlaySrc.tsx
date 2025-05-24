@@ -182,13 +182,13 @@ const PlaySrc = (props: Props) => {
   // get current level
   useEffect(() => {
     getUserInfo().then((res: any) => {
-      dispatch(incrementBy({value: res?.current_level || 1}));
+      dispatch(incrementBy({value: res?.current_level || 0}));
     });
   }, []);
 
   // Get riddle by id and update user info
   useEffect(() => {
-    getRiddleById({id: riddleNo + 1}).then((res: any) => {
+    getRiddleById({id: riddleNo}).then((res: any) => {
       setRiddle(res[0]);
       console.log('Riddle', res, riddleNo);
     });
@@ -401,7 +401,7 @@ const PlaySrc = (props: Props) => {
             styles.textStyle,
             {fontFamily: 'KanchenjungaBold', fontSize: wp(7)},
           ]}>
-          Riddle {riddleNo + 1}
+          Riddle {riddleNo}
         </Text>
         {/* Question */}
         <Text style={styles.textStyle}>{Riddle?.question || ''}</Text>

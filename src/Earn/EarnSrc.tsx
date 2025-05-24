@@ -45,7 +45,8 @@ const EarnSrc = (props: Props) => {
 
   const [activeTab, setActiveTab] = useState(0);
   const handleWithdraw = () => {
-    if (availableAmount < 10) {
+    console.log('availableAmount', availableAmount);
+    if (availableAmount == null || availableAmount < 10) {
       showModal((onClose: any) => (
         <ToastMsg
           message="You have not enough balance to withdraw minimum ₹10 required"
